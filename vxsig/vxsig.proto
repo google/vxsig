@@ -1,0 +1,228 @@
+// Copyright 2012-2019 Google LLC. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Definitions for the vxsig AV signature generator.
+
+syntax = "proto2";
+
+package security.vxsig;
+
+enum SignatureType {
+  INVALID = -1;
+  RAW = 0;
+  CLAMAV = 1;
+  YARA = 2;
+}
+
+message SignatureDefinition {
+  // An enum for the various methods of signature trimming.
+  enum SignatureTrimAlgorithm {
+    TRIM_NONE = 0;   // Do not shorten the signature at all.
+    TRIM_LAST = 1;   // Remove the right-most parts of the signature.
+    TRIM_FIRST = 2;  // Remove the left-most parts of the signature.
+    // Pseudo-randomly remove parts of the signature. Random seed is influenced
+    // by the variant field (id = 9).
+    // Note: Enum value 3 was used by TRIM_SKIP that was removed.
+    TRIM_RANDOM = 4;
+
+    // These two options are currently not meaningful as they rely on the
+    // availability of a function index with an associated occurrence count.
+    // Prefer to keep those signature pieces that originate from functions with
+    // a low occurence count, thus preferring "rare" functions.
+    TRIM_WEIGHTED = 5;
+    // Like TRIM_WEIGHTED, but use a greedy algorithm for shortening.
+    TRIM_WEIGHTED_GREEDY = 6;
+  }
+
+  // An enum for the various algorithms for selecting items to be signatured.
+  enum ItemSelection {
+    ITEMS_EXACT = 0;    // Only the items explicitly specified.
+    ITEMS_SIMILAR = 1;  // Also include items similar to the specified ones.
+  }
+
+  // Stores metadata key-value pairs for supporting engines.
+  message Meta {
+    optional string key = 1;
+    oneof value {
+      string string_value = 2;
+      int64 int_value = 3;
+      bool bool_value = 4;
+    }
+  }
+
+  reserved 3;
+
+  // Who requested the creation of this signature?
+  optional string requester = 1;
+
+  // When was this signature requested? Seconds since the Unix Epoch.
+  optional int64 timestamp = 2;
+
+  // The signature generator task id that created this signature.
+  optional string unique_signature_id = 4;
+
+  // The detection name to be displayed by the AV software in the event that
+  // the signature matches.
+  optional string detection_name = 5;
+
+  // The source items the signature was generated from.
+  repeated string item_id = 6;
+
+  // For signature trimming, specifies the maximum number of bytes of raw
+  // signature pieces to include in the target signature. The default value
+  // means "no limit".
+  optional int32 trim_length = 7 [default = -1];
+
+  // The algorithm to use for trimming the signature.
+  optional SignatureTrimAlgorithm trim_algorithm = 8 [default = TRIM_NONE];
+
+  // If the signature is truncated using TRIM_RANDOM, this value influences the
+  // initial seed. This makes signature generation repeatable and allows to hand
+  // out different signatures based on the same set of items. Omitting this
+  // value results in an implicit variant of zero, which is not treated
+  // specially.
+  optional int32 variant = 9;
+
+  // Additional strings identifying this signature. This can be used to filter
+  // by signatures of interest ("group" them together).
+  // Note: If this is stored in a regular KV-store, it's only possible to filter
+  //       by the first string in this list. This limitation does not apply, if
+  //       downstream signature storage uses a full database.
+  repeated string signature_group = 10;
+
+  // Minimum length of a single signature piece. The default is set to be longer
+  // than the minimum of all scan engines currently in use. A standard minimum
+  // for most engines seems to be 2, but this usually leads to poor scan
+  // performance.
+  // Note: If this value is set to too large a value, the resulting signature
+  //       will most likely be empty.
+  optional int32 min_piece_length = 11 [default = 4];
+
+  // Signature tags for supporting engines. In Yara, they will show up like
+  // this:
+  //   rule TagsExample1 : ATag AnotherTag ThirdTag
+  //   { ... }
+  repeated string tag = 12;
+
+  // Signature metadata for supporting engines. In Yara, the key-value pairs of
+  // this repeated message will be formatted like this:
+  //   rule MetadataExample
+  //   {
+  //     meta:
+  //       a_string = "Some string data"
+  //       an_int = 42
+  //       some_bool = true
+  //     ...
+  //   }
+  repeated Meta meta = 13;
+
+  // The item selection algorithm to use.
+  optional ItemSelection item_selection = 14;
+
+  // Minimum similarity for items.
+  optional double items_min_similarity = 15;
+
+  // Disable the replacement of instruction immediate values with a fixed number
+  // of single byte wildcards. This only applies to signature formats that
+  // support fixed wildcards. This is currently the case for CLAMAV and YARA.
+  optional bool disable_nibble_masking = 16;
+
+  // Do not upload the signature to Nirvana.
+  optional bool disable_nirvana_upload = 17;
+
+  // A list of function addresses that will be filtered according to
+  // function_filter. The addresses in this list apply to the first binary
+  // mentioned in item_id and propagate from there.
+  repeated uint64 filtered_function_address = 18;
+
+  enum FunctionFilterMode {
+    FILTER_NONE = 0;
+    FILTER_BLACKLIST = 1;  // Exclude the functions in item_function_list.
+    FILTER_WHITELIST = 2;  // Only use the functions in item_function_list.
+  }
+  optional FunctionFilterMode function_filter = 19 [default = FILTER_NONE];
+}
+
+// A generic raw signature that consists of pieces of byte strings that end with
+// a wildcard (except the last).
+message RawSignature {
+  message Piece {
+    // The raw bytes between wildcards.
+    optional bytes bytes = 1;
+
+    // Minimum and maximum number of bytes to follow the raw bytes for the
+    // signature to match. Acts like ".{n,m}" in PCRE regexes with n and m equal
+    // to min_qualifier and max_qualifier, respectively. The default values of 0
+    // and -1 specify an unbounded wildcard (".*").
+    optional int64 min_qualifier = 2 [default = 0];
+    optional int64 max_qualifier = 3 [default = -1];
+
+    // Weight of this signature piece based on the relative occurence count of the
+    // function its bytes originate from. The higher the weight, the higher the
+    // likelihood that its instruction bytes are retained in a trimmed signature
+    // when TRIM_WEIGHTED or TRIM_WEIGHTED_GREEDY is used.
+    optional int32 weight = 4;
+
+    // Textual disassembly information for this piece. Note that a signature
+    // piece does not necessarily contain a full instruction. Assume for
+    // example, that the original disassembly that was present across all
+    // signatured binaries was this (raw bytes on the left):
+    //   FF 15 84 20 00 10  call ds:[0x10002084]
+    //   8B F8              mov edi, eax
+    //   A1 88 34 00 10     mov eax, ds:[0x10003488]
+    //   47                 inc edi
+    //   47                 inc edi
+    // We may (after stripping out memory addresses) end up with several pieces:
+    //   FF15 .{4,4} 8BF8A1 .{4,4} 4747
+    // The first two will only contain the prefix that comes before the encoded
+    // memory address. These pieces will have this field set like this:
+    //   FF15   -> call ds:[0x10002084]
+    //   8BF8A1 -> mov edi, eax
+    //             mov eax, ds:[0x10003488]
+    repeated string origin_disassembly = 5;
+
+    // Indices of nibbles (half-bytes) of the "bytes" field that are masked
+    // out. These cannot be expressed by filling the min_qualifier and
+    // max_qualifier field. Note that the index is also nibble-based, so for
+    // each full byte that is masked, two entries appear in this list.
+    repeated int32 masked_nibble = 6;
+  }
+
+  repeated Piece piece = 1;
+}
+
+// A ClamAV formatted signature.
+message ClamAvSignature {
+  optional string data = 1;
+}
+
+// A Yara formatted signature.
+message YaraSignature {
+  optional string data = 1;
+}
+
+message Signature {
+  reserved 1, 6;
+
+  optional RawSignature raw_signature = 2;
+  optional ClamAvSignature clam_av_signature = 3;
+  optional YaraSignature yara_signature = 4;
+
+  // The creation request for this signature.
+  optional SignatureDefinition definition = 5;
+}
+
+message Signatures {
+    repeated Signature signature = 1;
+}
