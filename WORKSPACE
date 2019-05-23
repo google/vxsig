@@ -20,7 +20,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
     name = "com_google_absl",
     sha256 = "b7b5fbd2e0b727ef156e73f184aac7edbeeea413ebd81c45b2aae6f9bda125a0",
-    strip_prefix = "abseil-cpp-master",
+    strip_prefix = "abseil-cpp-8a394b19c149cab50534b04c5e21d42bc2217a7d",
     urls = ["https://github.com/abseil/abseil-cpp/archive/8a394b19c149cab50534b04c5e21d42bc2217a7d.zip"],
 )
 
