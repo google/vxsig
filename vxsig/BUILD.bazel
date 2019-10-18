@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-licenses(["notice"])  # Apache 2.0
+licenses(["notice"])
 
 exports_files(["LICENSE"])
 
@@ -304,7 +304,7 @@ cc_library(
         ":generic_signature",
         ":types",
         ":vxsig_cc_proto",
-        "@com_github_gflags_gflags//:gflags",
+        "@com_google_absl//absl/flags:flag",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/strings",
         "@com_google_binexport//:status",
@@ -432,7 +432,8 @@ cc_binary(
         ":signature_formatter",
         ":types",
         ":vxsig_cc_proto",
-        #"@com_google_absl//absl/flags:flag",
+        "@com_google_absl//absl/flags:flag",
+        "@com_google_absl//absl/flags:parse",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/strings",
     ],

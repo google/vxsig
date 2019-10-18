@@ -14,12 +14,11 @@
 
 #include "vxsig/yara_signature_formatter.h"
 
-#include <gflags/gflags.h>
-
 #include <algorithm>
 #include <cstddef>
 #include <vector>
 
+#include "absl/flags/flag.h"
 #include "absl/strings/ascii.h"
 #include "absl/strings/escaping.h"
 #include "absl/strings/numbers.h"
@@ -34,9 +33,9 @@
 #include "vxsig/signature_formatter.h"
 #include "vxsig/vxsig.pb.h"
 
-DEFINE_bool(siggen_yara_debug_masking, false,
+ABSL_FLAG(bool, siggen_yara_debug_masking, false,
             "Include unmasked hex bytes in signature output");
-DEFINE_bool(siggen_yara_debug_weights, false,
+ABSL_FLAG(bool, siggen_yara_debug_weights, false,
             "Include signature piece weights in output");
 
 namespace security {
@@ -147,12 +146,12 @@ not_absl::Status YaraSignatureFormatter::DoFormat(Signature* signature) const {
         (*signature_data)[start_mask + masked_nibble] = '?';
       }
     }
-    if (FLAGS_siggen_yara_debug_masking) {
+    if (absl::GetFlag(FLAGS_siggen_yara_debug_masking)) {
       // Align with masked hex bytes.
       absl::StrAppend(signature_data, "      // ",
                       absl::BytesToHexString(piece_bytes), "\n");
     }
-    if (FLAGS_siggen_yara_debug_weights) {
+    if (absl::GetFlag(FLAGS_siggen_yara_debug_weights)) {
       absl::StrAppend(signature_data, "         // Weight: ", piece.weight(),
                       "\n");
     }
