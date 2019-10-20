@@ -8,3 +8,4 @@ bazel-*
 # IDE files
 .vscode/
 .idea
+compile_commands.json
