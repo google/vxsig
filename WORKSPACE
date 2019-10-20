@@ -24,14 +24,6 @@ http_archive(
     urls = ["https://github.com/abseil/abseil-cpp/archive/lts_2019_08_08.zip"],
 )
 
-## gflags
-#http_archive(
-#    name = "com_github_gflags_gflags",
-#    sha256 = "53b16091efa386ab11e33f018eef0ed489e0ab63554455293cbb0cc2a5f50e98",
-#    strip_prefix = "gflags-28f50e0fed19872e0fd50dd23ce2ee8cd759338e",
-#    urls = ["https://github.com/gflags/gflags/archive/28f50e0fed19872e0fd50dd23ce2ee8cd759338e.zip"],  # 2019-01-25
-#)
-
 # GoogleTest/GoogleMock
 http_archive(
     name = "com_google_googletest",

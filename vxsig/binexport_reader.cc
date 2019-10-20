@@ -136,7 +136,7 @@ not_absl::Status ParseBinExport(
   std::ifstream file(std::string(filename), std::ios_base::binary);
   BinExport2 proto;
   if (!proto.ParseFromIstream(&file)) {
-    return not_absl::InternalError(absl::StrCat("error reading ", filename));
+    return not_absl::InternalError(absl::StrCat("failed parsing ", filename));
   }
 
   // TODO(cblichmann): Read MD indices if we have them.

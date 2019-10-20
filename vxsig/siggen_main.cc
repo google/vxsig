@@ -88,20 +88,26 @@ void SiggenMain(int argc, char* argv[]) {
     uint64_t address = 0;
     for (const auto& function :
          absl::StrSplit(filter_list, ',', absl::SkipWhitespace())) {
-      QCHECK(
-          absl::numbers_internal::safe_strtou64_base(function, &address, 16));
+      ABSL_RAW_CHECK(
+          absl::numbers_internal::safe_strtou64_base(function, &address, 16),
+          "Failed to parse hex address in function filter");
       signature_definition.add_filtered_function_address(address);
     }
   }
 
   AvSignatureGenerator siggen;
   siggen.AddDiffResultsFromCommandLineArguments(--argc, ++argv);
-  QCHECK_OK(siggen.Generate(&signature));
+  not_absl::Status status(siggen.Generate(&signature));
+  ABSL_RAW_CHECK(status.ok(), absl::StrCat("Failed to generate signature: ",
+                                           status.error_message()).c_str());
 
   // Output the signature itself to stdout, so we can use redirected output
   // from this tool in scripts.
   std::cout << "----8<--------8<---- Signature ----8<--------8<----\n";
-  QCHECK_OK(SignatureFormatter::Create(YARA)->Format(&signature));
+  status = SignatureFormatter::Create(YARA)->Format(&signature);
+  ABSL_RAW_CHECK(status.ok(), absl::StrCat("Failed to format signature: ",
+                                           status.error_message())
+                                  .c_str());
   printf("%s\n", signature.yara_signature().data().c_str());
   std::cout << "---->8-------->8---- Signature ---->8-------->8----\n";
 }
