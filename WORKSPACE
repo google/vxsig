@@ -15,53 +15,43 @@
 workspace(name = "com_google_vxsig")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
+load("//vxsig/bazel:vxsig_deps.bzl", "vxsig_deps")
 
-# Abseil
-http_archive(
-    name = "com_google_absl",
-    sha256 = "d1c9f51f933f0cd45fd5af3ce05593b8956bfa0538a7c55c7a617d067ca38cc0",
-    strip_prefix = "abseil-cpp-lts_2019_08_08",
-    urls = ["https://github.com/abseil/abseil-cpp/archive/lts_2019_08_08.zip"],
-)
+# Load common dependencies, then Protobuf's
+vxsig_deps()
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+protobuf_deps()
 
 # GoogleTest/GoogleMock
-http_archive(
+maybe(
+    http_archive,
     name = "com_google_googletest",
-    sha256 = "70404b4a887fd8efce2179e9918e58cdac03245e575408ed87799696e816ecb8",
-    strip_prefix = "googletest-f80d6644d4b451f568a2e7aea1e01e842eb242dc",
-    urls = ["https://github.com/google/googletest/archive/f80d6644d4b451f568a2e7aea1e01e842eb242dc.zip"],  # 2019-02-05
+    sha256 = "ba5b04a4849246e7c16ba94227eed46486ef942f61dc8b78609732543c19c9f4",  # 2019-11-21
+    strip_prefix = "googletest-200ff599496e20f4e39566feeaf2f6734ca7570f",
+    urls = ["https://github.com/google/googletest/archive/200ff599496e20f4e39566feeaf2f6734ca7570f.zip"],
 )
 
 # Google Benchmark
-http_archive(
+maybe(
+    http_archive,
     name = "com_google_benchmark",
-    strip_prefix = "benchmark-master",
-    urls = ["https://github.com/google/benchmark/archive/master.zip"],
+    sha256 = "9067442aa447e54cc144160420daf37fcd0663ccf3057ce2d87b9d7f6ad45d3f",  # 2019-11-05
+    strip_prefix = "benchmark-c50ac68c50ff8da3827cd6720792117910d85666",
+    urls = ["https://github.com/google/benchmark/archive/c50ac68c50ff8da3827cd6720792117910d85666.zip"],
 )
 
-# Protobuf
-http_archive(
-    name = "com_google_protobuf",
-    sha256 = "33cba8b89be6c81b1461f1c438424f7a1aa4e31998dbe9ed6f8319583daac8c7",
-    strip_prefix = "protobuf-3.10.0",
-    urls = ["https://github.com/protocolbuffers/protobuf/archive/v3.10.0.zip"],
-)
+#http_archive(
+#    name = "rules_python",
+#    sha256 = "e5470e92a18aa51830db99a4d9c492cc613761d5bdb7131c04bd92b9834380f6",
+#    strip_prefix = "rules_python-4b84ad270387a7c439ebdccfd530e2339601ef27",
+#    urls = ["https://github.com/bazelbuild/rules_python/archive/4b84ad270387a7c439ebdccfd530e2339601ef27.tar.gz"],
+#)
 
-http_archive(
-    name = "bazel_skylib",
-    sha256 = "bbccf674aa441c266df9894182d80de104cabd19be98be002f6d478aaa31574d",
-    strip_prefix = "bazel-skylib-2169ae1c374aab4a09aa90e65efe1a3aad4e279b",
-    urls = ["https://github.com/bazelbuild/bazel-skylib/archive/2169ae1c374aab4a09aa90e65efe1a3aad4e279b.tar.gz"],
-)
-
-http_archive(
-    name = "rules_python",
-    sha256 = "e5470e92a18aa51830db99a4d9c492cc613761d5bdb7131c04bd92b9834380f6",
-    strip_prefix = "rules_python-4b84ad270387a7c439ebdccfd530e2339601ef27",
-    urls = ["https://github.com/bazelbuild/rules_python/archive/4b84ad270387a7c439ebdccfd530e2339601ef27.tar.gz"],
-)
-
-http_archive(
+maybe(
+    http_archive,
     name = "zlib",
     build_file = "@com_google_protobuf//:third_party/zlib.BUILD",
     sha256 = "629380c90a77b964d896ed37163f5c3a34f6e6d897311f1df2a7016355c45eff",
