@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC. All Rights Reserved.
+// Copyright 2019-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 #ifndef VXSIG_BAZEL_EXTERNAL_BINEXPORT2_PB_H_
 #define VXSIG_BAZEL_EXTERNAL_BINEXPORT2_PB_H_
 
+// Forward to BinExport's version
 #include "external/com_google_binexport/binexport2.pb.h"
 
 #endif  // VXSIG_BAZEL_EXTERNAL_BINEXPORT2_PB_H_
