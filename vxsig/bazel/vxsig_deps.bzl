@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC. All Rights Reserved.
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,4 +44,31 @@ def vxsig_deps():
         sha256 = "678d91d8a939a1ef9cb268e1f20c14cd55e40361dc397bb5881e4e1e532679b1",  # 2019-10-29
         strip_prefix = "protobuf-3.10.1",
         urls = ["https://github.com/protocolbuffers/protobuf/archive/v3.10.1.zip"],
+    )
+
+    # Google OR tools
+    maybe(
+        http_archive,
+        name = "com_google_ortools",
+        sha256 = "3978fef757fb2f6030b49590ba21955cd710a2df5e74aa1d4cb4d6aed4823965",
+        strip_prefix = "or-tools-7.0",
+        urls = ["https://github.com/google/or-tools/archive/v7.0.zip"],
+    )
+
+    # GoogleTest/GoogleMock
+    maybe(
+        http_archive,
+        name = "com_google_googletest",
+        sha256 = "ba5b04a4849246e7c16ba94227eed46486ef942f61dc8b78609732543c19c9f4",  # 2019-11-21
+        strip_prefix = "googletest-200ff599496e20f4e39566feeaf2f6734ca7570f",
+        urls = ["https://github.com/google/googletest/archive/200ff599496e20f4e39566feeaf2f6734ca7570f.zip"],
+    )
+
+    # Google Benchmark
+    maybe(
+        http_archive,
+        name = "com_google_benchmark",
+        sha256 = "9067442aa447e54cc144160420daf37fcd0663ccf3057ce2d87b9d7f6ad45d3f",  # 2019-11-05
+        strip_prefix = "benchmark-c50ac68c50ff8da3827cd6720792117910d85666",
+        urls = ["https://github.com/google/benchmark/archive/c50ac68c50ff8da3827cd6720792117910d85666.zip"],
     )
