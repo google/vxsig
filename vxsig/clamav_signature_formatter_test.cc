@@ -65,7 +65,7 @@ TEST_F(ClamAvSignatureFormatterTest, TestDatabaseSingleSignature) {
   signature->mutable_definition()->set_detection_name("one");
   signature->mutable_definition()->set_min_piece_length(2);
   AddSignaturePieces({"12", "34"}, signature->mutable_raw_signature());
-  string database;
+  std::string database;
   EXPECT_THAT(formatter_->FormatDatabase(signatures, &database), IsOk());
   ASSERT_THAT(database, Eq("one:0:*:3132*3334\n"));
 }
@@ -84,7 +84,7 @@ TEST_F(ClamAvSignatureFormatterTest, TestDatabaseMultipleSignatures) {
     signature->mutable_definition()->set_min_piece_length(2);
     AddSignaturePieces({"56", "78"}, signature->mutable_raw_signature());
   }
-  string database;
+  std::string database;
   ASSERT_THAT(formatter_->FormatDatabase(signatures, &database), IsOk());
   EXPECT_THAT(database, Eq("one:0:*:3132*3334\ntwo:0:*:3536*3738\n"));
 }

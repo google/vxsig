@@ -50,7 +50,7 @@ not_absl::Status SignatureFormatter::Format(Signature* signature) const {
 }
 
 not_absl::Status SignatureFormatter::FormatDatabase(
-    const Signatures& signatures, string* database) const {
+    const Signatures& signatures, std::string* database) const {
   return DoFormatDatabase(signatures, ABSL_DIE_IF_NULL(database));
 }
 

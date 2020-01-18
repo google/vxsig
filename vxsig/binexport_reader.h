@@ -31,7 +31,7 @@ namespace vxsig {
 // Each time a function is encountered, this callback gets called with the
 // function's address and type.
 using FunctionReceiverCallback = std::function<void(
-    const string& sha256, MemoryAddress function_address,
+    const std::string& sha256, MemoryAddress function_address,
     BinExport2::CallGraph::Vertex::Type type, double md_index)>;
 
 enum ImmediateSize {
@@ -48,7 +48,7 @@ using Immediates = std::vector<std::pair<MemoryAddress, ImmediateSize>>;
 // bytes as well as the instruction's immediates and their widths.
 using InstructionReceiverCallback = std::function<void(
     MemoryAddress basic_block_address, MemoryAddress instruction_address,
-    const string& raw_bytes, const string& disassembly,
+    const std::string& raw_bytes, const std::string& disassembly,
     const Immediates& immediates)>;
 
 // Parses the specified .BinExport file and calls the specified callback

@@ -75,7 +75,7 @@ void SiggenMain(int argc, char* argv[]) {
       absl::GetFlag(FLAGS_disable_nibble_masking));
   signature_definition.set_function_filter(SignatureDefinition::FILTER_NONE);
 
-  string filter_list(absl::GetFlag(FLAGS_function_whitelist));
+  std::string filter_list = absl::GetFlag(FLAGS_function_whitelist);
   if (!filter_list.empty()) {
     signature_definition.set_function_filter(
         SignatureDefinition::FILTER_WHITELIST);

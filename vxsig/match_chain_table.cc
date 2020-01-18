@@ -227,9 +227,10 @@ void MatchChainColumn::BuildIdIndices() {
   BuildIdIndexFromAddressIndex(basic_blocks_by_address_, &basic_blocks_by_id_);
 }
 
-not_absl::Status AddDiffResult(absl::string_view filename, bool last,
-                               MatchChainColumn* column, MatchChainColumn* next,
-                               std::vector<std::pair<string, string>>* diffs) {
+not_absl::Status AddDiffResult(
+    absl::string_view filename, bool last, MatchChainColumn* column,
+    MatchChainColumn* next,
+    std::vector<std::pair<std::string, std::string>>* diffs) {
   namespace arg = ::std::placeholders;
 
   MatchChainInserter match_inserter(column);
@@ -245,7 +246,7 @@ not_absl::Status AddDiffResult(absl::string_view filename, bool last,
                              &match_inserter, arg::_1),
                    &metadata));
 
-  const string diff_directory = Dirname(filename);
+  const std::string diff_directory = Dirname(filename);
   column->set_filename(metadata.first.filename);
   column->set_diff_directory(diff_directory);
   if (last) {
@@ -259,29 +260,30 @@ not_absl::Status AddDiffResult(absl::string_view filename, bool last,
 
 not_absl::Status AddFunctionData(absl::string_view filename,
                                  MatchChainColumn* column) {
-  auto metadata_callback([column](const string& sha256, MemoryAddress address,
-                                  BinExport2::CallGraph::Vertex::Type type,
-                                  double /*md_index*/) {
-    auto* func = column->FindFunctionByAddress(address);
-    if (!func) {
-      // Function was not found in this column. This happens if the function was
-      // not matched by the differ or has been filtered. Do not insert metadata.
-      return;
-    }
-    func->type = type;
+  auto metadata_callback(
+      [column](const std::string& sha256, MemoryAddress address,
+               BinExport2::CallGraph::Vertex::Type type, double /*md_index*/) {
+        auto* func = column->FindFunctionByAddress(address);
+        if (!func) {
+          // Function was not found in this column. This happens if the function
+          // was not matched by the differ or has been filtered. Do not insert
+          // metadata.
+          return;
+        }
+        func->type = type;
 
-    auto& column_sha256 = column->sha256();
-    if (column_sha256.empty()) {
-      column->set_sha256(sha256);
-    } else {
-      QCHECK_EQ(column_sha256, sha256) << "Inconsistent SHA256 in column";
-    }
-  });
+        auto& column_sha256 = column->sha256();
+        if (column_sha256.empty()) {
+          column->set_sha256(sha256);
+        } else {
+          QCHECK_EQ(column_sha256, sha256) << "Inconsistent SHA256 in column";
+        }
+      });
 
   auto basic_block_callback([column](MemoryAddress bb_address,
                                      MemoryAddress instr_address,
-                                     const string& instr_bytes,
-                                     const string& disassembly,
+                                     const std::string& instr_bytes,
+                                     const std::string& disassembly,
                                      const Immediates& immediates) {
     // Note: We used to check whether the instruction's parent basic block was
     // present in this column. However, loading all instruction bytes makes the

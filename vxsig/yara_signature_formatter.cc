@@ -99,7 +99,7 @@ not_absl::Status YaraSignatureFormatter::DoFormat(Signature* signature) const {
           value = std::to_string(meta.int_value());
           break;
         case SignatureDefinition::Meta::kBoolValue:
-          value = meta.bool_value() ? string("true") : string("false");
+          value = meta.bool_value() ? "true" : "false";
           break;
         case SignatureDefinition::Meta::VALUE_NOT_SET:
           continue;
@@ -135,7 +135,8 @@ not_absl::Status YaraSignatureFormatter::DoFormat(Signature* signature) const {
       absl::StrAppend(signature_data, kYaraHexWildcard);
       ++num_hex_string_tokens;  // Current wildcard
     } else {
-      absl::StrAppend(signature_data, string(strlen(kYaraHexWildcard), ' '));
+      absl::StrAppend(signature_data,
+                      std::string(strlen(kYaraHexWildcard), ' '));
     }
 
     const auto piece_bytes(piece.bytes().substr(0, max_copy_bytes));
@@ -169,7 +170,7 @@ not_absl::Status YaraSignatureFormatter::DoFormat(Signature* signature) const {
 }
 
 not_absl::Status YaraSignatureFormatter::DoFormatDatabase(
-    const Signatures& signatures, string* database) const {
+    const Signatures& signatures, std::string* database) const {
   database->clear();
   Signature format_signature;
   for (const auto& signature : signatures.signature()) {

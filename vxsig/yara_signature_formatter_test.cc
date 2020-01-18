@@ -50,7 +50,7 @@ namespace {
 
 enum { kYaraMaxHexStringTokens = 5000 };
 
-void AddSignaturePieces(const std::vector<string>& pieces,
+void AddSignaturePieces(const std::vector<std::string>& pieces,
                         Signature* signature) {
   auto* raw = ABSL_DIE_IF_NULL(signature)->mutable_raw_signature();
   for (const auto& piece : pieces) {
@@ -90,7 +90,7 @@ TEST_F(YaraSignatureFormatterTest, TestDatabaseSingleSignature) {
   signature->mutable_definition()->set_detection_name("one");
   signature->mutable_definition()->set_min_piece_length(2);
   AddSignaturePieces({"12", "34"}, signature);
-  string database;
+  std::string database;
   EXPECT_THAT(formatter_->FormatDatabase(signatures, &database), IsOk());
   EXPECT_THAT(
       MakeComparableYaraSignature(database),
@@ -111,7 +111,7 @@ TEST_F(YaraSignatureFormatterTest, TestDatabaseMultipleSignatures) {
     signature->mutable_definition()->set_min_piece_length(2);
     AddSignaturePieces({"56", "78"}, signature);
   }
-  string database;
+  std::string database;
   EXPECT_THAT(formatter_->FormatDatabase(signatures, &database), IsOk());
   EXPECT_THAT(
       MakeComparableYaraSignature(database),
@@ -125,17 +125,18 @@ TEST_F(YaraSignatureFormatterTest, TestMaxHexStringTokensOnePiece) {
     auto* signature = signatures.add_signature();
     signature->mutable_definition()->set_detection_name("one");
     *signature->mutable_raw_signature()->add_piece()->mutable_bytes() =
-        string(2 /* Hex byte */ * (kYaraMaxHexStringTokens +
-                                   50 /* Arbitrary over-size of 50 bytes */),
-               '1');
+        std::string(
+            2 /* Hex byte */ * (kYaraMaxHexStringTokens +
+                                50 /* Arbitrary over-size of 50 bytes */),
+            '1');
   }
-  string database;
+  std::string database;
   EXPECT_THAT(formatter_->FormatDatabase(signatures, &database), IsOk());
   EXPECT_THAT(MakeComparableYaraSignature(database),
-              Eq(absl::StrCat(
-                  "rule one {\nstrings:$ = {",
-                  absl::BytesToHexString(string(kYaraMaxHexStringTokens, '1')),
-                  "}condition:all of them}")));
+              Eq(absl::StrCat("rule one {\nstrings:$ = {",
+                              absl::BytesToHexString(
+                                  std::string(kYaraMaxHexStringTokens, '1')),
+                              "}condition:all of them}")));
 }
 
 TEST_F(YaraSignatureFormatterTest, TestMaxHexStringTokensTwoPiece) {
@@ -144,20 +145,20 @@ TEST_F(YaraSignatureFormatterTest, TestMaxHexStringTokensTwoPiece) {
     auto* signature = signatures.add_signature();
     signature->mutable_definition()->set_detection_name("two");
     *signature->mutable_raw_signature()->add_piece()->mutable_bytes() =
-        string(kYaraMaxHexStringTokens / 2, '1');
+        std::string(kYaraMaxHexStringTokens / 2, '1');
     *signature->mutable_raw_signature()->add_piece()->mutable_bytes() =
-        string(kYaraMaxHexStringTokens / 2 - 1, '2');
+        std::string(kYaraMaxHexStringTokens / 2 - 1, '2');
   }
-  string database;
+  std::string database;
   EXPECT_THAT(formatter_->FormatDatabase(signatures, &database), IsOk());
-  EXPECT_THAT(
-      MakeComparableYaraSignature(database),
-      Eq(absl::StrCat(
-          "rule two {\nstrings:$ = {",
-          absl::BytesToHexString(string(kYaraMaxHexStringTokens / 2, '1')),
-          "[-]",
-          absl::BytesToHexString(string(kYaraMaxHexStringTokens / 2 - 1, '2')),
-          "}condition:all of them}")));
+  EXPECT_THAT(MakeComparableYaraSignature(database),
+              Eq(absl::StrCat("rule two {\nstrings:$ = {",
+                              absl::BytesToHexString(std::string(
+                                  kYaraMaxHexStringTokens / 2, '1')),
+                              "[-]",
+                              absl::BytesToHexString(std::string(
+                                  kYaraMaxHexStringTokens / 2 - 1, '2')),
+                              "}condition:all of them}")));
 }
 
 TEST_F(YaraSignatureFormatterTest, TestRealSignature) {
@@ -169,7 +170,7 @@ TEST_F(YaraSignatureFormatterTest, TestRealSignature) {
   ASSERT_THAT(google::protobuf::TextFormat::Parse(&from, &signatures),
               IsTrue());
 
-  string database;
+  std::string database;
   // Force reformatting.
   signatures.mutable_signature(0)->clear_yara_signature();
   EXPECT_THAT(formatter_->FormatDatabase(signatures, &database), IsOk());
@@ -184,7 +185,7 @@ TEST_F(YaraSignatureFormatterTest, TestSingleTag) {
     definition->add_tag("one");
     *signature->mutable_raw_signature()->add_piece()->mutable_bytes() = "1234";
   }
-  string database;
+  std::string database;
   EXPECT_THAT(formatter_->FormatDatabase(signatures, &database), IsOk());
   EXPECT_THAT(MakeComparableYaraSignature(database),
               Eq(absl::StrCat(
@@ -202,7 +203,7 @@ TEST_F(YaraSignatureFormatterTest, TestMultipleTags) {
     definition->add_tag("two");
     *signature->mutable_raw_signature()->add_piece()->mutable_bytes() = "1234";
   }
-  string database;
+  std::string database;
   EXPECT_THAT(formatter_->FormatDatabase(signatures, &database), IsOk());
   EXPECT_THAT(MakeComparableYaraSignature(database),
               Eq("rule has_tags : one two {\nstrings:$ = "
@@ -220,7 +221,7 @@ TEST_F(YaraSignatureFormatterTest, TestMetaSingleStringValue) {
     value->set_string_value("string");
     *signature->mutable_raw_signature()->add_piece()->mutable_bytes() = "1234";
   }
-  string database;
+  std::string database;
   EXPECT_THAT(formatter_->FormatDatabase(signatures, &database), IsOk());
   EXPECT_THAT(MakeComparableYaraSignature(database),
               Eq("rule with_meta {meta:one = \"string\"\nstrings:$ = "
@@ -239,7 +240,7 @@ TEST_F(YaraSignatureFormatterTest, TestMetaSingleMultiValue) {
     value->set_bool_value(false);
     *signature->mutable_raw_signature()->add_piece()->mutable_bytes() = "1234";
   }
-  string database;
+  std::string database;
   EXPECT_THAT(formatter_->FormatDatabase(signatures, &database), IsOk());
   EXPECT_THAT(MakeComparableYaraSignature(database),
               Eq("rule with_meta {meta:one = false\nstrings:$ = "
@@ -260,7 +261,7 @@ TEST_F(YaraSignatureFormatterTest, TestMetaMultipleValues) {
     value->set_string_value("second");
     *signature->mutable_raw_signature()->add_piece()->mutable_bytes() = "1234";
   }
-  string database;
+  std::string database;
   EXPECT_THAT(formatter_->FormatDatabase(signatures, &database), IsOk());
   EXPECT_THAT(MakeComparableYaraSignature(database),
               Eq("rule with_meta {meta:one = \"first\"two = \"second\"\n"

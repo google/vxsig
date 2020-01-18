@@ -28,7 +28,7 @@ class YaraSignatureFormatter : public SignatureFormatter {
   not_absl::Status DoFormat(Signature* signature) const override;
 
   not_absl::Status DoFormatDatabase(const Signatures& signatures,
-                                string* database) const override;
+                                    std::string* database) const override;
 };
 
 }  // namespace vxsig

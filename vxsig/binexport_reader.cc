@@ -40,7 +40,7 @@ enum { kNoMdIndex = -1 };
 // TODO(cblichmann): Use BinExport's variant of this code
 void RenderExpression(const BinExport2& proto,
                       const BinExport2::Operand& operand, int index,
-                      ImmediateSize immediate_size, string* output,
+                      ImmediateSize immediate_size, std::string* output,
                       Immediates* immediates) {
   const auto& expression = proto.expression(operand.expression_index(index));
   const auto& symbol = expression.symbol();
@@ -143,7 +143,7 @@ not_absl::Status ParseBinExport(
   std::map<MemoryAddress, double> md_index_map;
 
   // Push function metadata to receiver.
-  const string& hash = proto.meta_information().executable_id();
+  const std::string& hash = proto.meta_information().executable_id();
   for (const auto& vertex : proto.call_graph().vertex()) {
     const auto address = vertex.address();
     const auto md_index = md_index_map.find(address);
@@ -177,7 +177,7 @@ not_absl::Status ParseBinExport(
             basic_block_address = instruction_address;
           }
 
-          string disassembly(absl::StrCat(
+          std::string disassembly(absl::StrCat(
               proto.mnemonic(instruction.mnemonic_index()).name(), " "));
           Immediates immediates;
           for (int i = 0; i < instruction.operand_index_size(); i++) {

@@ -68,17 +68,17 @@ TEST_F(BinExportReaderTest, ParseBinExport2Complex) {
       "6d661e63d51d2b38c40d7a16d0cd957a125d397e13b1e50280c3d06bc26bb315."
       "BinExport");
 
-  std::map<MemoryAddress, string> instructions;
+  std::map<MemoryAddress, std::string> instructions;
   ASSERT_THAT(
       ParseBinExport(
           file_name,
-          [this](const string& /* sha256 */, MemoryAddress,
+          [this](const std::string& /* sha256 */, MemoryAddress,
                  BinExport2::CallGraph::Vertex::Type,
                  double /* md_index */) { ++num_functions_; },
           [this, &instructions](MemoryAddress /* basic_block_address */,
                                 MemoryAddress instruction_address,
-                                const string& instruction_bytes,
-                                const string& /* disassembly */,
+                                const std::string& instruction_bytes,
+                                const std::string& /* disassembly */,
                                 const Immediates& /* immediates */) {
             ++num_instructions_;
             ASSERT_FALSE(instruction_bytes.empty());

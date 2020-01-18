@@ -145,7 +145,7 @@ void AddInstructionBytes(const MatchedBasicBlock& bb,
       // Only look for little endian encoded immediates.
       absl::little_endian::Store32(&immediate[0], immediate_value.first);
       const auto found = instr.raw_instruction_bytes.rfind(immediate);
-      if (found != string::npos) {
+      if (found != std::string::npos) {
         immediate_pos.insert(found);
       }
     }
