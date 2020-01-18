@@ -51,7 +51,7 @@ http_archive(
         "find . -path ./third_party -prune -o -\\( -name '*.cc' -o -name '*.h' -\\) -print0 |" +
         "xargs -0 -P8 -n1 sed -i 's,^\\(#include \"\\)third_party/\\(absl\\),\\1\\2,g'",
     ],
-    sha256 = "a6532112802c1f75b1aeb0b2fdbd26532a069aa0b0e5432dd5592d8cb84d56ed",
-    strip_prefix = "binexport-10",
-    urls = ["https://github.com/google/binexport/archive/v10.zip"],
+    sha256 = "525130e4bbd0c8a53421e3ece50f0f67c77c4785fe52742af1b884724fc9e21b",
+    strip_prefix = "binexport-750c161574887a0fc12bc330202e19cba437b1c6",
+    urls = ["https://github.com/google/binexport/archive/750c161574887a0fc12bc330202e19cba437b1c6.zip"],
 )
