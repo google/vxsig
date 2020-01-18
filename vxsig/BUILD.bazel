@@ -12,14 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("//vxsig/bazel:build_defs.bzl", "VXSIG_DEFAULT_COPTS")
+
 licenses(["notice"])
 
 exports_files(["LICENSE"])
-
-VXSIG_DEFAULT_COPTS = [
-    "-Wno-narrowing",
-    "-Wno-sign-compare",
-]
 
 # A C++ library with the core algorithms.
 cc_library(

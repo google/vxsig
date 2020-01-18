@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@com_google_vxsig//vxsig/bazel:build_defs.bzl", "VXSIG_DEFAULT_COPTS")
+
 # Defines the protocol message used in the .BinExport v2 file format.
 proto_library(
     name = "binexport2_proto",
@@ -24,7 +26,7 @@ cc_proto_library(
     deps = [":binexport2_proto"],
 )
 
-BINEXPORT_DEFAULT_COPTS = [
+BINEXPORT_DEFAULT_COPTS = VXSIG_DEFAULT_COPTS + [
     "-fexceptions",  # This code throws on error
 ]
 
