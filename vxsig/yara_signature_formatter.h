@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@
 #include "vxsig/signature_formatter.h"
 #include "vxsig/vxsig.pb.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 // This class inherits from SignatureFormatter to implement the Yara 2.0
 // signature format. See https://yara.readthedocs.io/en/v3.4.0/ for details.
@@ -31,5 +30,4 @@ class YaraSignatureFormatter : public SignatureFormatter {
                                     std::string* database) const override;
 };
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

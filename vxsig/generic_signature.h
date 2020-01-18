@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,8 +23,7 @@
 #include "vxsig/types.h"
 #include "vxsig/vxsig.pb.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 // Builds a "proto signature" from a list of overlap-free basic block
 // candidates. "Proto signature" in this context means a sequence of bytes
@@ -45,7 +44,6 @@ not_absl::StatusOr<RawSignature> GenericSignatureFromMatches(
 // sizes of all signature pieces in the raw signature data.
 int GetSignatureSize(const Signature& signature);
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig
 
 #endif  // VXSIG_GENERIC_SIGNATURE_H_

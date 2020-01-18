@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,8 +26,7 @@
 #include "vxsig/generic_signature.h"
 #include "vxsig/yara_signature_formatter.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 std::unique_ptr<SignatureFormatter> SignatureFormatter::Create(
     SignatureType type) {
@@ -245,5 +244,4 @@ not_absl::Status GetRelevantSignatureSubset(const Signature& input,
   return not_absl::OkStatus();
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

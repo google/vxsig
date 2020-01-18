@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@
 
 #include "absl/strings/string_view.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 std::string LongestCommonSubsequence(absl::string_view first,
                                      absl::string_view second) {
@@ -27,5 +26,4 @@ std::string LongestCommonSubsequence(absl::string_view first,
   return result;
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

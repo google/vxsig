@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -52,8 +52,7 @@
 #include "vxsig/types.h"
 #include "vxsig/vxsig.pb.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 // Represents a single BinDiff match between two binaries.
 struct MatchedMemoryAddress {
@@ -266,7 +265,6 @@ void PropagateIds(MatchChainTable* table);
 // calling the method of the same name on its columns.
 void BuildIdIndices(MatchChainTable* table);
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig
 
 #endif  // VXSIG_MATCH_CHAIN_TABLE_H_

@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,8 +34,7 @@ using testing::IsTrue;
 using testing::Not;
 using testing::StrEq;
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 class SiggenTest : public testing::Test {
  protected:
@@ -196,5 +195,4 @@ TEST_F(SiggenTest, NotADiffChain) {
               HasSubstr("Input files do not form a chain of diffs"));
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

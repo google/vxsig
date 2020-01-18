@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2019-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,8 +19,7 @@
 #include "absl/strings/str_split.h"
 #include "absl/strings/string_view.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 std::string MakeComparableYaraSignature(const std::string& data) {
   std::string result;
@@ -43,5 +42,4 @@ std::string MakeComparableYaraSignature(const std::string& data) {
   return result;
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

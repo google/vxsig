@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,8 +38,7 @@ ABSL_FLAG(bool, siggen_yara_debug_masking, false,
 ABSL_FLAG(bool, siggen_yara_debug_weights, false,
             "Include signature piece weights in output");
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 namespace {
 
 enum {
@@ -186,5 +185,4 @@ not_absl::Status YaraSignatureFormatter::DoFormatDatabase(
   return not_absl::OkStatus();
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

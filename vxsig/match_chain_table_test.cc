@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,8 +25,7 @@ using testing::Eq;
 using testing::NotNull;
 using testing::SizeIs;
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 namespace {
 
 enum { kNumSimpleMatches = 5 };
@@ -179,5 +178,4 @@ TEST(MatchChainColumnTest, PropagateIdsAndBuildIndices) {
 }
 
 }  // namespace
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

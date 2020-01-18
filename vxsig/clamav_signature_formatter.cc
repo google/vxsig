@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,8 +23,7 @@
 #include "third_party/zynamics/binexport/util/canonical_errors.h"
 #include "third_party/zynamics/binexport/util/status_macros.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 namespace {
 
 enum {
@@ -107,5 +106,4 @@ not_absl::Status ClamAvSignatureFormatter::DoFormatDatabase(
   return not_absl::OkStatus();
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

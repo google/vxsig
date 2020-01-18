@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -47,8 +47,7 @@ ABSL_FLAG(std::string, function_whitelist, "",
           "function_blacklist.");
 ABSL_FLAG(std::string, function_blacklist, "", "Inverse of function_whitelist");
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 namespace {
 
 void SiggenMain(int argc, char* argv[]) {
@@ -113,8 +112,7 @@ void SiggenMain(int argc, char* argv[]) {
 }
 
 }  // namespace
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig
 
 int main(int argc, char* argv[]) {
   absl::SetProgramUsageMessage(absl::StrCat(

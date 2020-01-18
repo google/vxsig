@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,8 +22,7 @@
 #include "absl/strings/string_view.h"
 #include "vxsig/vxsig.pb.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 // A utility class to generate unique signature id prefixes out of a given
 // signature definition.
@@ -65,7 +64,6 @@ class SignatureDefinitionHasher {
   SignatureDefinition sig_def_;
 };
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig
 
 #endif  // VXSIG_SIGNATURE_DEFINITION_HASH_H_

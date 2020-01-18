@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,7 @@ using testing::Eq;
 using testing::Ne;
 using not_absl::IsOk;
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 class BinExportReaderTest : public testing::Test {
  protected:
@@ -93,5 +92,4 @@ TEST_F(BinExportReaderTest, ParseBinExport2Complex) {
   EXPECT_THAT("\x83\x7D\xFC\x10", Eq(found->second));  // cmp ss:[ebp-4], 10h
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,8 +39,7 @@
 #include "vxsig/types.h"
 #include "vxsig/vxsig.pb.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 // This class provides methods to conveniently create AV signatures from
 // BinDiff result files and associated BinExport files.
@@ -120,7 +119,6 @@ class AvSignatureGenerator {
   bool debug_match_chain_ = false;
 };
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig
 
 #endif  // VXSIG_SIGGEN_H_

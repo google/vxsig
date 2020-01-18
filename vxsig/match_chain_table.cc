@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,8 +26,7 @@
 #include "vxsig/binexport_reader.h"
 #include "vxsig/diff_result_reader.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 MatchedMemoryAddress::MatchedMemoryAddress(const MemoryAddressPair& from_match)
     : address(from_match.first), address_in_next(from_match.second) {}
@@ -360,5 +359,4 @@ void BuildIdIndices(MatchChainTable* table) {
   }
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

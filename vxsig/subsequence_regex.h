@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,7 @@
 
 #include "base/logging.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 // Callback that is used in RegexFromSubsequence() to insert the actual
 // wildcards. This allows to insert bounded or unbounded wildcards with the same
@@ -106,7 +105,6 @@ void RegexFromSubsequence(IteratorT first, IteratorT last,
   }
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig
 
 #endif  // VXSIG_SUBSEQUENCE_REGEX_H_

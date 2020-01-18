@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,8 +25,7 @@
 #include "third_party/zynamics/binexport/util/status.h"
 #include "vxsig/types.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 // Each time a function is encountered, this callback gets called with the
 // function's address and type.
@@ -58,7 +57,6 @@ not_absl::Status ParseBinExport(
     const FunctionReceiverCallback& function_receiver,
     const InstructionReceiverCallback& instruction_receiver);
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig
 
 #endif  // VXSIG_BINEXPORT_READER_H_

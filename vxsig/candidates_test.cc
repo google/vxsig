@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,8 +25,7 @@ using testing::ElementsAre;
 using testing::IsNull;
 using testing::Not;
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 // The fixture for testing function/basic block computation.
 class CandidatesTest : public ::testing::Test {
@@ -121,5 +120,4 @@ TEST_F(CandidatesTest, FilterBasicBlockOverlaps) {
   EXPECT_THAT(bb_candidate_ids, AnyOf(ElementsAre(1), ElementsAre(3, 4, 5)));
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

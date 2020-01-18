@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,8 +19,7 @@
 
 using testing::Eq;
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 class SignatureDefinitionHashTest : public ::testing::Test {
  protected:
@@ -69,5 +68,4 @@ TEST_F(SignatureDefinitionHashTest, ValidSignatureDefinition) {
   EXPECT_THAT(hasher.GetSignatureId(0), Eq("sig_63ad6eaa162e_07510000"));
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

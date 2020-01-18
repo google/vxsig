@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,8 +23,7 @@
 #include <iterator>
 #include <string>
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 // Returns the number of different elements in a specified iterator range.
 //
@@ -52,7 +51,6 @@ size_t HammingDistance(const Cont1T& first, const Cont2T& second) {
                          second.end());
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig
 
 #endif  // VXSIG_HAMMING_H_

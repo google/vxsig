@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,8 +20,7 @@
 
 #include "absl/types/span.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 class RawSignature;
 
@@ -34,7 +33,6 @@ std::unique_ptr<RawSignature> MakeRawSignature(
 bool EquivRawSignature(const RawSignature& actual,
                        const RawSignature& expected);
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig
 
 #endif  // VXSIG_SIGNATURE_TEST_UTIL_H_

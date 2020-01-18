@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,8 +34,7 @@
 #include "vxsig/generic_signature.h"
 #include "vxsig/match_chain_table.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 namespace {
 
 // Debugging utility. It outputs a table of function matches. Each column
@@ -282,5 +281,4 @@ not_absl::Status AvSignatureGenerator::Generate(Signature* signature) {
   return not_absl::OkStatus();
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2019-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,8 +21,7 @@
 #include <utility>
 #include <vector>
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 // Type used for representing memory addresses.
 using MemoryAddress = uint64_t;
@@ -43,7 +42,6 @@ enum MatchType {
   kInstructionMatch
 };
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig
 
 #endif  // VXSIG_TYPES_H_

@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,7 @@
 #include "vxsig/hamming.h"
 #include "vxsig/longest_common_subsequence.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 // Removes from the range [first,last) the elements not in the range
 // [keep_first, keep_last). That is, PruneSequence returns an iterator new_last
@@ -165,7 +164,6 @@ void CommonSubsequence(const NestedContT& sequences, OutputIteratorT result) {
   }
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig
 
 #endif  // VXSIG_COMMON_SUBSEQUENCE_H_

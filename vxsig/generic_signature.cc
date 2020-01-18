@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,7 @@
 #include "vxsig/common_subsequence.h"
 #include "vxsig/subsequence_regex.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 namespace {
 
 // A byte with extra information. This is used to differentiate between regular
@@ -286,5 +285,4 @@ not_absl::StatusOr<RawSignature> GenericSignatureFromMatches(
   return ToRawSignatureProto(regex);
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

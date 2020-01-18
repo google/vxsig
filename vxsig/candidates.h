@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,8 +21,7 @@
 #include "vxsig/match_chain_table.h"
 #include "vxsig/types.h"
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 // Computes function candidates filtered by the specified predicate callback.
 void ComputeFunctionCandidates(const MatchChainTable& match_chain_table,
@@ -39,7 +38,6 @@ void ComputeBasicBlockCandidates(const MatchChainTable& match_chain_table,
 void FilterBasicBlockOverlaps(const MatchChainTable& match_chain_table,
                               IdentSequence* bb_candidate_ids);
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig
 
 #endif  // VXSIG_CANDIDATES_H_

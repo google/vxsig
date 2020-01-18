@@ -1,4 +1,4 @@
-// Copyright 2011-2019 Google LLC
+// Copyright 2011-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,8 +27,7 @@ using not_absl::IsOk;
 using testing::Eq;
 using testing::SizeIs;
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 class GenericSignatureTest : public ::testing::Test {
  protected:
@@ -154,5 +153,4 @@ TEST_F(GenericSignatureTest,
   }
 }
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig

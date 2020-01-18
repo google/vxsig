@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2019-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,12 +17,10 @@
 
 #include <string>
 
-namespace security {
-namespace vxsig {
+namespace security::vxsig {
 
 std::string MakeComparableYaraSignature(const std::string& data);
 
-}  // namespace vxsig
-}  // namespace security
+}  // namespace security::vxsig
 
 #endif  // VXSIG_YARA_SIGNATURE_TEST_UTIL_H_
