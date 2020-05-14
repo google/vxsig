@@ -29,9 +29,12 @@ maybe(
     http_archive,
     name = "zlib",
     build_file = "@com_google_protobuf//:third_party/zlib.BUILD",
-    sha256 = "629380c90a77b964d896ed37163f5c3a34f6e6d897311f1df2a7016355c45eff",
+    sha256 = "c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1",  # 2020-04-23
     strip_prefix = "zlib-1.2.11",
-    urls = ["https://github.com/madler/zlib/archive/v1.2.11.tar.gz"],
+    urls = [
+        "https://mirror.bazel.build/zlib.net/zlib-1.2.11.tar.gz",
+        "https://www.zlib.net/zlib-1.2.11.tar.gz",
+    ],
 )
 
 # SQLite
