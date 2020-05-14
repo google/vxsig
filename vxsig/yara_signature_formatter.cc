@@ -28,7 +28,6 @@
 #include "absl/strings/str_split.h"
 #include "absl/strings/string_view.h"
 #include "absl/strings/substitute.h"
-#include "third_party/zynamics/binexport/util/canonical_errors.h"
 #include "third_party/zynamics/binexport/util/status_macros.h"
 #include "vxsig/signature_formatter.h"
 #include "vxsig/vxsig.pb.h"
@@ -59,7 +58,7 @@ std::string MakeValidIdentifier(absl::string_view identifier) {
 
 }  // namespace
 
-not_absl::Status YaraSignatureFormatter::DoFormat(Signature* signature) const {
+absl::Status YaraSignatureFormatter::DoFormat(Signature* signature) const {
   std::string* signature_data =
       signature->mutable_yara_signature()->mutable_data();
   // Avoid too many reallocations.
@@ -165,10 +164,10 @@ not_absl::Status YaraSignatureFormatter::DoFormat(Signature* signature) const {
   }
 
   absl::StrAppend(signature_data, "\n  }\n  condition:\n    all of them\n}\n");
-  return not_absl::OkStatus();
+  return absl::OkStatus();
 }
 
-not_absl::Status YaraSignatureFormatter::DoFormatDatabase(
+absl::Status YaraSignatureFormatter::DoFormatDatabase(
     const Signatures& signatures, std::string* database) const {
   database->clear();
   Signature format_signature;
@@ -182,7 +181,7 @@ not_absl::Status YaraSignatureFormatter::DoFormatDatabase(
     }
     absl::StrAppend(database, *signature_data);
   }
-  return not_absl::OkStatus();
+  return absl::OkStatus();
 }
 
 }  // namespace security::vxsig

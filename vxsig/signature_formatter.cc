@@ -20,7 +20,6 @@
 #include "absl/memory/memory.h"
 #include "absl/strings/str_cat.h"
 #include "absl/strings/string_view.h"
-#include "third_party/zynamics/binexport/util/canonical_errors.h"
 #include "third_party/zynamics/binexport/util/status_macros.h"
 #include "vxsig/clamav_signature_formatter.h"
 #include "vxsig/generic_signature.h"
@@ -41,25 +40,25 @@ std::unique_ptr<SignatureFormatter> SignatureFormatter::Create(
   }
 }
 
-not_absl::Status SignatureFormatter::Format(Signature* signature) const {
+absl::Status SignatureFormatter::Format(Signature* signature) const {
   if (!signature) {
-    return not_absl::InvalidArgumentError("Signature must not be nullptr");
+    return absl::InvalidArgumentError("Signature must not be nullptr");
   }
   return DoFormat(signature);
 }
 
-not_absl::Status SignatureFormatter::FormatDatabase(
+absl::Status SignatureFormatter::FormatDatabase(
     const Signatures& signatures, std::string* database) const {
   return DoFormatDatabase(signatures, ABSL_DIE_IF_NULL(database));
 }
 
 namespace {
 
-not_absl::Status SolveKnapsack(const int64 max_byte_len,
-                               const RawSignature& raw_signature,
-                               std::vector<int>* piece_indices) {
+absl::Status SolveKnapsack(const int64_t max_byte_len,
+                           const RawSignature& raw_signature,
+                           std::vector<int>* piece_indices) {
   if (!piece_indices) {
-    return not_absl::InvalidArgumentError("Piece indices must be non-nullptr");
+    return absl::InvalidArgumentError("Piece indices must be non-nullptr");
   }
   // The code below is disabled for now, as piece weights need a function
   // corpus.
@@ -107,7 +106,7 @@ not_absl::Status SolveKnapsack(const int64 max_byte_len,
   }
   const auto solver_result = solver.Solve();
   if (solver_result != MPSolver::OPTIMAL) {
-    return not_absl::InternalError(
+    return absl::InternalError(
         absl::StrCat("Solver failed with code: ", solver_result));
   }
   RawSignature result;
@@ -121,16 +120,16 @@ not_absl::Status SolveKnapsack(const int64 max_byte_len,
                      [](int i) { return i < 0; }),
       piece_indices->end());
 #endif
-  return not_absl::OkStatus();
+  return absl::OkStatus();
 }
 
-void TrimLast(const int64 max_length, const RawSignature& raw_sig,
+void TrimLast(const int64_t max_length, const RawSignature& raw_sig,
               std::vector<int>* piece_indices) {
   int current_length = 0;
   int j = 0;
   for (; j < piece_indices->size(); ++j) {
     const int i = (*piece_indices)[j];
-    int64 new_length = current_length + raw_sig.piece(i).bytes().size();
+    int64_t new_length = current_length + raw_sig.piece(i).bytes().size();
     if (new_length > max_length) {
       break;
     }
@@ -139,7 +138,7 @@ void TrimLast(const int64 max_length, const RawSignature& raw_sig,
   piece_indices->resize(j);
 }
 
-void TrimLowWeight(const int64 max_length, const RawSignature& raw_sig,
+void TrimLowWeight(const int64_t max_length, const RawSignature& raw_sig,
                    std::vector<int>* piece_indices) {
   std::sort(
       piece_indices->begin(), piece_indices->end(), [&raw_sig](int a, int b) {
@@ -156,7 +155,7 @@ void TrimLowWeight(const int64 max_length, const RawSignature& raw_sig,
   std::vector<int> keep_indices;
   int current_length = 0;
   for (const auto& i : *piece_indices) {
-    int64 new_length = current_length + raw_sig.piece(i).bytes().size();
+    int64_t new_length = current_length + raw_sig.piece(i).bytes().size();
     if (new_length > max_length) {
       // Don't give up yet, shorter pieces may follow.
       continue;
@@ -169,7 +168,7 @@ void TrimLowWeight(const int64 max_length, const RawSignature& raw_sig,
 
 }  // namespace
 
-not_absl::Status GetRelevantSignatureSubset(const Signature& input,
+absl::Status GetRelevantSignatureSubset(const Signature& input,
                                             int engine_min_piece_len,
                                             RawSignature* output) {
   CHECK(output);
@@ -197,7 +196,7 @@ not_absl::Status GetRelevantSignatureSubset(const Signature& input,
   int max_length = definition.trim_length();
   if (max_length < 0 &&
       definition.trim_algorithm() != SignatureDefinition::TRIM_NONE) {
-    return not_absl::InvalidArgumentError(
+    return absl::InvalidArgumentError(
         "Unbounded signature trimming requested");
   }
   switch (definition.trim_algorithm()) {
@@ -228,20 +227,20 @@ not_absl::Status GetRelevantSignatureSubset(const Signature& input,
       TrimLowWeight(max_length, raw_sig, &piece_indices);
       break;
     default:
-      return not_absl::InvalidArgumentError(
+      return absl::InvalidArgumentError(
           "Unknown signature trimming algorithm");
       break;
   }
 
   if (piece_indices.empty()) {
-    return not_absl::InvalidArgumentError("No byte piece to create signature");
+    return absl::InvalidArgumentError("No byte piece to create signature");
   }
 
   std::sort(piece_indices.begin(), piece_indices.end());
   for (const auto& i : piece_indices) {
     *output->add_piece() = raw_sig.piece(i);
   }
-  return not_absl::OkStatus();
+  return absl::OkStatus();
 }
 
 }  // namespace security::vxsig

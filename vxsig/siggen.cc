@@ -27,7 +27,6 @@
 #include "absl/strings/str_format.h"
 #include "absl/strings/string_view.h"
 #include "absl/time/time.h"
-#include "third_party/zynamics/binexport/util/canonical_errors.h"
 #include "third_party/zynamics/binexport/util/filesystem.h"
 #include "third_party/zynamics/binexport/util/status_macros.h"
 #include "vxsig/candidates.h"
@@ -127,7 +126,7 @@ void AvSignatureGenerator::AddDiffResults(absl::Span<const std::string> files) {
   AddDiffResults(files.begin(), files.end());
 }
 
-not_absl::Status AvSignatureGenerator::LoadColumnData() {
+absl::Status AvSignatureGenerator::LoadColumnData() {
   absl::PrintF("Loading function metadata and instruction data\n");
   for (const auto& column : match_chain_table_) {
     NA_RETURN_IF_ERROR(
@@ -135,10 +134,10 @@ not_absl::Status AvSignatureGenerator::LoadColumnData() {
                             .append(".BinExport"),
                         column.get()));
   }
-  return not_absl::OkStatus();
+  return absl::OkStatus();
 }
 
-not_absl::Status AvSignatureGenerator::ParseDiffResults() {
+absl::Status AvSignatureGenerator::ParseDiffResults() {
   const auto num_diffs = diff_results_.size();
 
   absl::PrintF("Parsing diff results\n");
@@ -154,20 +153,20 @@ not_absl::Status AvSignatureGenerator::ParseDiffResults() {
     const auto& pair = diff_file_pairs[i];
     if (match_chain_table_[i]->filename() != pair.first ||
         match_chain_table_[i + 1]->filename() != pair.second) {
-      return not_absl::FailedPreconditionError(
+      return absl::FailedPreconditionError(
           "Input files do not form a chain of diffs");
     }
   }
-  return not_absl::OkStatus();
+  return absl::OkStatus();
 }
 
-not_absl::Status AvSignatureGenerator::SetFunctionWeights(
+absl::Status AvSignatureGenerator::SetFunctionWeights(
     const IdentSequence& func_candidate_ids) {
   // TODO(cblichmann): Query for function occurrence counts and fill the map.
   using FunctionId = std::pair<std::string, Address>;
   absl::flat_hash_map<FunctionId, uint32_t> occurrence_counts;
   if (occurrence_counts.size() == 0) {
-    return not_absl::OkStatus();
+    return absl::OkStatus();
   }
   for (int i = 0; i < func_candidate_ids.size(); ++i) {
     for (const auto& column : match_chain_table_) {
@@ -183,10 +182,10 @@ not_absl::Status AvSignatureGenerator::SetFunctionWeights(
       }
     }
   }
-  return not_absl::OkStatus();
+  return absl::OkStatus();
 }
 
-not_absl::Status AvSignatureGenerator::ComputeCandidates() {
+absl::Status AvSignatureGenerator::ComputeCandidates() {
   absl::PrintF("Building id chains and indices\n");
   PropagateIds(&match_chain_table_);
   BuildIdIndices(&match_chain_table_);
@@ -201,7 +200,7 @@ not_absl::Status AvSignatureGenerator::ComputeCandidates() {
       // out what was wrong.
       DumpMatchChainTable(match_chain_table_, func_candidate_ids);
     }
-    return not_absl::FailedPreconditionError("No function candidates found");
+    return absl::FailedPreconditionError("No function candidates found");
   }
   absl::PrintF("  Function candidates found: %d\n", func_candidate_ids.size());
   if (debug_match_chain_) {
@@ -215,21 +214,21 @@ not_absl::Status AvSignatureGenerator::ComputeCandidates() {
   ComputeBasicBlockCandidates(match_chain_table_, func_candidate_ids,
                               &bb_candidate_ids_);
   if (bb_candidate_ids_.empty()) {
-    return not_absl::FailedPreconditionError("No basic block candidates found");
+    return absl::FailedPreconditionError("No basic block candidates found");
   }
   absl::PrintF("  Basic block candidates found: %d\n",
                bb_candidate_ids_.size());
-  return not_absl::OkStatus();
+  return absl::OkStatus();
 }
 
-not_absl::Status AvSignatureGenerator::Generate(Signature* signature) {
+absl::Status AvSignatureGenerator::Generate(Signature* signature) {
   if (!signature) {
-    return not_absl::InvalidArgumentError("Need non-null signature object");
+    return absl::InvalidArgumentError("Need non-null signature object");
   }
   const auto& signature_definition = signature->definition();
 
   if (diff_results_.empty()) {
-    return not_absl::FailedPreconditionError(
+    return absl::FailedPreconditionError(
         "Need to call one of the methods from the AddDiffResults*() family "
         "first");
   }
@@ -260,7 +259,7 @@ not_absl::Status AvSignatureGenerator::Generate(Signature* signature) {
                size_before - bb_candidate_ids_.size(),
                bb_candidate_ids_.size());
   if (bb_candidate_ids_.empty()) {
-    return not_absl::FailedPreconditionError(
+    return absl::FailedPreconditionError(
         "All basic blocks overlap, input data is probably bad");
   }
 
@@ -278,7 +277,7 @@ not_absl::Status AvSignatureGenerator::Generate(Signature* signature) {
                GetSignatureSize(*signature));
 
   FillSignatureMetadata(signature);
-  return not_absl::OkStatus();
+  return absl::OkStatus();
 }
 
 }  // namespace security::vxsig

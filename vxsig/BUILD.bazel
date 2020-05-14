@@ -113,9 +113,11 @@ cc_library(
         ":binexport2_cc_proto",
         ":types",
         "@com_google_absl//absl/memory",
+        "@com_google_absl//absl/status",
         "@com_google_absl//absl/strings",
         "@com_google_binexport//:binexport_util",
         "@com_google_binexport//:status",
+        "@com_google_binexport//:statusor",
         "@com_google_binexport//:stubs",
         "@com_google_binexport//:types",
         "@org_sqlite//:sqlite",
@@ -135,9 +137,9 @@ cc_test(
     deps = [
         ":file_readers",
         "@com_google_absl//absl/container:flat_hash_set",
+        "@com_google_absl//absl/status",
         "@com_google_absl//absl/strings",
         "@com_google_binexport//:filesystem",
-        "@com_google_binexport//:status",
         "@com_google_binexport//:status_matchers",
         "@com_google_googletest//:gtest_main",
     ],
@@ -155,9 +157,9 @@ cc_test(
     visibility = ["//visibility:private"],
     deps = [
         ":file_readers",
+        "@com_google_absl//absl/status",
         "@com_google_absl//absl/strings",
         "@com_google_binexport//:filesystem",
-        "@com_google_binexport//:status",
         "@com_google_binexport//:status_matchers",
         "@com_google_googletest//:gtest_main",
     ],
@@ -189,10 +191,10 @@ cc_library(
         "@com_google_absl//absl/base:core_headers",
         "@com_google_absl//absl/container:flat_hash_set",
         "@com_google_absl//absl/memory",
+        "@com_google_absl//absl/status",
         "@com_google_absl//absl/strings",
         "@com_google_absl//absl/strings:str_format",
         "@com_google_binexport//:filesystem",
-        "@com_google_binexport//:status",
     ],
 )
 
@@ -251,6 +253,7 @@ cc_library(
         "@com_google_absl//absl/container:flat_hash_set",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/strings",
+        "@com_google_binexport//:statusor",
     ],
 )
 
@@ -304,7 +307,6 @@ cc_library(
         "@com_google_absl//absl/flags:flag",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/strings",
-        "@com_google_binexport//:status",
         # "@com_google_ortools//linear_solver",  # Disabled, needs function corpus
     ],
 )
@@ -377,11 +379,11 @@ cc_library(
         ":vxsig_cc_proto",
         "@com_google_absl//absl/container:flat_hash_map",
         "@com_google_absl//absl/memory",
+        "@com_google_absl//absl/status",
         "@com_google_absl//absl/strings",
         "@com_google_absl//absl/strings:str_format",
         "@com_google_absl//absl/time",
         "@com_google_absl//absl/types:span",
-        "@com_google_binexport//:status",
         "@com_google_binexport//:stubs",
     ],
 )
@@ -411,7 +413,6 @@ cc_test(
         ":yara_signature_test_util",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/strings",
-        "@com_google_binexport//:status",
         "@com_google_binexport//:status_matchers",
         "@com_google_googletest//:gtest_main",
     ],

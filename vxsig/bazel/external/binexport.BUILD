@@ -51,19 +51,22 @@ cc_library(
     deps = [":stubs"],
 )
 
-# Custom fork of util::Status to be used until absl::Status is open source.
 cc_library(
     name = "status",
-    srcs = [
-        "util/canonical_errors.cc",
-        "util/status.cc",
+    hdrs = ["util/status_macros.h"],
+    copts = BINEXPORT_DEFAULT_COPTS,
+    include_prefix = "third_party/zynamics/binexport",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_absl//absl/base:core_headers",
+        "@com_google_absl//absl/status",
+        "@com_google_absl//absl/strings",
     ],
-    hdrs = [
-        "util/canonical_errors.h",
-        "util/status.h",
-        "util/status_macros.h",
-        "util/statusor.h",
-    ],
+)
+
+cc_library(
+    name = "statusor",
+    hdrs = ["util/statusor.h"],
     copts = BINEXPORT_DEFAULT_COPTS,
     include_prefix = "third_party/zynamics/binexport",
     visibility = ["//visibility:public"],
@@ -71,6 +74,7 @@ cc_library(
         ":types",
         "@com_google_absl//absl/base:core_headers",
         "@com_google_absl//absl/meta:type_traits",
+        "@com_google_absl//absl/status",
         "@com_google_absl//absl/strings",
         "@com_google_absl//absl/types:variant",
         "@com_google_protobuf//:protobuf",
@@ -85,7 +89,8 @@ cc_library(
     include_prefix = "third_party/zynamics/binexport",
     visibility = ["//visibility:public"],
     deps = [
-        ":status",
+        ":statusor",
+        "@com_google_absl//absl/status",
         "@com_google_absl//absl/types:optional",
         "@com_google_googletest//:gtest",
     ],
@@ -101,6 +106,9 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         ":status",
+        ":statusor",
+        ":types",
+        "@com_google_absl//absl/status",
         "@com_google_absl//absl/strings",
     ],
 )

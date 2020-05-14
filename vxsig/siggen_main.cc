@@ -15,8 +15,10 @@
 // A program that implements AV signature generation from sets of binaries.
 // Siggen operates on similar binaries that have been bindiffed pairwise.
 
+#include <cstdint>
 #include <cstdio>
 #include <iostream>
+#include <limits>
 #include <memory>
 #include <string>
 
@@ -34,7 +36,7 @@
 
 ABSL_FLAG(std::string, detection_name, "VxSig_Signature",
           "Detection name of the signature");
-ABSL_FLAG(int32, trim_length, kint32max,
+ABSL_FLAG(int32_t, trim_length, std::numeric_limits<int32_t>::max(),
           "Maximum length of the signature, subject to truncation of due to "
           "limitations of the target format");
 ABSL_FLAG(std::string, trim_algorithm, "TRIM_RANDOM",
@@ -96,17 +98,18 @@ void SiggenMain(int argc, char* argv[]) {
 
   AvSignatureGenerator siggen;
   siggen.AddDiffResultsFromCommandLineArguments(--argc, ++argv);
-  not_absl::Status status(siggen.Generate(&signature));
-  ABSL_RAW_CHECK(status.ok(), absl::StrCat("Failed to generate signature: ",
-                                           status.error_message()).c_str());
+  absl::Status status(siggen.Generate(&signature));
+  ABSL_RAW_CHECK(
+      status.ok(),
+      absl::StrCat("Failed to generate signature: ", status.message()).c_str());
 
   // Output the signature itself to stdout, so we can use redirected output
   // from this tool in scripts.
   std::cout << "----8<--------8<---- Signature ----8<--------8<----\n";
   status = SignatureFormatter::Create(YARA)->Format(&signature);
-  ABSL_RAW_CHECK(status.ok(), absl::StrCat("Failed to format signature: ",
-                                           status.error_message())
-                                  .c_str());
+  ABSL_RAW_CHECK(
+      status.ok(),
+      absl::StrCat("Failed to format signature: ", status.message()).c_str());
   printf("%s\n", signature.yara_signature().data().c_str());
   std::cout << "---->8-------->8---- Signature ---->8-------->8----\n";
 }

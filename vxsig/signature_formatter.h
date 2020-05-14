@@ -23,7 +23,7 @@
 #include <string>
 
 #include "absl/strings/string_view.h"
-#include "third_party/zynamics/binexport/util/status.h"
+#include "absl/status/status.h"
 #include "vxsig/types.h"
 #include "vxsig/vxsig.pb.h"
 
@@ -47,11 +47,11 @@ class SignatureFormatter {
   // Formats the specified raw signature into an engine-specific signature
   // Will fill the type specific fields of "signature". Returns false on error.
   // The content of "signature" is undefined at that point.
-  not_absl::Status Format(Signature* signature) const;
+  absl::Status Format(Signature* signature) const;
 
   // Like above, but combine multiple signatures into one signature database of
   // the target format.
-  not_absl::Status FormatDatabase(const Signatures& signatures,
+  absl::Status FormatDatabase(const Signatures& signatures,
                                   std::string* database) const;
 
  protected:
@@ -60,14 +60,14 @@ class SignatureFormatter {
 
  private:
   // These perform the actual formatting.
-  virtual not_absl::Status DoFormat(Signature* signature) const = 0;
-  virtual not_absl::Status DoFormatDatabase(const Signatures& signatures,
+  virtual absl::Status DoFormat(Signature* signature) const = 0;
+  virtual absl::Status DoFormatDatabase(const Signatures& signatures,
                                             std::string* database) const = 0;
 };
 
 // Checks the truncation strategy and fills the relevant signature subset into
 // an output RawSignature.
-not_absl::Status GetRelevantSignatureSubset(const Signature& input,
+absl::Status GetRelevantSignatureSubset(const Signature& input,
                                         int engine_min_piece_len,
                                         RawSignature* output);
 

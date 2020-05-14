@@ -22,7 +22,7 @@
 #include <utility>
 
 #include "absl/strings/string_view.h"
-#include "third_party/zynamics/binexport/util/status.h"
+#include "absl/status/status.h"
 #include "vxsig/types.h"
 
 namespace security::vxsig {
@@ -44,7 +44,7 @@ using MatchReceiverCallback = std::function<void(const MemoryAddressPair&)>;
 // non-null, it is filled with metadata that is stored in the BinDiff result
 // file.
 // Requires the callbacks to be a permanent ones and takes ownership.
-not_absl::Status ParseBinDiff(
+absl::Status ParseBinDiff(
     absl::string_view filename,
     const MatchReceiverCallback& function_match_receiver,
     const MatchReceiverCallback& basic_block_match_receiver,

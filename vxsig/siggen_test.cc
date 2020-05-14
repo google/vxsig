@@ -21,7 +21,7 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include "third_party/zynamics/binexport/util/filesystem.h"
-#include "third_party/zynamics/binexport/util/status.h"
+#include "absl/status/status.h"
 #include "third_party/zynamics/binexport/util/status_matchers.h"
 #include "vxsig/generic_signature.h"
 #include "vxsig/signature_formatter.h"

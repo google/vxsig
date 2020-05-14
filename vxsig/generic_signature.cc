@@ -25,7 +25,6 @@
 #include "absl/container/flat_hash_set.h"
 #include "absl/memory/memory.h"
 #include "absl/strings/str_cat.h"
-#include "third_party/zynamics/binexport/util/canonical_errors.h"
 #include "vxsig/common_subsequence.h"
 #include "vxsig/subsequence_regex.h"
 
@@ -36,7 +35,7 @@ namespace {
 // instruction bytes and signature wildcards. It also helps to keep the
 // association with basic block weights used for weighted signature trimming.
 struct ByteWithExtra {
-  uint8 value;  // The actual raw byte value
+  uint8_t value;  // The actual raw byte value
   enum { kRegularByte, kWildcard, kSingleWildcard } type;
   int weight;  // See MatchedBasicBlock and RawSignature::Piece::weight.
   // Keep the association with the disassembly.
@@ -209,10 +208,10 @@ not_absl::StatusOr<RawSignature> GenericSignatureFromMatches(
     const MatchChainTable& table, const IdentSequence& bb_candidate_ids,
     bool disable_nibble_masking, int min_piece_length) {
   if (bb_candidate_ids.empty()) {
-    return not_absl::InvalidArgumentError("Empty basic block candidate list");
+    return absl::InvalidArgumentError("Empty basic block candidate list");
   }
   if (min_piece_length < 1) {
-    return not_absl::InvalidArgumentError(
+    return absl::InvalidArgumentError(
         "Minimum piece length must be at least 1");
   }
 
@@ -252,7 +251,7 @@ not_absl::StatusOr<RawSignature> GenericSignatureFromMatches(
         }
 
         if (instr->raw_instruction_bytes.empty()) {
-          return not_absl::InternalError(absl::StrCat(
+          return absl::InternalError(absl::StrCat(
               "No bytes for instruction in ", column->filename(), " at ",
               absl::Hex(instr->match.address, absl::kZeroPad8),
               " (from basic block at ",

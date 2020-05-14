@@ -20,7 +20,6 @@
 
 #include "absl/strings/escaping.h"
 #include "absl/strings/str_cat.h"
-#include "third_party/zynamics/binexport/util/canonical_errors.h"
 #include "third_party/zynamics/binexport/util/status_macros.h"
 
 namespace security::vxsig {
@@ -37,7 +36,7 @@ static constexpr char kClamAvWildcard[] = "*";
 
 }  // namespace
 
-not_absl::Status ClamAvSignatureFormatter::DoFormat(
+absl::Status ClamAvSignatureFormatter::DoFormat(
     Signature* signature) const {
   std::string* signature_data =
       signature->mutable_clam_av_signature()->mutable_data();
@@ -81,17 +80,17 @@ not_absl::Status ClamAvSignatureFormatter::DoFormat(
   // A return value of false can only happen if the detection name is overly
   // long.
   if (signature_data->size() > kClamAvMaxLineLen) {
-    return not_absl::OutOfRangeError(
+    return absl::OutOfRangeError(
         absl::StrCat("Signature data size too long: ", signature_data->size(),
                      " > ", kClamAvMaxLineLen));
   }
-  return not_absl::OkStatus();
+  return absl::OkStatus();
 }
 
-not_absl::Status ClamAvSignatureFormatter::DoFormatDatabase(
+absl::Status ClamAvSignatureFormatter::DoFormatDatabase(
     const Signatures& signatures, std::string* database) const {
   if (!database) {
-    return not_absl::InvalidArgumentError("Database must not be nullptr");
+    return absl::InvalidArgumentError("Database must not be nullptr");
   }
   Signature format_signature;
   for (const auto& signature : signatures.signature()) {
@@ -103,7 +102,7 @@ not_absl::Status ClamAvSignatureFormatter::DoFormatDatabase(
     }
     absl::StrAppend(database, *signature_data, "\n");
   }
-  return not_absl::OkStatus();
+  return absl::OkStatus();
 }
 
 }  // namespace security::vxsig

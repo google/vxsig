@@ -47,7 +47,7 @@
 #include "absl/container/flat_hash_set.h"
 #include "absl/strings/string_view.h"
 #include "third_party/zynamics/binexport/binexport2.pb.h"
-#include "third_party/zynamics/binexport/util/status.h"
+#include "absl/status/status.h"
 #include "vxsig/binexport_reader.h"
 #include "vxsig/types.h"
 #include "vxsig/vxsig.pb.h"
@@ -243,14 +243,14 @@ class MatchChainColumn {
 using MatchChainTable = std::vector<std::unique_ptr<MatchChainColumn>>;
 
 // Adds a diff result file to the table in the specified column.
-not_absl::Status AddDiffResult(
+absl::Status AddDiffResult(
     absl::string_view filename, bool last, MatchChainColumn* column,
     MatchChainColumn* next,
     std::vector<std::pair<std::string, std::string>>* diffs);
 
 // Loads function metadata and raw instruction bytes from the specified
 // .BinExport file and adds it to the table in the specified column.
-not_absl::Status AddFunctionData(absl::string_view filename,
+absl::Status AddFunctionData(absl::string_view filename,
                                  MatchChainColumn* column);
 
 // Imposes an order on the matches of each column/binary in the table. The

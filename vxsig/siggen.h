@@ -33,7 +33,7 @@
 #include <vector>
 
 #include "absl/types/span.h"
-#include "third_party/zynamics/binexport/util/status.h"
+#include "absl/status/status.h"
 #include "vxsig/generic_signature.h"
 #include "vxsig/match_chain_table.h"
 #include "vxsig/types.h"
@@ -83,25 +83,25 @@ class AvSignatureGenerator {
   // metadata and computes a generic regular expression suitable for formatting
   // to the requested output format. One of the methods from the AddDiffResult*
   // family of methods must have been called before calling this method.
-  not_absl::Status Generate(Signature* signature);
+  absl::Status Generate(Signature* signature);
 
  private:
   // Reads and parses the BinExport data for the BinDiff results in the match
   // chain table.
-  not_absl::Status LoadColumnData();
+  absl::Status LoadColumnData();
 
   // Parses BinDiff result files and adds matches to the table. Returns true on
   // success.
-  not_absl::Status ParseDiffResults();
+  absl::Status ParseDiffResults();
 
   // Placeholder function that should query the occurrence count of the
   // specified function candidate ids and convert them into weights.
-  not_absl::Status SetFunctionWeights(const IdentSequence& func_candidate_ids);
+  absl::Status SetFunctionWeights(const IdentSequence& func_candidate_ids);
 
   // Computes a list of function and basic block candidates for the signature
   // generation. Function/basic block candidates are functions/basic blocks
   // that appear in all matched binaries in the same order.
-  not_absl::Status ComputeCandidates();
+  absl::Status ComputeCandidates();
 
   // Filenames of the BinDiff result files to work on
   std::vector<std::string> diff_results_;

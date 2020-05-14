@@ -14,7 +14,7 @@
 
 #include <string>
 
-#include "third_party/zynamics/binexport/util/status.h"
+#include "absl/status/status.h"
 #include "vxsig/signature_formatter.h"
 #include "vxsig/vxsig.pb.h"
 
@@ -25,9 +25,9 @@ namespace security::vxsig {
 // details.
 class ClamAvSignatureFormatter : public SignatureFormatter {
  private:
-  not_absl::Status DoFormat(Signature* signature) const override;
+  absl::Status DoFormat(Signature* signature) const override;
 
-  not_absl::Status DoFormatDatabase(const Signatures& signatures,
+  absl::Status DoFormatDatabase(const Signatures& signatures,
                                     std::string* database) const override;
 };
 

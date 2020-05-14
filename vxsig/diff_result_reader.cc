@@ -14,6 +14,7 @@
 
 #include "vxsig/diff_result_reader.h"
 
+#include <cstdint>
 #include <cstring>
 #include <memory>
 
@@ -23,7 +24,6 @@
 #include "absl/strings/string_view.h"
 #include "absl/strings/substitute.h"
 #include "third_party/sqlite/sqlite3.h"
-#include "third_party/zynamics/binexport/util/canonical_errors.h"
 
 namespace security::vxsig {
 
@@ -50,14 +50,14 @@ Sqlite3Closer::~Sqlite3Closer() {
   sqlite3_close(handle);
 }
 
-not_absl::Status ParseBinDiff(
+absl::Status ParseBinDiff(
     absl::string_view filename,
     const MatchReceiverCallback& function_match_receiver,
     const MatchReceiverCallback& basic_block_match_receiver,
     const MatchReceiverCallback& instruction_match_receiver,
     std::pair<FileMetaData, FileMetaData>* metadata) {
   if (filename.empty()) {
-    return not_absl::InvalidArgumentError("Empty BinDiff filename");
+    return absl::InvalidArgumentError("Empty BinDiff filename");
   }
 
   const char* query =
@@ -84,7 +84,7 @@ not_absl::Status ParseBinDiff(
   Sqlite3Closer db;
   if (sqlite3_open_v2(std::string(filename).c_str(), &db.handle,
                       SQLITE_OPEN_READONLY, nullptr)) {
-    return not_absl::FailedPreconditionError(
+    return absl::FailedPreconditionError(
         absl::StrCat("SQLite open failed for ", filename));
   }
 
@@ -93,14 +93,14 @@ not_absl::Status ParseBinDiff(
   if (sqlite3_prepare_v2(db.handle, query, strlen(query), &stmt, &query) !=
           SQLITE_OK ||
       sqlite3_step(stmt) != SQLITE_ROW) {
-    return not_absl::InternalError(absl::StrCat(
+    return absl::InternalError(absl::StrCat(
         "SQLite prepare statement failed for file metadata in ", filename));
   }
 
   int file1_id = sqlite3_column_int(stmt, 0);
   int file2_id = sqlite3_column_int(stmt, 1);
   if (sqlite3_finalize(stmt) != SQLITE_OK) {
-    return not_absl::InternalError(
+    return absl::InternalError(
         absl::StrCat("SQLite finalize statement failed, file: ", filename));
   }
 
@@ -109,7 +109,7 @@ not_absl::Status ParseBinDiff(
           SQLITE_OK ||
       sqlite3_bind_int(stmt, 1, file1_id) != SQLITE_OK ||
       sqlite3_step(stmt) != SQLITE_ROW) {
-    return not_absl::InternalError(absl::StrCat(
+    return absl::InternalError(absl::StrCat(
         "SQLite result error querying file ids, file: ", filename));
   }
 
@@ -124,7 +124,7 @@ not_absl::Status ParseBinDiff(
     if (sqlite3_bind_int(stmt, 1, file2_id) != SQLITE_OK ||
         sqlite3_step(stmt) != SQLITE_ROW) {
       sqlite3_finalize(stmt);
-      return not_absl::InternalError(absl::StrCat(
+      return absl::InternalError(absl::StrCat(
           "SQLite result error querying file metadata, file: ", filename));
     }
 
@@ -136,21 +136,21 @@ not_absl::Status ParseBinDiff(
         reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2)));
   }
   if (sqlite3_finalize(stmt) != SQLITE_OK) {
-    return not_absl::InternalError(
+    return absl::InternalError(
         absl::StrCat("SQLite finalize statement failed for ", filename));
   }
 
   // Query function matches.
   if (sqlite3_prepare_v2(db.handle, query, strlen(query), &stmt, nullptr)) {
-    return not_absl::InternalError(absl::StrCat(
+    return absl::InternalError(absl::StrCat(
         "SQLite prepare statement failed querying function matches, file: ",
         filename));
   }
 
-  int32 last_function_id = -1;
-  int32 last_basic_block_id = -1;
+  int32_t last_function_id = -1;
+  int32_t last_basic_block_id = -1;
   MemoryAddressPair function_match, basic_block_match, instruction_match;
-  int32 col = 0;
+  int32_t col = 0;
   while (true) {
     int result = sqlite3_step(stmt);
     if (result == SQLITE_DONE) {
@@ -158,14 +158,14 @@ not_absl::Status ParseBinDiff(
     }
     if (result != SQLITE_ROW) {
       sqlite3_finalize(stmt);
-      return not_absl::FailedPreconditionError(absl::Substitute(
+      return absl::FailedPreconditionError(absl::Substitute(
           "SQLite result error: $0, file $1", result, filename));
     }
 
-    int32 function_id = sqlite3_column_int(stmt, col++ % kNumMatchCols);
+    int32_t function_id = sqlite3_column_int(stmt, col++ % kNumMatchCols);
     function_match.first = sqlite3_column_int64(stmt, col++ % kNumMatchCols);
     function_match.second = sqlite3_column_int64(stmt, col++ % kNumMatchCols);
-    int32 basic_block_id = sqlite3_column_int(stmt, col++ % kNumMatchCols);
+    int32_t basic_block_id = sqlite3_column_int(stmt, col++ % kNumMatchCols);
     basic_block_match.first = sqlite3_column_int64(stmt, col++ % kNumMatchCols);
     basic_block_match.second =
         sqlite3_column_int64(stmt, col++ % kNumMatchCols);
@@ -186,11 +186,11 @@ not_absl::Status ParseBinDiff(
     }
   }
   if (sqlite3_finalize(stmt) != SQLITE_OK) {
-    return not_absl::InternalError(
+    return absl::InternalError(
         absl::StrCat("SQLite finalize statement failed, file: ", filename));
   }
 
-  return not_absl::OkStatus();
+  return absl::OkStatus();
 }
 
 }  // namespace security::vxsig

@@ -226,7 +226,7 @@ void MatchChainColumn::BuildIdIndices() {
   BuildIdIndexFromAddressIndex(basic_blocks_by_address_, &basic_blocks_by_id_);
 }
 
-not_absl::Status AddDiffResult(
+absl::Status AddDiffResult(
     absl::string_view filename, bool last, MatchChainColumn* column,
     MatchChainColumn* next,
     std::vector<std::pair<std::string, std::string>>* diffs) {
@@ -254,10 +254,10 @@ not_absl::Status AddDiffResult(
     next->FinishChain(column);
   }
   diffs->emplace_back(metadata.first.filename, metadata.second.filename);
-  return not_absl::OkStatus();
+  return absl::OkStatus();
 }
 
-not_absl::Status AddFunctionData(absl::string_view filename,
+absl::Status AddFunctionData(absl::string_view filename,
                                  MatchChainColumn* column) {
   auto metadata_callback(
       [column](const std::string& sha256, MemoryAddress address,

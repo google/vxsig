@@ -25,7 +25,6 @@
 #include "absl/strings/str_cat.h"
 #include "absl/strings/string_view.h"
 #include "third_party/zynamics/binexport/binexport.h"
-#include "third_party/zynamics/binexport/util/canonical_errors.h"
 #include "third_party/zynamics/binexport/util/status_macros.h"
 #include "vxsig/types.h"
 
@@ -128,14 +127,14 @@ void RenderExpression(const BinExport2& proto,
 
 }  // namespace
 
-not_absl::Status ParseBinExport(
+absl::Status ParseBinExport(
     absl::string_view filename,
     const FunctionReceiverCallback& function_receiver,
     const InstructionReceiverCallback& instruction_receiver) {
   std::ifstream file(std::string(filename), std::ios_base::binary);
   BinExport2 proto;
   if (!proto.ParseFromIstream(&file)) {
-    return not_absl::InternalError(absl::StrCat("failed parsing ", filename));
+    return absl::InternalError(absl::StrCat("failed parsing ", filename));
   }
 
   // TODO(cblichmann): Read MD indices if we have them.
@@ -204,7 +203,7 @@ not_absl::Status ParseBinExport(
       }
     }
   }
-  return not_absl::OkStatus();
+  return absl::OkStatus();
 }
 
 }  // namespace security::vxsig

@@ -22,7 +22,7 @@
 
 #include "absl/strings/string_view.h"
 #include "third_party/zynamics/binexport/binexport2.pb.h"
-#include "third_party/zynamics/binexport/util/status.h"
+#include "absl/status/status.h"
 #include "vxsig/types.h"
 
 namespace security::vxsig {
@@ -52,7 +52,7 @@ using InstructionReceiverCallback = std::function<void(
 
 // Parses the specified .BinExport file and calls the specified callback
 // function for all encountered functions.
-not_absl::Status ParseBinExport(
+absl::Status ParseBinExport(
     absl::string_view filename,
     const FunctionReceiverCallback& function_receiver,
     const InstructionReceiverCallback& instruction_receiver);
