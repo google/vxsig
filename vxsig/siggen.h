@@ -32,8 +32,8 @@
 #include <utility>
 #include <vector>
 
-#include "absl/types/span.h"
 #include "absl/status/status.h"
+#include "absl/types/span.h"
 #include "vxsig/generic_signature.h"
 #include "vxsig/match_chain_table.h"
 #include "vxsig/types.h"

@@ -18,7 +18,7 @@
 #ifndef VXSIG_GENERIC_SIGNATURE_H_
 #define VXSIG_GENERIC_SIGNATURE_H_
 
-#include "third_party/zynamics/binexport/util/statusor.h"
+#include "absl/status/statusor.h"
 #include "vxsig/match_chain_table.h"
 #include "vxsig/types.h"
 #include "vxsig/vxsig.pb.h"
@@ -36,7 +36,7 @@ namespace security::vxsig {
 // setting their respective weights to zero. This is done, so that constructs
 // like "[-] XX ?? ?? ?? ??" (Yara syntax) are less likely to be included in the
 // final signature.
-not_absl::StatusOr<RawSignature> GenericSignatureFromMatches(
+absl::StatusOr<RawSignature> GenericSignatureFromMatches(
     const MatchChainTable& table, const IdentSequence& bb_candidate_ids,
     bool disable_nibble_masking, int min_piece_length);
 

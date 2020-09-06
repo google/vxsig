@@ -18,12 +18,12 @@
 #ifndef VXSIG_SIGNATURE_FORMATTER_H_
 #define VXSIG_SIGNATURE_FORMATTER_H_
 
-#include <map>
+#include <cstdint>
 #include <memory>
 #include <string>
 
-#include "absl/strings/string_view.h"
 #include "absl/status/status.h"
+#include "absl/strings/string_view.h"
 #include "vxsig/types.h"
 #include "vxsig/vxsig.pb.h"
 
@@ -52,7 +52,7 @@ class SignatureFormatter {
   // Like above, but combine multiple signatures into one signature database of
   // the target format.
   absl::Status FormatDatabase(const Signatures& signatures,
-                                  std::string* database) const;
+                              std::string* database) const;
 
  protected:
   // Make constructor accessible from the deriving formatter classes.
@@ -62,7 +62,7 @@ class SignatureFormatter {
   // These perform the actual formatting.
   virtual absl::Status DoFormat(Signature* signature) const = 0;
   virtual absl::Status DoFormatDatabase(const Signatures& signatures,
-                                            std::string* database) const = 0;
+                                        std::string* database) const = 0;
 };
 
 // Checks the truncation strategy and fills the relevant signature subset into

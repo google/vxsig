@@ -41,9 +41,9 @@ maybe(
 http_archive(
     name = "org_sqlite",
     build_file = "//vxsig:bazel/external/sqlite.BUILD",
-    sha256 = "d02fc4e95cfef672b45052e221617a050b7f2e20103661cda88387349a9b1327",
-    strip_prefix = "sqlite-amalgamation-3280000",
-    urls = ["https://www.sqlite.org/2019/sqlite-amalgamation-3280000.zip"],
+    sha256 = "b34f4c0c0eefad9a7e515c030c18702e477f4ef7d8ade6142bdab8011b487ac6",  # 2020-08-14
+    strip_prefix = "sqlite-amalgamation-3330000",
+    urls = ["https://www.sqlite.org/2020/sqlite-amalgamation-3330000.zip"],
 )
 
 # BinExport
@@ -54,7 +54,7 @@ http_archive(
         "find . -path ./third_party -prune -o -\\( -name '*.cc' -o -name '*.h' -\\) -print0 |" +
         "xargs -0 -P8 -n1 sed -i 's,^\\(#include \"\\)third_party/\\(absl\\),\\1\\2,g'",
     ],
-    sha256 = "8c3df9877f54fcdf6ffaa4291db8e0805ebe917baef969aa931bdc6f5e319b6a",
-    strip_prefix = "binexport-64b18c303e26558224b980274780fa4b455d7518",
-    urls = ["https://github.com/google/binexport/archive/64b18c303e26558224b980274780fa4b455d7518.zip"],
+    sha256 = "522ec4655e4cc46f589ecc3ad936681eb1214fa254948f741627296154793366", # 2020-09-03
+    strip_prefix = "binexport-aae2b41acd9fe38b101ed35dc13b7b39fd69c583",
+    urls = ["https://github.com/google/binexport/archive/aae2b41acd9fe38b101ed35dc13b7b39fd69c583.zip"],
 )

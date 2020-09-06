@@ -21,8 +21,9 @@
 #include "absl/memory/memory.h"
 #include "absl/strings/str_format.h"
 #include "absl/strings/string_view.h"
-#include "third_party/zynamics/binexport/util/status_macros.h"
+#include "base/logging.h"
 #include "third_party/zynamics/binexport/util/filesystem.h"
+#include "third_party/zynamics/binexport/util/status_macros.h"
 #include "vxsig/binexport_reader.h"
 #include "vxsig/diff_result_reader.h"
 
@@ -258,7 +259,7 @@ absl::Status AddDiffResult(
 }
 
 absl::Status AddFunctionData(absl::string_view filename,
-                                 MatchChainColumn* column) {
+                             MatchChainColumn* column) {
   auto metadata_callback(
       [column](const std::string& sha256, MemoryAddress address,
                BinExport2::CallGraph::Vertex::Type type, double /*md_index*/) {

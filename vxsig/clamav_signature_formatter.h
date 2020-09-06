@@ -28,7 +28,7 @@ class ClamAvSignatureFormatter : public SignatureFormatter {
   absl::Status DoFormat(Signature* signature) const override;
 
   absl::Status DoFormatDatabase(const Signatures& signatures,
-                                    std::string* database) const override;
+                                std::string* database) const override;
 };
 
 }  // namespace security::vxsig

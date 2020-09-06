@@ -36,8 +36,7 @@ static constexpr char kClamAvWildcard[] = "*";
 
 }  // namespace
 
-absl::Status ClamAvSignatureFormatter::DoFormat(
-    Signature* signature) const {
+absl::Status ClamAvSignatureFormatter::DoFormat(Signature* signature) const {
   std::string* signature_data =
       signature->mutable_clam_av_signature()->mutable_data();
 

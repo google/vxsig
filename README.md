@@ -79,7 +79,7 @@ rule VxSigTestSig {
 
 ## Further reading / Similar tools
 
-* The original thesis that provided the base for this tool (German language
+* The original thesis that provided the basis for this tool (German language
   only): [Automatisierte Signaturgenerierung für Malware-Stämme
   ](https://www.zynamics.com/downloads/blichmann-christian--diplomarbeit--final.pdf)
 * [zynamics VxClass](https://www.zynamics.com/vxclass.html), a discontinued
@@ -87,7 +87,7 @@ rule VxSigTestSig {
 * Cisco's Talos Group's [BASS Automated Signature Synthesizer
   ](https://github.com/Cisco-Talos/BASS), an open-source reimplementation of the
   thesis
-* [funcionsimsearch](https://github.com/googleprojectzero/functionsimsearch), a
+* [functionsimsearch](https://github.com/googleprojectzero/functionsimsearch), a
   tool that can be used to create a corpus of files for computing function
   occurrence counts.
 

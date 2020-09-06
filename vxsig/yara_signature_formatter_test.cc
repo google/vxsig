@@ -20,6 +20,7 @@
 
 #include "absl/strings/escaping.h"
 #include "absl/strings/str_join.h"
+#include "base/logging.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include "third_party/zynamics/binexport/util/filesystem.h"

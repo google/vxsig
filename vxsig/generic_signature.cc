@@ -204,7 +204,7 @@ void PenalizeShortAtoms(int min_piece_length, ByteWithExtraString* regex) {
   }
 }
 
-not_absl::StatusOr<RawSignature> GenericSignatureFromMatches(
+absl::StatusOr<RawSignature> GenericSignatureFromMatches(
     const MatchChainTable& table, const IdentSequence& bb_candidate_ids,
     bool disable_nibble_masking, int min_piece_length) {
   if (bb_candidate_ids.empty()) {

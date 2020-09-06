@@ -20,6 +20,7 @@
 #include "absl/memory/memory.h"
 #include "absl/strings/str_cat.h"
 #include "absl/strings/string_view.h"
+#include "base/logging.h"
 #include "third_party/zynamics/binexport/util/status_macros.h"
 #include "vxsig/clamav_signature_formatter.h"
 #include "vxsig/generic_signature.h"
@@ -169,8 +170,8 @@ void TrimLowWeight(const int64_t max_length, const RawSignature& raw_sig,
 }  // namespace
 
 absl::Status GetRelevantSignatureSubset(const Signature& input,
-                                            int engine_min_piece_len,
-                                            RawSignature* output) {
+                                        int engine_min_piece_len,
+                                        RawSignature* output) {
   CHECK(output);
   const auto& raw_sig = input.raw_signature();
   const auto& definition = input.definition();
@@ -196,8 +197,7 @@ absl::Status GetRelevantSignatureSubset(const Signature& input,
   int max_length = definition.trim_length();
   if (max_length < 0 &&
       definition.trim_algorithm() != SignatureDefinition::TRIM_NONE) {
-    return absl::InvalidArgumentError(
-        "Unbounded signature trimming requested");
+    return absl::InvalidArgumentError("Unbounded signature trimming requested");
   }
   switch (definition.trim_algorithm()) {
     case SignatureDefinition::TRIM_NONE:
@@ -227,9 +227,7 @@ absl::Status GetRelevantSignatureSubset(const Signature& input,
       TrimLowWeight(max_length, raw_sig, &piece_indices);
       break;
     default:
-      return absl::InvalidArgumentError(
-          "Unknown signature trimming algorithm");
-      break;
+      return absl::InvalidArgumentError("Unknown signature trimming algorithm");
   }
 
   if (piece_indices.empty()) {

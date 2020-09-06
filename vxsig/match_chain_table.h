@@ -45,9 +45,9 @@
 #include <vector>
 
 #include "absl/container/flat_hash_set.h"
+#include "absl/status/status.h"
 #include "absl/strings/string_view.h"
 #include "third_party/zynamics/binexport/binexport2.pb.h"
-#include "absl/status/status.h"
 #include "vxsig/binexport_reader.h"
 #include "vxsig/types.h"
 #include "vxsig/vxsig.pb.h"
@@ -251,7 +251,7 @@ absl::Status AddDiffResult(
 // Loads function metadata and raw instruction bytes from the specified
 // .BinExport file and adds it to the table in the specified column.
 absl::Status AddFunctionData(absl::string_view filename,
-                                 MatchChainColumn* column);
+                             MatchChainColumn* column);
 
 // Imposes an order on the matches of each column/binary in the table. The
 // first column is used as the "master column", i.e. the matches of the

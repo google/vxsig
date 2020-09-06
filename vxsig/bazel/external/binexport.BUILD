@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2019-2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,31 +53,15 @@ cc_library(
 
 cc_library(
     name = "status",
-    hdrs = ["util/status_macros.h"],
-    copts = BINEXPORT_DEFAULT_COPTS,
-    include_prefix = "third_party/zynamics/binexport",
-    visibility = ["//visibility:public"],
-    deps = [
-        "@com_google_absl//absl/base:core_headers",
-        "@com_google_absl//absl/status",
-        "@com_google_absl//absl/strings",
-    ],
-)
-
-cc_library(
-    name = "statusor",
-    hdrs = ["util/statusor.h"],
+    hdrs = [ "util/status_macros.h"],
     copts = BINEXPORT_DEFAULT_COPTS,
     include_prefix = "third_party/zynamics/binexport",
     visibility = ["//visibility:public"],
     deps = [
         ":types",
         "@com_google_absl//absl/base:core_headers",
-        "@com_google_absl//absl/meta:type_traits",
         "@com_google_absl//absl/status",
-        "@com_google_absl//absl/strings",
-        "@com_google_absl//absl/types:variant",
-        "@com_google_protobuf//:protobuf",
+        "@com_google_absl//absl/status:statusor",
     ],
 )
 
@@ -89,8 +73,9 @@ cc_library(
     include_prefix = "third_party/zynamics/binexport",
     visibility = ["//visibility:public"],
     deps = [
-        ":statusor",
+        ":status",
         "@com_google_absl//absl/status",
+        "@com_google_absl//absl/status:statusor",
         "@com_google_absl//absl/types:optional",
         "@com_google_googletest//:gtest",
     ],
@@ -99,16 +84,22 @@ cc_library(
 # Utility library with portable filesystem functions.
 cc_library(
     name = "filesystem",
-    srcs = ["util/filesystem.cc"],
-    hdrs = ["util/filesystem.h"],
+    srcs = [
+      "util/filesystem.cc",
+      "util/process.cc",  # BinExport has this in "os_helpers"
+    ],
+    hdrs = [
+      "util/filesystem.h",
+      "util/process.h",  # BinExport has this in "os_helpers"
+    ],
     copts = BINEXPORT_DEFAULT_COPTS,
     include_prefix = "third_party/zynamics/binexport",
     visibility = ["//visibility:public"],
     deps = [
         ":status",
-        ":statusor",
         ":types",
         "@com_google_absl//absl/status",
+        "@com_google_absl//absl/status:statusor",
         "@com_google_absl//absl/strings",
     ],
 )

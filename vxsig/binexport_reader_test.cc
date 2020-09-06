@@ -19,11 +19,11 @@
 #include <utility>
 #include <map>
 
+#include "absl/status/status.h"
 #include "absl/strings/str_cat.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include "third_party/zynamics/binexport/util/filesystem.h"
-#include "absl/status/status.h"
 #include "third_party/zynamics/binexport/util/status_matchers.h"
 
 using testing::Eq;
