@@ -46,9 +46,9 @@ MatchedFunction* MatchChainColumn::InsertFunctionMatch(
   if (function_filter_ != SignatureDefinition::FILTER_NONE) {
     bool address_in_filter =
         filtered_functions_.find(match.first) != filtered_functions_.end();
-    if ((function_filter_ == SignatureDefinition::FILTER_WHITELIST &&
+    if ((function_filter_ == SignatureDefinition::FILTER_INCLUDE &&
          !address_in_filter) ||
-        (function_filter_ == SignatureDefinition::FILTER_BLACKLIST &&
+        (function_filter_ == SignatureDefinition::FILTER_EXCLUDE &&
          address_in_filter)) {
       return nullptr;
     }

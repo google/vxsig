@@ -43,11 +43,11 @@ ABSL_FLAG(std::string, trim_algorithm, "TRIM_RANDOM",
           "Signature trimming algorithm to use");
 ABSL_FLAG(bool, disable_nibble_masking, false,
           "Whether or not to disable masking of instruction immediate bytes");
-ABSL_FLAG(std::string, function_whitelist, "",
+ABSL_FLAG(std::string, function_includes, "",
           "List of (hex) addresses of functions in the first binary to "
           "consider for the signature. Mutually exclusive with "
-          "function_blacklist.");
-ABSL_FLAG(std::string, function_blacklist, "", "Inverse of function_whitelist");
+          "function_excludes.");
+ABSL_FLAG(std::string, function_excludes, "", "Inverse of function_includes");
 
 namespace security::vxsig {
 namespace {
@@ -63,9 +63,9 @@ void SiggenMain(int argc, char* argv[]) {
   }
 
   ABSL_RAW_CHECK(
-      absl::GetFlag(FLAGS_function_whitelist).empty() ||
-          absl::GetFlag(FLAGS_function_blacklist).empty(),
-      "function_whitelist and function_blacklist are mutually exclusive");
+      absl::GetFlag(FLAGS_function_includes).empty() ||
+          absl::GetFlag(FLAGS_function_excludes).empty(),
+      "function_includes and function_excludes are mutually exclusive");
 
   Signature signature;
   auto& signature_definition = *signature.mutable_definition();
@@ -76,14 +76,14 @@ void SiggenMain(int argc, char* argv[]) {
       absl::GetFlag(FLAGS_disable_nibble_masking));
   signature_definition.set_function_filter(SignatureDefinition::FILTER_NONE);
 
-  std::string filter_list = absl::GetFlag(FLAGS_function_whitelist);
+  std::string filter_list = absl::GetFlag(FLAGS_function_includes);
   if (!filter_list.empty()) {
     signature_definition.set_function_filter(
-        SignatureDefinition::FILTER_WHITELIST);
+        SignatureDefinition::FILTER_INCLUDE);
   } else {
     signature_definition.set_function_filter(
-        SignatureDefinition::FILTER_BLACKLIST);
-    filter_list = absl::GetFlag(FLAGS_function_blacklist);
+        SignatureDefinition::FILTER_EXCLUDE);
+    filter_list = absl::GetFlag(FLAGS_function_excludes);
   }
   if (!filter_list.empty()) {
     uint64_t address = 0;

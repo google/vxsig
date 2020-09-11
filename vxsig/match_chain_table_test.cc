@@ -97,17 +97,17 @@ TEST(MatchChainColumnTest, FilteredInsertion) {
     column.AddFilteredFunction(address);
   }
 
-  // Test whitelist
-  column.set_function_filter(SignatureDefinition::FILTER_WHITELIST);
+  // Test inclusion
+  column.set_function_filter(SignatureDefinition::FILTER_INCLUDE);
   InsertSimpleMatches(&column);
   EXPECT_THAT(index, SizeIs(2));
   for (const auto& entry : index) {
     EXPECT_THAT(filtered_functions, Contains(entry.first));
   }
 
-  // Test blacklist
+  // Test exclusion
   index.clear();
-  column.set_function_filter(SignatureDefinition::FILTER_BLACKLIST);
+  column.set_function_filter(SignatureDefinition::FILTER_EXCLUDE);
   InsertSimpleMatches(&column);
   EXPECT_THAT(index, SizeIs(3));
   for (const auto& entry : index) {

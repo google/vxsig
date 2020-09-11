@@ -148,8 +148,8 @@ message SignatureDefinition {
 
   enum FunctionFilterMode {
     FILTER_NONE = 0;
-    FILTER_BLACKLIST = 1;  // Exclude the functions in item_function_list.
-    FILTER_WHITELIST = 2;  // Only use the functions in item_function_list.
+    FILTER_EXCLUDE = 1;  // Exclude the functions in item_function_list.
+    FILTER_INCLUDE = 2;  // Only use the functions in item_function_list.
   }
   optional FunctionFilterMode function_filter = 19 [default = FILTER_NONE];
 }

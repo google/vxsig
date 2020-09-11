@@ -217,8 +217,8 @@ class MatchChainColumn {
   void BuildIdIndices();
 
  private:
-  // If set to FILTER_BLACKLIST, filtered_functions_ will serve as a function
-  // blacklist. Set to FILTER_WHITELIST, _only_ the functions listed in
+  // If set to FILTER_EXCLUDE, filtered_functions_ will serve as a function
+  // blacklist. Set to FILTER_INCLUDE, _only_ the functions listed in
   // filtered_functions_ will be used.
   SignatureDefinition::FunctionFilterMode function_filter_ =
       SignatureDefinition::FILTER_NONE;
