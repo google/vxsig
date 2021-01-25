@@ -1,6 +1,6 @@
 # VxSig
 
-Copyright 2011-2020 Google LLC
+Copyright 2011-2021 Google LLC
 
 Disclaimer: This is not an official Google product (experimental or otherwise),
 it is just code that happens to be owned by Google.
@@ -32,6 +32,10 @@ wget -qO - https://bazel.build/bazel-release.pub.gpg | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install -qy bazel
 ```
+
+Refer to the Bazel
+[installation guide](https://docs.bazel.build/versions/master/install.html) for
+how to get started on other platforms.
 
 Clone and run the build:
 
@@ -79,17 +83,17 @@ rule VxSigTestSig {
 
 ## Further reading / Similar tools
 
-* The original thesis that provided the basis for this tool (German language
-  only): [Automatisierte Signaturgenerierung für Malware-Stämme
-  ](https://www.zynamics.com/downloads/blichmann-christian--diplomarbeit--final.pdf)
-* [zynamics VxClass](https://www.zynamics.com/vxclass.html), a discontinued
-  malware analysis pipeline using a previous version of VxSig.
-* Cisco's Talos Group's [BASS Automated Signature Synthesizer
-  ](https://github.com/Cisco-Talos/BASS), an open-source reimplementation of the
-  thesis
-* [functionsimsearch](https://github.com/googleprojectzero/functionsimsearch), a
-  tool that can be used to create a corpus of files for computing function
-  occurrence counts.
+*   The original thesis that provided the basis for this tool (German language
+    only):
+    [Automatisierte Signaturgenerierung für Malware-Stämme](https://www.zynamics.com/downloads/blichmann-christian--diplomarbeit--final.pdf)
+*   [zynamics VxClass](https://www.zynamics.com/vxclass.html), a discontinued
+    malware analysis pipeline using a previous version of VxSig.
+*   Cisco's Talos Group's
+    [BASS Automated Signature Synthesizer](https://github.com/Cisco-Talos/BASS),
+    an open-source reimplementation of the thesis
+*   [functionsimsearch](https://github.com/googleprojectzero/functionsimsearch),
+    a tool that can be used to create a corpus of files for computing function
+    occurrence counts.
 
 ## Getting Involved
 
