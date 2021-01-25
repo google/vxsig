@@ -55,7 +55,7 @@ namespace {
 void SiggenMain(int argc, char* argv[]) {
   ABSL_RAW_CHECK(argc >= 2, "Need at least one .BinDiff file");
 
-  SignatureDefinition::SignatureTrimAlgorithm trim_algorithm;
+  auto trim_algorithm = SignatureDefinition::TRIM_NONE;
   if (!SignatureDefinition::SignatureTrimAlgorithm_Parse(
           absl::GetFlag(FLAGS_trim_algorithm), &trim_algorithm)) {
     ABSL_RAW_LOG(FATAL, "Invalid signature trimming algorithm: %s",

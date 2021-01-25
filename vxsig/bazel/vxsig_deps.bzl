@@ -35,9 +35,9 @@ def vxsig_deps():
     maybe(
         http_archive,
         name = "com_google_absl",
-        sha256 = "10a83730ea1a0fdd3d9f17c06d6e3ca0b3d90d20874d81fdf1adec97c154d590",  # 2020-09-04
-        strip_prefix = "abseil-cpp-7ba8cdb56df3bf4fe4ab4606f3fe4b2ab825afac",
-        urls = ["https://github.com/abseil/abseil-cpp/archive/7ba8cdb56df3bf4fe4ab4606f3fe4b2ab825afac.zip"],
+        sha256 = "6ead5ca816dee2052e80ef746ab88e319f7cf40392e9dcc67d56d2d1e0043660",  # 2021-01-21
+        strip_prefix = "abseil-cpp-3a2d6572d06709da32a17f053ca1e3c8e2af90df",
+        urls = ["https://github.com/abseil/abseil-cpp/archive/3a2d6572d06709da32a17f053ca1e3c8e2af90df.zip"],
     )
 
     # Protobuf

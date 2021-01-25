@@ -51,10 +51,11 @@ http_archive(
     name = "com_google_binexport",
     build_file = "//vxsig:bazel/external/binexport.BUILD",
     patch_cmds = [
-        "find . -path ./third_party -prune -o -\\( -name '*.cc' -o -name '*.h' -\\) -print0 |" +
-        "xargs -0 -P8 -n1 sed -i 's,^\\(#include \"\\)third_party/\\(absl\\),\\1\\2,g'",
+        "find . -path ./third_party -prune -o \\( -name '*.cc' -o -name '*.h' \\) -print0 |" +
+        "xargs -0 -P8 -n1 sed -i.bak 's,^\\(#include \"\\)third_party/\\(absl\\),\\1\\2,g'",
+        "find . -path ./third_party -name '*.bak' -delete",
     ],
-    sha256 = "522ec4655e4cc46f589ecc3ad936681eb1214fa254948f741627296154793366", # 2020-09-03
+    sha256 = "522ec4655e4cc46f589ecc3ad936681eb1214fa254948f741627296154793366",  # 2020-09-03
     strip_prefix = "binexport-aae2b41acd9fe38b101ed35dc13b7b39fd69c583",
     urls = ["https://github.com/google/binexport/archive/aae2b41acd9fe38b101ed35dc13b7b39fd69c583.zip"],
 )
