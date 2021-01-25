@@ -175,13 +175,12 @@ class MatchChainColumn {
     return function_filter_;
   }
 
-  // Add a function address to the list of filtered functions. Filtering
+  // Adds a function address to the list of filtered functions. Filtering
   // behavior is controlled by calling set_function_filter().
   void AddFilteredFunction(MemoryAddress address) {
     filtered_functions_.insert(address);
   }
 
-  // Accessor functions to return function, basic block and instruction indices.
   const FunctionAddressIndex& functions_by_address() const {
     return functions_by_address_;
   }
@@ -206,7 +205,7 @@ class MatchChainColumn {
   MatchedFunction* FindFunctionById(Ident id);
   MatchedBasicBlock* FindBasicBlockById(Ident id);
 
-  // Terminate the match chain table by propagating the next to last column's
+  // Finalizes the match chain table by propagating the next to last column's
   // address_in_next to this column's address and adding mappings to address
   // zero. This is done because we have one more binary than BinDiff results.
   void FinishChain(MatchChainColumn* prev);
@@ -218,7 +217,7 @@ class MatchChainColumn {
 
  private:
   // If set to FILTER_EXCLUDE, filtered_functions_ will serve as a function
-  // blacklist. Set to FILTER_INCLUDE, _only_ the functions listed in
+  // exclusion list. Set to FILTER_INCLUDE, _only_ the functions listed in
   // filtered_functions_ will be used.
   SignatureDefinition::FunctionFilterMode function_filter_ =
       SignatureDefinition::FILTER_NONE;

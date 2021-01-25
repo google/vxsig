@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Provides a function to build a generic (format-agnostic) byte signature from
-// a set of basic block candidates.
+// Provides a function to build a generic (format-independent) byte signature 
+// from a set of basic block candidates.
 
 #ifndef VXSIG_GENERIC_SIGNATURE_H_
 #define VXSIG_GENERIC_SIGNATURE_H_

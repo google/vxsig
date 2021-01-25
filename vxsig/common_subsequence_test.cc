@@ -22,12 +22,12 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
+namespace security::vxsig {
+
 using testing::ElementsAre;
 using testing::Eq;
 using testing::IsEmpty;
 using testing::SizeIs;
-
-namespace security::vxsig {
 
 TEST(PruneSequenceTest, OperateOnStrings) {
   std::string keep;
@@ -215,7 +215,7 @@ TEST(CommonSubSequence, OperateOnStrings) {
     EXPECT_THAT(result, Eq("common"));
   }
   {
-    // Check kill set traversal
+    // Check removal set traversal
     std::string result;
     std::vector<std::string> seqs{"abcdef", "fabcde", "efabcd"};
     CommonSubsequence(seqs, std::back_inserter(result));

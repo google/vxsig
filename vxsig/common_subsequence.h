@@ -92,17 +92,17 @@ void CommonSubsequence(const NestedContT& sequences, OutputIteratorT result) {
 
   while (sub_seqs.size() > 2) {
     // Find the two sequences with the greatest Hamming distance and
-    // populate the kill set.
+    // populate the removal set.
     size_t max_dist = 0;  // Greatest distance so far.
     // Indices of sequences with smallest distance.
     std::pair<int, int> shd(0, 0);
-    std::set<int> kill;  // Indices of sequences to remove.
+    std::set<int> removals;  // Indices of sequences to remove.
     for (int i = 0; i < sub_seqs.size(); ++i) {
       for (int j = 0; j < i; ++j) {
         // Current Hamming distance.
         const size_t cur_dist = HammingDistance(sub_seqs[i], sub_seqs[j]);
         if (cur_dist == 0) {
-          kill.insert(kill.end(), i);
+          removals.insert(removals.end(), i);
         } else if (cur_dist > max_dist) {
           max_dist = cur_dist;
           shd = {i, j};
@@ -110,7 +110,7 @@ void CommonSubsequence(const NestedContT& sequences, OutputIteratorT result) {
       }
     }
 
-    if (kill.size() == sub_seqs.size() - 1) {
+    if (removals.size() == sub_seqs.size() - 1) {
       // If all sequences are identical, return the first as the common
       // subsequence.
       std::copy(sub_seqs[0].begin(), sub_seqs[0].end(), result);
@@ -128,14 +128,14 @@ void CommonSubsequence(const NestedContT& sequences, OutputIteratorT result) {
     // Replace the two most similar sequences with their LCS. From all other
     // sequences, remove any element not found in the LCS. Those elements
     // can by definition not be part a CS of all sequences.
-    // Also add the most similar sequences to the kill set, since we only
+    // Also add the most similar sequences to the removal set, since we only
     // keep their LCS which is added back later.
-    kill.insert(kill.end(), shd.first);
-    kill.insert(kill.end(), shd.second);
+    removals.insert(removals.end(), shd.first);
+    removals.insert(removals.end(), shd.second);
 
     // Reverse traversal ensures that the items relative to the beginning of
     // sub_seqs are valid.
-    for (auto it = kill.crbegin(); it != kill.crend(); ++it) {
+    for (auto it = removals.crbegin(); it != removals.crend(); ++it) {
       sub_seqs.erase(sub_seqs.begin() + *it);
     }
 

@@ -193,7 +193,7 @@ void MatchChainColumn::FinishChain(MatchChainColumn* prev) {
   for (const auto& function_match : functions) {
     CHECK(function_match.second);
     const MatchedFunction& func = *function_match.second;
-    // Add a mapping to address zero to properly terminate the match chain.
+    // Add a mapping to address zero to properly finalize the match chain.
     // The zero value is never used and is just there to avoid undefined
     // values in the match chain table.
     auto* new_function = InsertFunctionMatch({func.match.address_in_next, 0});
