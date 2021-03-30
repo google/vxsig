@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2020-2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,18 +35,18 @@ def vxsig_deps():
     maybe(
         http_archive,
         name = "com_google_absl",
-        sha256 = "6ead5ca816dee2052e80ef746ab88e319f7cf40392e9dcc67d56d2d1e0043660",  # 2021-01-21
-        strip_prefix = "abseil-cpp-3a2d6572d06709da32a17f053ca1e3c8e2af90df",
-        urls = ["https://github.com/abseil/abseil-cpp/archive/3a2d6572d06709da32a17f053ca1e3c8e2af90df.zip"],
+        sha256 = "595a502009b3f97f9407ff0557abc0fc4a9d9a574662353ccb2971c539ddb2e3",  # 2021-03-25
+        strip_prefix = "abseil-cpp-a09b5de0d57d7b2179210989ab63361c3c1894f5",
+        urls = ["https://github.com/abseil/abseil-cpp/archive/a09b5de0d57d7b2179210989ab63361c3c1894f5.zip"],
     )
 
     # Protobuf
     maybe(
         http_archive,
         name = "com_google_protobuf",
-        sha256 = "1c744a6a1f2c901e68c5521bc275e22bdc66256eeb605c2781923365b7087e5f",  # 2020-08-15
-        strip_prefix = "protobuf-3.13.0",
-        urls = ["https://github.com/protocolbuffers/protobuf/archive/v3.13.0.zip"],
+        sha256 = "985bb1ca491f0815daad825ef1857b684e0844dc68123626a08351686e8d30c9",  # 2021-03-10
+        strip_prefix = "protobuf-3.15.6",
+        urls = ["https://github.com/protocolbuffers/protobuf/archive/v3.15.6.zip"],
     )
 
     # Google OR tools
@@ -62,16 +62,16 @@ def vxsig_deps():
     maybe(
         http_archive,
         name = "com_google_googletest",
-        sha256 = "e89104fc9b7c6e93004909d619b8e9f5f7543f9e34a9cc967a745eefae941018",  # 2020-09-01
-        strip_prefix = "googletest-7b1cf6dd5fbe0c22c5e638fce8caf7f0f5c1abbf",
-        urls = ["https://github.com/google/googletest/archive/7b1cf6dd5fbe0c22c5e638fce8caf7f0f5c1abbf.zip"],
+        sha256 = "4d6bb52c23b6c590fd0f8bea90bed9a1f263c61a1ac0e2d66dadb9213fbe4b1c",  # 2021-03-29
+        strip_prefix = "googletest-6c5c4554ac218a8e19168edc121b1ad232015185",
+        urls = ["https://github.com/google/googletest/archive/6c5c4554ac218a8e19168edc121b1ad232015185.zip"],
     )
 
     # Google Benchmark
     maybe(
         http_archive,
         name = "com_google_benchmark",
-        sha256 = "",  # 2020-09-03
-        strip_prefix = "benchmark-4751550871a4765c027d39680b842f590e1192b2",
-        urls = ["https://github.com/google/benchmark/archive/4751550871a4765c027d39680b842f590e1192b2.zip"],
+        sha256 = "bc60957389e8d9e37d1a40fad22da7a1950e382850cec80b0133fcbfa7d41016",  # 2021-03-08
+        strip_prefix = "benchmark-cc9abfc8f12577ea83b2d093693ba70c3c0fd2c7",
+        urls = ["https://github.com/google/benchmark/archive/cc9abfc8f12577ea83b2d093693ba70c3c0fd2c7.zip"],
     )

@@ -1,4 +1,4 @@
-# Copyright 2019-2020 Google LLC
+# Copyright 2019-2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ cc_library(
 
 cc_library(
     name = "status",
-    hdrs = [ "util/status_macros.h"],
+    hdrs = ["util/status_macros.h"],
     copts = BINEXPORT_DEFAULT_COPTS,
     include_prefix = "third_party/zynamics/binexport",
     visibility = ["//visibility:public"],
@@ -85,12 +85,12 @@ cc_library(
 cc_library(
     name = "filesystem",
     srcs = [
-      "util/filesystem.cc",
-      "util/process.cc",  # BinExport has this in "os_helpers"
+        "util/filesystem.cc",
+        "util/process.cc",  # BinExport has this in "os_helpers"
     ],
     hdrs = [
-      "util/filesystem.h",
-      "util/process.h",  # BinExport has this in "os_helpers"
+        "util/filesystem.h",
+        "util/process.h",  # BinExport has this in "os_helpers"
     ],
     copts = BINEXPORT_DEFAULT_COPTS,
     include_prefix = "third_party/zynamics/binexport",
