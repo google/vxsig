@@ -86,7 +86,7 @@ rule VxSigTestSig {
 *   The original thesis that provided the basis for this tool (German language
     only):
     [Automatisierte Signaturgenerierung für Malware-Stämme](https://www.zynamics.com/downloads/blichmann-christian--diplomarbeit--final.pdf)
-*   [zynamics VxClass](https://www.zynamics.com/vxclass.html), a discontinued
+*   [zynamics VxClass](https://web.archive.org/web/20210224202639/https://www.zynamics.com/vxclass.html), a discontinued
     malware analysis pipeline using a previous version of VxSig.
 *   Cisco's Talos Group's
     [BASS Automated Signature Synthesizer](https://github.com/Cisco-Talos/BASS),
