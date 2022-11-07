@@ -211,6 +211,8 @@ absl::Status GetRelevantSignatureSubset(const Signature& input,
       break;
     case SignatureDefinition::TRIM_RANDOM: {
       // Mix the signature variant into the PRNG's seed.
+      // TODO(cblichmann): Use Abseil's MakeTaggedSeedSeq(), once it's
+      //                   available.
       std::string seed = absl::StrCat(
           definition.variant() ^ 0x1599C98B /* Random number to mask 0 */,
           "369ea79bcded92881284" /* Random bytes */);
