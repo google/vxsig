@@ -17,17 +17,17 @@
 #include <cmath>
 #include <cstddef>
 #include <iterator>
+#include <limits>
 #include <memory>
 
-#include "absl/base/internal/raw_logging.h"
 #include "absl/container/flat_hash_map.h"
+#include "absl/log/check.h"
 #include "absl/memory/memory.h"
 #include "absl/strings/numbers.h"
 #include "absl/strings/str_cat.h"
 #include "absl/strings/str_format.h"
 #include "absl/strings/string_view.h"
 #include "absl/time/time.h"
-#include "base/logging.h"
 #include "third_party/zynamics/binexport/util/filesystem.h"
 #include "third_party/zynamics/binexport/util/status_macros.h"
 #include "vxsig/candidates.h"
@@ -179,7 +179,8 @@ absl::Status AvSignatureGenerator::SetFunctionWeights(
         continue;
       }
       for (auto& basic_block : function->basic_blocks) {
-        basic_block->weight = kuint32max - found->second;
+        basic_block->weight =
+            std::numeric_limits<uint32_t>::max() - found->second;
       }
     }
   }

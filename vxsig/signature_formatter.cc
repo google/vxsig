@@ -17,10 +17,10 @@
 #include <algorithm>
 #include <random>
 
+#include "absl/log/die_if_null.h"
 #include "absl/memory/memory.h"
 #include "absl/strings/str_cat.h"
 #include "absl/strings/string_view.h"
-#include "base/logging.h"
 #include "third_party/zynamics/binexport/util/status_macros.h"
 #include "vxsig/clamav_signature_formatter.h"
 #include "vxsig/generic_signature.h"
@@ -172,7 +172,7 @@ void TrimLowWeight(const int64_t max_length, const RawSignature& raw_sig,
 absl::Status GetRelevantSignatureSubset(const Signature& input,
                                         int engine_min_piece_len,
                                         RawSignature* output) {
-  CHECK(output);
+  ABSL_DIE_IF_NULL(output);
   const auto& raw_sig = input.raw_signature();
   const auto& definition = input.definition();
 

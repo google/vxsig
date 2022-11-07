@@ -31,24 +31,11 @@ BINEXPORT_DEFAULT_COPTS = VXSIG_DEFAULT_COPTS + [
 ]
 
 cc_library(
-    name = "stubs",
-    hdrs = [
-        "stubs/base/integral_types.h",
-        "stubs/base/logging.h",
-    ],
-    copts = BINEXPORT_DEFAULT_COPTS,
-    includes = ["stubs"],
-    visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf"],
-)
-
-cc_library(
     name = "types",
-    hdrs = ["types.h"],
+    hdrs = ["util/types.h"],
     copts = BINEXPORT_DEFAULT_COPTS,
     include_prefix = "third_party/zynamics/binexport",
     visibility = ["//visibility:public"],
-    deps = [":stubs"],
 )
 
 cc_library(
@@ -115,6 +102,8 @@ cc_library(
     deps = [
         ":types",
         "@//vxsig:binexport2_cc_proto",  # TODO(cblichmann): HACK
+        "@com_google_absl//absl/log",
+        "@com_google_absl//absl/log:check",
         "@com_google_protobuf//:protobuf",
     ],
 )

@@ -17,8 +17,8 @@
 #include <cstdint>
 #include <utility>
 
+#include "absl/log/die_if_null.h"
 #include "absl/memory/memory.h"
-#include "base/logging.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include "third_party/zynamics/binexport/util/status_matchers.h"

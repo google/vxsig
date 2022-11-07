@@ -32,9 +32,9 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         "@com_google_absl//absl/base:core_headers",
+        "@com_google_absl//absl/log:check",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/strings",
-        "@com_google_binexport//:stubs",
     ],
 )
 
@@ -118,7 +118,6 @@ cc_library(
         "@com_google_absl//absl/strings",
         "@com_google_binexport//:binexport_util",
         "@com_google_binexport//:status",
-        "@com_google_binexport//:stubs",
         "@com_google_binexport//:types",
         "@org_sqlite//:sqlite",
     ],
@@ -256,6 +255,7 @@ cc_library(
         ":vxsig_cc_proto",
         "@com_google_absl//absl/base:core_headers",
         "@com_google_absl//absl/container:flat_hash_set",
+        "@com_google_absl//absl/log:die_if_null",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/strings",
     ],
@@ -270,6 +270,7 @@ cc_test(
     deps = [
         ":generic_signature",
         ":vxsig_cc_proto",
+        "@com_google_absl//absl/log:die_if_null",
         "@com_google_absl//absl/memory",
         "@com_google_binexport//:filesystem",
         "@com_google_binexport//:status_matchers",
@@ -310,6 +311,7 @@ cc_library(
         ":types",
         ":vxsig_cc_proto",
         "@com_google_absl//absl/flags:flag",
+        "@com_google_absl//absl/log:die_if_null",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/status:statusor",
@@ -365,6 +367,7 @@ cc_test(
     deps = [
         ":signature_formatter",
         ":yara_signature_test_util",
+        "@com_google_absl//absl/log:die_if_null",
         "@com_google_absl//absl/strings",
         "@com_google_binexport//:filesystem",
         "@com_google_binexport//:status_matchers",
@@ -393,7 +396,6 @@ cc_library(
         "@com_google_absl//absl/strings:str_format",
         "@com_google_absl//absl/time",
         "@com_google_absl//absl/types:span",
-        "@com_google_binexport//:stubs",
     ],
 )
 

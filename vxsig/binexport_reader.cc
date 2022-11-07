@@ -14,12 +14,11 @@
 
 #include "vxsig/binexport_reader.h"
 
-#include "base/logging.h"
-
 #include <cstddef>
 #include <fstream>
 #include <memory>
 
+#include "absl/log/check.h"
 #include "absl/memory/memory.h"
 #include "absl/strings/match.h"
 #include "absl/strings/str_cat.h"

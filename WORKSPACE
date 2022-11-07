@@ -29,11 +29,11 @@ maybe(
     http_archive,
     name = "zlib",
     build_file = "@com_google_protobuf//:third_party/zlib.BUILD",
-    sha256 = "c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1",  # 2020-04-23
-    strip_prefix = "zlib-1.2.11",
+    sha256 = "b3a24de97a8fdbc835b9833169501030b8977031bcb54b3b3ac13740f846ab30",  # 2022-10-13
+    strip_prefix = "zlib-1.2.13",
     urls = [
-        "https://mirror.bazel.build/zlib.net/zlib-1.2.11.tar.gz",
-        "https://www.zlib.net/zlib-1.2.11.tar.gz",
+        "https://mirror.bazel.build/zlib.net/zlib-1.2.13.tar.gz",
+        "https://www.zlib.net/zlib-1.2.13.tar.gz",
     ],
 )
 
@@ -41,9 +41,9 @@ maybe(
 http_archive(
     name = "org_sqlite",
     build_file = "//vxsig:bazel/external/sqlite.BUILD",
-    sha256 = "b34f4c0c0eefad9a7e515c030c18702e477f4ef7d8ade6142bdab8011b487ac6",  # 2020-08-14
-    strip_prefix = "sqlite-amalgamation-3330000",
-    urls = ["https://www.sqlite.org/2020/sqlite-amalgamation-3330000.zip"],
+    sha256 = "9c99955b21d2374f3a385d67a1f64cbacb1d4130947473d25c77ad609c03b4cd",  # 2022-09-29
+    strip_prefix = "sqlite-amalgamation-3390400",
+    urls = ["https://www.sqlite.org/2022/sqlite-amalgamation-3390400.zip"],
 )
 
 # BinExport
@@ -55,7 +55,7 @@ http_archive(
         "xargs -0 -P8 -n1 sed -i.bak 's,^\\(#include \"\\)third_party/\\(absl\\),\\1\\2,g'",
         "find . -path ./third_party -name '*.bak' -delete",
     ],
-    sha256 = "522ec4655e4cc46f589ecc3ad936681eb1214fa254948f741627296154793366",  # 2020-09-03
-    strip_prefix = "binexport-aae2b41acd9fe38b101ed35dc13b7b39fd69c583",
-    urls = ["https://github.com/google/binexport/archive/aae2b41acd9fe38b101ed35dc13b7b39fd69c583.zip"],
+    sha256 = "d5dd1a34b118f1c1140f1426cdef5edf01f4405f6c286262d9cce30245a3c4ac",  # 2020-09-03
+    strip_prefix = "binexport-f56c8b0a5fa4977dea032ef0143697a40c893783",
+    urls = ["https://github.com/google/binexport/archive/f56c8b0a5fa4977dea032ef0143697a40c893783.zip"],
 )

@@ -18,10 +18,10 @@
 #include <utility>
 #include <vector>
 
+#include "absl/log/check.h"
 #include "absl/memory/memory.h"
 #include "absl/strings/str_format.h"
 #include "absl/strings/string_view.h"
-#include "base/logging.h"
 #include "third_party/zynamics/binexport/util/filesystem.h"
 #include "third_party/zynamics/binexport/util/status_macros.h"
 #include "vxsig/binexport_reader.h"

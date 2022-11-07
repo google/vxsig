@@ -28,7 +28,7 @@
 #include <utility>
 #include <vector>
 
-#include "base/logging.h"
+#include "absl/log/check.h"
 
 namespace security::vxsig {
 

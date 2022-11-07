@@ -23,6 +23,7 @@
 #include "absl/base/attributes.h"
 #include "absl/base/internal/endian.h"
 #include "absl/container/flat_hash_set.h"
+#include "absl/log/die_if_null.h"
 #include "absl/memory/memory.h"
 #include "absl/strings/str_cat.h"
 #include "vxsig/common_subsequence.h"
