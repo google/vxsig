@@ -1,6 +1,6 @@
 # VxSig
 
-Copyright 2011-2021 Google LLC
+Copyright 2011-2022 Google LLC
 
 Disclaimer: This is not an official Google product (experimental or otherwise),
 it is just code that happens to be owned by Google.
