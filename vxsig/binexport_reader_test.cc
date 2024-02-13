@@ -39,14 +39,11 @@ class BinExportReaderTest : public testing::Test {
 };
 
 TEST_F(BinExportReaderTest, ParseBinExport2) {
-  std::string file_name =
-      JoinPath(getenv("TEST_SRCDIR"),
-               "com_google_vxsig/vxsig/testdata/"
-               "0000050d2efbd0602bed34669e2f2cb01f6e91e35014fafd35d80ada62d6169"
-               "a-PID_2192_-Name_LoadDLL.exe_.BinExport");
   ASSERT_THAT(
       ParseBinExport(
-          file_name,
+          "vxsig/testdata/"
+          "0000050d2efbd0602bed34669e2f2cb01f6e91e35014fafd35d80ada62d6169a-"
+          "PID_2192_-Name_LoadDLL.exe_.BinExport",
           [this](const std::string& /* sha256 */, MemoryAddress,
                  BinExport2::CallGraph::Vertex::Type,
                  double /* md_index */) { ++num_functions_; },
@@ -61,16 +58,12 @@ TEST_F(BinExportReaderTest, ParseBinExport2) {
 }
 
 TEST_F(BinExportReaderTest, ParseBinExport2Complex) {
-  std::string file_name = JoinPath(
-      getenv("TEST_SRCDIR"),
-      "com_google_vxsig/vxsig/testdata/"
-      "6d661e63d51d2b38c40d7a16d0cd957a125d397e13b1e50280c3d06bc26bb315."
-      "BinExport");
-
   std::map<MemoryAddress, std::string> instructions;
   ASSERT_THAT(
       ParseBinExport(
-          file_name,
+          "vxsig/testdata/"
+          "6d661e63d51d2b38c40d7a16d0cd957a125d397e13b1e50280c3d06bc26bb315."
+          "BinExport",
           [this](const std::string& /* sha256 */, MemoryAddress,
                  BinExport2::CallGraph::Vertex::Type,
                  double /* md_index */) { ++num_functions_; },

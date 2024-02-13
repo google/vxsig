@@ -31,10 +31,10 @@ cc_library(
     copts = VXSIG_DEFAULT_COPTS,
     visibility = ["//visibility:public"],
     deps = [
-        "@com_google_absl//absl/base:core_headers",
-        "@com_google_absl//absl/log:check",
-        "@com_google_absl//absl/memory",
-        "@com_google_absl//absl/strings",
+        "@abseil-cpp//absl/base:core_headers",
+        "@abseil-cpp//absl/log:check",
+        "@abseil-cpp//absl/memory",
+        "@abseil-cpp//absl/strings",
     ],
 )
 
@@ -46,7 +46,7 @@ cc_test(
     visibility = ["//visibility:private"],
     deps = [
         ":sequence_utils",
-        "@com_google_googletest//:gtest_main",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -58,8 +58,8 @@ cc_test(
     visibility = ["//visibility:private"],
     deps = [
         ":sequence_utils",
-        "@com_google_absl//absl/strings",
-        "@com_google_googletest//:gtest_main",
+        "@abseil-cpp//absl/strings",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -71,7 +71,7 @@ cc_test(
     visibility = ["//visibility:private"],
     deps = [
         ":sequence_utils",
-        "@com_google_googletest//:gtest_main",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -83,8 +83,8 @@ cc_test(
     visibility = ["//visibility:private"],
     deps = [
         ":sequence_utils",
-        "@com_google_absl//absl/memory",
-        "@com_google_googletest//:gtest_main",
+        "@abseil-cpp//absl/memory",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -112,14 +112,14 @@ cc_library(
     deps = [
         ":binexport2_cc_proto",
         ":types",
-        "@com_google_absl//absl/memory",
-        "@com_google_absl//absl/status",
-        "@com_google_absl//absl/status:statusor",
-        "@com_google_absl//absl/strings",
+        "@abseil-cpp//absl/memory",
+        "@abseil-cpp//absl/status",
+        "@abseil-cpp//absl/status:statusor",
+        "@abseil-cpp//absl/strings",
         "@com_google_binexport//:binexport_util",
         "@com_google_binexport//:status",
         "@com_google_binexport//:types",
-        "@org_sqlite//:sqlite",
+        "@sqlite3",
     ],
 )
 
@@ -135,13 +135,13 @@ cc_test(
     visibility = ["//visibility:private"],
     deps = [
         ":file_readers",
-        "@com_google_absl//absl/container:flat_hash_set",
-        "@com_google_absl//absl/status",
-        "@com_google_absl//absl/status:statusor",
-        "@com_google_absl//absl/strings",
+        "@abseil-cpp//absl/container:flat_hash_set",
+        "@abseil-cpp//absl/status",
+        "@abseil-cpp//absl/status:statusor",
+        "@abseil-cpp//absl/strings",
         "@com_google_binexport//:filesystem",
         "@com_google_binexport//:status_matchers",
-        "@com_google_googletest//:gtest_main",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -157,12 +157,12 @@ cc_test(
     visibility = ["//visibility:private"],
     deps = [
         ":file_readers",
-        "@com_google_absl//absl/status",
-        "@com_google_absl//absl/status:statusor",
-        "@com_google_absl//absl/strings",
+        "@abseil-cpp//absl/status",
+        "@abseil-cpp//absl/status:statusor",
+        "@abseil-cpp//absl/strings",
         "@com_google_binexport//:filesystem",
         "@com_google_binexport//:status_matchers",
-        "@com_google_googletest//:gtest_main",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -189,13 +189,13 @@ cc_library(
         ":file_readers",
         ":types",
         ":vxsig_cc_proto",
-        "@com_google_absl//absl/base:core_headers",
-        "@com_google_absl//absl/container:flat_hash_set",
-        "@com_google_absl//absl/memory",
-        "@com_google_absl//absl/status",
-        "@com_google_absl//absl/status:statusor",
-        "@com_google_absl//absl/strings",
-        "@com_google_absl//absl/strings:str_format",
+        "@abseil-cpp//absl/base:core_headers",
+        "@abseil-cpp//absl/container:flat_hash_set",
+        "@abseil-cpp//absl/memory",
+        "@abseil-cpp//absl/status",
+        "@abseil-cpp//absl/status:statusor",
+        "@abseil-cpp//absl/strings",
+        "@abseil-cpp//absl/strings:str_format",
         "@com_google_binexport//:filesystem",
     ],
 )
@@ -208,9 +208,9 @@ cc_test(
     visibility = ["//visibility:private"],
     deps = [
         ":match_chain_table",
-        "@com_google_absl//absl/memory",
+        "@abseil-cpp//absl/memory",
         "@com_google_binexport//:filesystem",
-        "@com_google_googletest//:gtest_main",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -224,7 +224,7 @@ cc_library(
         ":match_chain_table",
         ":sequence_utils",
         ":types",
-        "@com_google_absl//absl/memory",
+        "@abseil-cpp//absl/memory",
     ],
 )
 
@@ -237,7 +237,7 @@ cc_test(
     deps = [
         ":candidates",
         "@com_google_binexport//:filesystem",
-        "@com_google_googletest//:gtest_main",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -253,11 +253,11 @@ cc_library(
         ":sequence_utils",
         ":types",
         ":vxsig_cc_proto",
-        "@com_google_absl//absl/base:core_headers",
-        "@com_google_absl//absl/container:flat_hash_set",
-        "@com_google_absl//absl/log:die_if_null",
-        "@com_google_absl//absl/memory",
-        "@com_google_absl//absl/strings",
+        "@abseil-cpp//absl/base:core_headers",
+        "@abseil-cpp//absl/container:flat_hash_set",
+        "@abseil-cpp//absl/log:die_if_null",
+        "@abseil-cpp//absl/memory",
+        "@abseil-cpp//absl/strings",
     ],
 )
 
@@ -270,11 +270,11 @@ cc_test(
     deps = [
         ":generic_signature",
         ":vxsig_cc_proto",
-        "@com_google_absl//absl/log:die_if_null",
-        "@com_google_absl//absl/memory",
+        "@abseil-cpp//absl/log:die_if_null",
+        "@abseil-cpp//absl/memory",
         "@com_google_binexport//:filesystem",
         "@com_google_binexport//:status_matchers",
-        "@com_google_googletest//:gtest_main",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -286,10 +286,10 @@ cc_library(
     copts = VXSIG_DEFAULT_COPTS,
     deps = [
         ":vxsig_cc_proto",
-        "@com_google_absl//absl/memory",
-        "@com_google_absl//absl/strings",
-        "@com_google_absl//absl/strings:str_format",
-        "@com_google_absl//absl/types:span",
+        "@abseil-cpp//absl/memory",
+        "@abseil-cpp//absl/strings",
+        "@abseil-cpp//absl/strings:str_format",
+        "@abseil-cpp//absl/types:span",
     ],
 )
 
@@ -310,12 +310,12 @@ cc_library(
         ":generic_signature",
         ":types",
         ":vxsig_cc_proto",
-        "@com_google_absl//absl/flags:flag",
-        "@com_google_absl//absl/log:die_if_null",
-        "@com_google_absl//absl/memory",
-        "@com_google_absl//absl/status",
-        "@com_google_absl//absl/status:statusor",
-        "@com_google_absl//absl/strings",
+        "@abseil-cpp//absl/flags:flag",
+        "@abseil-cpp//absl/log:die_if_null",
+        "@abseil-cpp//absl/memory",
+        "@abseil-cpp//absl/status",
+        "@abseil-cpp//absl/status:statusor",
+        "@abseil-cpp//absl/strings",
         # "@com_google_ortools//linear_solver",  # Disabled, needs function corpus
     ],
 )
@@ -330,7 +330,7 @@ cc_test(
         ":vxsig_cc_proto",
         "@com_google_binexport//:filesystem",
         "@com_google_binexport//:status_matchers",
-        "@com_google_googletest//:gtest_main",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -345,7 +345,7 @@ cc_test(
         ":signature_test_util",
         "@com_google_binexport//:filesystem",
         "@com_google_binexport//:status_matchers",
-        "@com_google_googletest//:gtest_main",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -354,7 +354,7 @@ cc_library(
     srcs = ["yara_signature_test_util.cc"],
     hdrs = ["yara_signature_test_util.h"],
     copts = VXSIG_DEFAULT_COPTS,
-    deps = ["@com_google_absl//absl/strings"],
+    deps = ["@abseil-cpp//absl/strings"],
 )
 
 cc_test(
@@ -367,11 +367,11 @@ cc_test(
     deps = [
         ":signature_formatter",
         ":yara_signature_test_util",
-        "@com_google_absl//absl/log:die_if_null",
-        "@com_google_absl//absl/strings",
+        "@abseil-cpp//absl/log:die_if_null",
+        "@abseil-cpp//absl/strings",
         "@com_google_binexport//:filesystem",
         "@com_google_binexport//:status_matchers",
-        "@com_google_googletest//:gtest_main",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -388,14 +388,14 @@ cc_library(
         ":match_chain_table",
         ":types",
         ":vxsig_cc_proto",
-        "@com_google_absl//absl/container:flat_hash_map",
-        "@com_google_absl//absl/memory",
-        "@com_google_absl//absl/status",
-        "@com_google_absl//absl/status:statusor",
-        "@com_google_absl//absl/strings",
-        "@com_google_absl//absl/strings:str_format",
-        "@com_google_absl//absl/time",
-        "@com_google_absl//absl/types:span",
+        "@abseil-cpp//absl/container:flat_hash_map",
+        "@abseil-cpp//absl/memory",
+        "@abseil-cpp//absl/status",
+        "@abseil-cpp//absl/status:statusor",
+        "@abseil-cpp//absl/strings",
+        "@abseil-cpp//absl/strings:str_format",
+        "@abseil-cpp//absl/time",
+        "@abseil-cpp//absl/types:span",
     ],
 )
 
@@ -422,13 +422,13 @@ cc_test(
         ":siggen",
         ":signature_formatter",
         ":yara_signature_test_util",
-        "@com_google_absl//absl/memory",
-        "@com_google_absl//absl/status",
-        "@com_google_absl//absl/status:statusor",
-        "@com_google_absl//absl/strings",
+        "@abseil-cpp//absl/memory",
+        "@abseil-cpp//absl/status",
+        "@abseil-cpp//absl/status:statusor",
+        "@abseil-cpp//absl/strings",
         "@com_google_binexport//:filesystem",
         "@com_google_binexport//:status_matchers",
-        "@com_google_googletest//:gtest_main",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -444,10 +444,10 @@ cc_binary(
         ":signature_formatter",
         ":types",
         ":vxsig_cc_proto",
-        "@com_google_absl//absl/flags:flag",
-        "@com_google_absl//absl/flags:parse",
-        "@com_google_absl//absl/memory",
-        "@com_google_absl//absl/strings",
+        "@abseil-cpp//absl/flags:flag",
+        "@abseil-cpp//absl/flags:parse",
+        "@abseil-cpp//absl/memory",
+        "@abseil-cpp//absl/strings",
         "@com_google_binexport//:filesystem",
     ],
 )
@@ -460,9 +460,9 @@ cc_library(
     copts = VXSIG_DEFAULT_COPTS,
     deps = [
         ":vxsig_cc_proto",
-        "@com_google_absl//absl/hash",
-        "@com_google_absl//absl/strings",
-        "@com_google_absl//absl/strings:str_format",
+        "@abseil-cpp//absl/hash",
+        "@abseil-cpp//absl/strings",
+        "@abseil-cpp//absl/strings:str_format",
     ],
 )
 
@@ -472,7 +472,7 @@ cc_test(
     copts = VXSIG_DEFAULT_COPTS,
     deps = [
         ":signature_definition_hash",
-        "@com_google_googletest//:gtest_main",
+        "@googletest//:gtest_main",
     ],
 )
 

@@ -23,7 +23,8 @@
 #include "absl/strings/str_cat.h"
 #include "absl/strings/string_view.h"
 #include "absl/strings/substitute.h"
-#include "third_party/sqlite/sqlite3.h"
+//#include "third_party/sqlite/sqlite3.h"
+#include "sqlite3.h"
 
 namespace security::vxsig {
 

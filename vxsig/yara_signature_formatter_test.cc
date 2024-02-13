@@ -163,9 +163,7 @@ TEST_F(YaraSignatureFormatterTest, TestMaxHexStringTokensTwoPiece) {
 
 TEST_F(YaraSignatureFormatterTest, TestRealSignature) {
   Signatures signatures;
-  std::ifstream file(JoinPath(getenv("TEST_SRCDIR"),
-                              "com_google_vxsig/vxsig/testdata/livid1.db"),
-                     std::ios_base::binary);
+  std::ifstream file("vxsig/testdata/livid1.db", std::ios_base::binary);
   google::protobuf::io::IstreamInputStream from(&file);
   ASSERT_THAT(google::protobuf::TextFormat::Parse(&from, &signatures),
               IsTrue());

@@ -54,9 +54,7 @@ void SiggenTest::SetupDefaultSignature(AvSignatureGenerator* siggen) {
           "1d3949acb5eb175af3cbc5f448ece50669a44743faec91e3d574dad9596a9d83."
           "BinDiff",
       }) {
-    const std::string file_name(JoinPath(getenv("TEST_SRCDIR"),
-                                    "com_google_vxsig/vxsig/testdata/",
-                                    diff_result));
+    const std::string file_name(JoinPath("vxsig/testdata/", diff_result));
     ASSERT_THAT(FileExists(file_name), IsTrue());
     files.push_back(file_name);
   }
@@ -220,12 +218,11 @@ TEST_F(SiggenTest, GenerateYaraSignatureWithMetadata) {
 
 TEST_F(SiggenTest, EmptyRawSignaturePieces) {
   AvSignatureGenerator siggen;
-  const std::string file_name(JoinPath(
-      getenv("TEST_SRCDIR"),
-      "com_google_vxsig/vxsig/testdata/"
+  const std::string file_name =
+      "vxsig/testdata/"
       "592fb377afa9f93670a23159aa585e0eca908b97571ab3218e026fea3598cc16_vs_"
       "65d25a86feb6d15527e398d7b5d043e7712b00e674bc6e8cf2a709a0c6f9b97b."
-      "BinDiff"));
+      "BinDiff";
   ASSERT_THAT(FileExists(file_name), IsTrue());
   siggen.AddDiffResults(std::vector<std::string>(1 /* size */, file_name));
   Signature signature;
@@ -239,18 +236,16 @@ TEST_F(SiggenTest, EmptyRawSignaturePieces) {
 
 TEST_F(SiggenTest, NotADiffChain) {
   AvSignatureGenerator siggen;
-  constexpr char kTestData[] = "com_google_vxsig/vxsig/testdata/";
   // Intentionally add diffs in the wrong order.
-  siggen.AddDiffResults({JoinPath(getenv("TEST_SRCDIR"), kTestData,
-                                  "61971471cedcb4daed8d07ad79297568ffdaa17e"
-                                  "b4ff301dc953cfafa91a4507_vs_"
-                                  "8433c9a6345d210d2196096461804d7137bbf2a6"
-                                  "b71b20cc21f4ecf7d15ef6c2.BinDiff"),
-                         JoinPath(getenv("TEST_SRCDIR"), kTestData,
-                                  "328b26dc3f0d8543e151495f4d6f3960323e3f51"
-                                  "223522c2e4cd1e2fe9f9ed8f_vs_"
-                                  "61971471cedcb4daed8d07ad79297568ffdaa17e"
-                                  "b4ff301dc953cfafa91a4507.BinDiff")});
+  siggen.AddDiffResults(
+      {"vxsig/testdata/"
+       "61971471cedcb4daed8d07ad79297568ffdaa17eb4ff301dc953cfafa91a4507_vs_"
+       "8433c9a6345d210d2196096461804d7137bbf2a6b71b20cc21f4ecf7d15ef6c2."
+       "BinDiff",
+       "vxsig/testdata/"
+       "328b26dc3f0d8543e151495f4d6f3960323e3f51223522c2e4cd1e2fe9f9ed8f_vs_"
+       "61971471cedcb4daed8d07ad79297568ffdaa17eb4ff301dc953cfafa91a4507."
+       "BinDiff"});
   Signature signature;
   EXPECT_THAT(siggen.Generate(&signature).ToString(),
               HasSubstr("Input files do not form a chain of diffs"));

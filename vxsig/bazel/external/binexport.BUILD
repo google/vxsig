@@ -46,9 +46,9 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         ":types",
-        "@com_google_absl//absl/base:core_headers",
-        "@com_google_absl//absl/status",
-        "@com_google_absl//absl/status:statusor",
+        "@abseil-cpp//absl/base:core_headers",
+        "@abseil-cpp//absl/status",
+        "@abseil-cpp//absl/status:statusor",
     ],
 )
 
@@ -61,10 +61,10 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         ":status",
-        "@com_google_absl//absl/status",
-        "@com_google_absl//absl/status:statusor",
-        "@com_google_absl//absl/types:optional",
-        "@com_google_googletest//:gtest",
+        "@abseil-cpp//absl/status",
+        "@abseil-cpp//absl/status:statusor",
+        "@abseil-cpp//absl/types:optional",
+        "@googletest//:gtest",
     ],
 )
 
@@ -85,9 +85,9 @@ cc_library(
     deps = [
         ":status",
         ":types",
-        "@com_google_absl//absl/status",
-        "@com_google_absl//absl/status:statusor",
-        "@com_google_absl//absl/strings",
+        "@abseil-cpp//absl/status",
+        "@abseil-cpp//absl/status:statusor",
+        "@abseil-cpp//absl/strings",
     ],
 )
 
@@ -102,8 +102,8 @@ cc_library(
     deps = [
         ":types",
         "@//vxsig:binexport2_cc_proto",  # TODO(cblichmann): HACK
-        "@com_google_absl//absl/log",
-        "@com_google_absl//absl/log:check",
-        "@com_google_protobuf//:protobuf",
+        "@abseil-cpp//absl/log",
+        "@abseil-cpp//absl/log:check",
+        "@protobuf",
     ],
 )

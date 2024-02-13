@@ -528,14 +528,9 @@ void ReceiveInstructionMatches(
 }
 
 TEST_F(DiffResultReaderTest, ParseNoMetadata) {
-  std::string file_name = JoinPath(
-      getenv("TEST_SRCDIR"),
-      "com_google_vxsig/vxsig/testdata/sshd.korg_vs_sshd.trojan1.BinDiff");
-  ASSERT_THAT(FileExists(file_name), IsTrue());
-
   // Parse the file, but don't retrieve metadata (last argument)
   EXPECT_THAT(
-      ParseBinDiff(file_name,
+      ParseBinDiff("vxsig/testdata/sshd.korg_vs_sshd.trojan1.BinDiff",
                    std::bind(ReceiveFunctionMatches, expect_functions_,
                              &num_function_matches_, arg::_1),
                    std::bind(ReceiveBasicBlockMatches, expect_basic_blocks_,
@@ -550,14 +545,9 @@ TEST_F(DiffResultReaderTest, ParseNoMetadata) {
 }
 
 TEST_F(DiffResultReaderTest, ParseWithMetadata) {
-  std::string file_name = JoinPath(
-      getenv("TEST_SRCDIR"),
-      "com_google_vxsig/vxsig/testdata/sshd.korg_vs_sshd.trojan1.BinDiff");
-  ASSERT_THAT(FileExists(file_name), IsTrue());
-
   std::pair<FileMetaData, FileMetaData> meta;
   EXPECT_THAT(
-      ParseBinDiff(file_name,
+      ParseBinDiff("vxsig/testdata/sshd.korg_vs_sshd.trojan1.BinDiff",
                    std::bind(ReceiveFunctionMatches, expect_functions_,
                              &num_function_matches_, arg::_1),
                    std::bind(ReceiveBasicBlockMatches, expect_basic_blocks_,
