@@ -1,6 +1,6 @@
 # VxSig
 
-Copyright 2011-2023 Google LLC
+Copyright 2011-2024 Google LLC
 
 Disclaimer: This is not an official Google product (experimental or otherwise),
 it is just code that happens to be owned by Google.
@@ -22,26 +22,32 @@ for many kinds of malware and targetted threats.
 
 ## Quick Start
 
-VxSig uses [Bazel](https://bazel.build/) to build, so install that first. On
-Debian 10 "Buster":
+VxSig uses [Bazel](https://bazel.build/) to build and manage its dependencies.
+The preferred way to use a current version is via
+[Bazelisk](https://github.com/bazelbuild/bazelisk), so install that first. For
+example, on Debian-based Linux distributions do:
 
 ```bash
-echo "deb http://storage.googleapis.com/bazel-apt stable jdk1.8" | \
-  sudo tee /etc/apt/sources.list.d/bazel.list
-wget -qO - https://bazel.build/bazel-release.pub.gpg | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install -qy bazel
+(cd /tmp && \
+  wget -qO- \
+  https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-$(dpkg --print-architecture) \
+  > bazelisk && \
+  echo 'd28b588ac0916abd6bf02defb5433f6eddf7cba35ffa808eabb65a44aab226f7  bazelisk' | \
+  sha256sum -c && \
+  chmod +x bazelisk && \
+  sudo mv bazelisk /usr/local/bin/ \
+)
 ```
 
 Refer to the Bazel
-[installation guide](https://docs.bazel.build/versions/master/install.html) for
-how to get started on other platforms.
+[Getting started guide](https://bazel.build/start) for how to get started on
+other platforms.
 
 Clone and run the build:
 
 ```bash
 git clone https://github.com/google/vxsig && cd vxsig
-bazel build -c opt //vxsig:vxsig
+bazelisk build -c opt //vxsig:vxsig
 ```
 
 To build an example Yara signature:
