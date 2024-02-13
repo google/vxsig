@@ -1,4 +1,4 @@
-# Copyright 2011-2023 Google LLC
+# Copyright 2011-2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,16 +26,16 @@ http_archive(
         "xargs -0 -P8 -n1 sed -i.bak 's,^\\(#include \"\\)third_party/\\(absl\\),\\1\\2,g'",
         "find . -path ./third_party -name '*.bak' -delete",
     ],
-    sha256 = "d5dd1a34b118f1c1140f1426cdef5edf01f4405f6c286262d9cce30245a3c4ac",  # 2020-09-03
-    strip_prefix = "binexport-f56c8b0a5fa4977dea032ef0143697a40c893783",
-    urls = ["https://github.com/google/binexport/archive/f56c8b0a5fa4977dea032ef0143697a40c893783.zip"],
+    sha256 = "f8a270f990529caf9ad2969337a02b9232b25d6ae69a06346e3f9e2cee8e5502",  # 2024-02-13
+    strip_prefix = "binexport-5795afc727e7ab66072ea12b38f3e9c978bfa046",
+    urls = ["https://github.com/google/binexport/archive/5795afc727e7ab66072ea12b38f3e9c978bfa046.zip"],
 )
 
 # Google OR tools
 maybe(
     http_archive,
     name = "com_google_ortools",
-    sha256 = "",  # 2022-08-11
-    strip_prefix = "or-tools-9.4",
-    urls = ["https://github.com/google/or-tools/archive/v9.4.zip"],
+    sha256 = "751d2f7399f3290a90e893bc6be5e57181a17545dd18c00b16dfd3933d2cc05d",  # 2023-11-15
+    strip_prefix = "or-tools-9.8",
+    urls = ["https://github.com/google/or-tools/archive/v9.8.zip"],
 )
