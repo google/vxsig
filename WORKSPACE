@@ -20,12 +20,9 @@ load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 # BinExport
 http_archive(
     name = "com_google_binexport",
-    build_file = "//vxsig:bazel/external/binexport.BUILD",
-    patch_cmds = [
-        "find . -path ./third_party -prune -o \\( -name '*.cc' -o -name '*.h' \\) -print0 |" +
-        "xargs -0 -P8 -n1 sed -i.bak 's,^\\(#include \"\\)third_party/\\(absl\\),\\1\\2,g'",
-        "find . -path ./third_party -name '*.bak' -delete",
-    ],
+    build_file = "//vxsig:bazel/external/binexport/BUILD.bazel",
+    patch_args = ["-p1"],
+    patches = ["//vxsig:bazel/external/binexport/0001-third_party-prefix.patch"],
     sha256 = "f8a270f990529caf9ad2969337a02b9232b25d6ae69a06346e3f9e2cee8e5502",  # 2024-02-13
     strip_prefix = "binexport-5795afc727e7ab66072ea12b38f3e9c978bfa046",
     urls = ["https://github.com/google/binexport/archive/5795afc727e7ab66072ea12b38f3e9c978bfa046.zip"],
