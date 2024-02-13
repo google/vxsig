@@ -95,10 +95,10 @@ void CommonSubsequence(const NestedContT& sequences, OutputIteratorT result) {
     // populate the removal set.
     size_t max_dist = 0;  // Greatest distance so far.
     // Indices of sequences with smallest distance.
-    std::pair<int, int> shd(0, 0);
-    std::set<int> removals;  // Indices of sequences to remove.
-    for (int i = 0; i < sub_seqs.size(); ++i) {
-      for (int j = 0; j < i; ++j) {
+    std::pair<size_t, size_t> shd(0, 0);
+    std::set<size_t> removals;  // Indices of sequences to remove.
+    for (size_t i = 0; i < sub_seqs.size(); ++i) {
+      for (size_t j = 0; j < i; ++j) {
         // Current Hamming distance.
         const size_t cur_dist = HammingDistance(sub_seqs[i], sub_seqs[j]);
         if (cur_dist == 0) {

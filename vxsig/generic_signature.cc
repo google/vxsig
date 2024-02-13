@@ -150,29 +150,33 @@ void AddInstructionBytes(const MatchedBasicBlock& bb,
     }
   }
 
-  for (int i = 0; i < instr.raw_instruction_bytes.size();) {
+  for (size_t i = 0; i < instr.raw_instruction_bytes.size();) {
     const auto& raw_bytes = instr.raw_instruction_bytes;
     if (disable_nibble_masking ||
         immediate_pos.find(i) == immediate_pos.end()) {
-      bb_sequence->push_back(
-          {raw_bytes[i++], ByteWithExtra::kRegularByte, bb.weight, &instr});
+      bb_sequence->push_back({static_cast<uint8_t>(raw_bytes[i++]),
+                              ByteWithExtra::kRegularByte, bb.weight, &instr});
     } else {
-      bb_sequence->push_back(
-          {raw_bytes[i++], ByteWithExtra::kSingleWildcard, bb.weight, &instr});
-      bb_sequence->push_back(
-          {raw_bytes[i++], ByteWithExtra::kSingleWildcard, bb.weight, &instr});
-      bb_sequence->push_back(
-          {raw_bytes[i++], ByteWithExtra::kSingleWildcard, bb.weight, &instr});
-      bb_sequence->push_back(
-          {raw_bytes[i++], ByteWithExtra::kSingleWildcard, bb.weight, &instr});
+      bb_sequence->push_back({static_cast<uint8_t>(raw_bytes[i++]),
+                              ByteWithExtra::kSingleWildcard, bb.weight,
+                              &instr});
+      bb_sequence->push_back({static_cast<uint8_t>(raw_bytes[i++]),
+                              ByteWithExtra::kSingleWildcard, bb.weight,
+                              &instr});
+      bb_sequence->push_back({static_cast<uint8_t>(raw_bytes[i++]),
+                              ByteWithExtra::kSingleWildcard, bb.weight,
+                              &instr});
+      bb_sequence->push_back({static_cast<uint8_t>(raw_bytes[i++]),
+                              ByteWithExtra::kSingleWildcard, bb.weight,
+                              &instr});
     }
   }
 }
 
 void PenalizeShortAtoms(int min_piece_length, ByteWithExtraString* regex) {
   CHECK_GE(min_piece_length, 1) << "Need a minimum piece length of at least 1";
-  int i = 0;
-  const int regex_size = regex->size();
+  size_t i = 0;
+  const size_t regex_size = regex->size();
   int num_regular = 0;
   int piece_start = 0;
   while (i < regex_size) {
@@ -190,7 +194,7 @@ void PenalizeShortAtoms(int min_piece_length, ByteWithExtraString* regex) {
     // of the wildcard.
     bool penalize_piece = num_regular < min_piece_length;
     if (penalize_piece) {
-      for (int j = piece_start; j < i; ++j) {
+      for (size_t j = piece_start; j < i; ++j) {
         (*regex)[j].weight = 0;
       }
     }

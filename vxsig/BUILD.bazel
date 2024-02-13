@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("//vxsig/bazel:build_defs.bzl", "VXSIG_DEFAULT_COPTS")
-
 licenses(["notice"])
 
 exports_files(["LICENSE"])
@@ -28,7 +26,6 @@ cc_library(
         "longest_common_subsequence.h",
         "subsequence_regex.h",
     ],
-    copts = VXSIG_DEFAULT_COPTS,
     visibility = ["//visibility:public"],
     deps = [
         "@abseil-cpp//absl/base:core_headers",
@@ -42,7 +39,6 @@ cc_test(
     name = "hamming_test",
     size = "small",
     srcs = ["hamming_test.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     visibility = ["//visibility:private"],
     deps = [
         ":sequence_utils",
@@ -54,7 +50,6 @@ cc_test(
     name = "longest_common_subsequence_test",
     size = "small",
     srcs = ["longest_common_subsequence_test.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     visibility = ["//visibility:private"],
     deps = [
         ":sequence_utils",
@@ -67,7 +62,6 @@ cc_test(
     name = "common_subsequence_test",
     size = "small",
     srcs = ["common_subsequence_test.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     visibility = ["//visibility:private"],
     deps = [
         ":sequence_utils",
@@ -79,7 +73,6 @@ cc_test(
     name = "subsequence_regex_test",
     size = "small",
     srcs = ["subsequence_regex_test.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     visibility = ["//visibility:private"],
     deps = [
         ":sequence_utils",
@@ -108,7 +101,6 @@ cc_library(
         "binexport_reader.h",
         "diff_result_reader.h",
     ],
-    copts = VXSIG_DEFAULT_COPTS,
     deps = [
         ":binexport2_cc_proto",
         ":types",
@@ -127,7 +119,6 @@ cc_test(
     name = "diff_result_reader_test",
     size = "small",
     srcs = ["diff_result_reader_test.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     data = [
         "testdata/1794a0afbfc38411dec87fa2660d6dd6515cf8d03cb32bb24a1d7a8e1ecf30fa_vs_1b0a84953909816c1945c2153605c2ddeb3b138fb4c262c7262cd9689ed25f82.BinDiff",
         "testdata/sshd.korg_vs_sshd.trojan1.BinDiff",
@@ -149,7 +140,6 @@ cc_test(
     name = "binexport_reader_test",
     size = "small",
     srcs = ["binexport_reader_test.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     data = [
         "testdata/0000050d2efbd0602bed34669e2f2cb01f6e91e35014fafd35d80ada62d6169a-PID_2192_-Name_LoadDLL.exe_.BinExport",
         "testdata/6d661e63d51d2b38c40d7a16d0cd957a125d397e13b1e50280c3d06bc26bb315.BinExport",
@@ -183,7 +173,6 @@ cc_library(
     name = "match_chain_table",
     srcs = ["match_chain_table.cc"],
     hdrs = ["match_chain_table.h"],
-    copts = VXSIG_DEFAULT_COPTS,
     deps = [
         ":binexport2_cc_proto",
         ":file_readers",
@@ -204,7 +193,6 @@ cc_test(
     name = "match_chain_table_test",
     size = "small",
     srcs = ["match_chain_table_test.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     visibility = ["//visibility:private"],
     deps = [
         ":match_chain_table",
@@ -219,7 +207,6 @@ cc_library(
     name = "candidates",
     srcs = ["candidates.cc"],
     hdrs = ["candidates.h"],
-    copts = VXSIG_DEFAULT_COPTS,
     deps = [
         ":match_chain_table",
         ":sequence_utils",
@@ -232,7 +219,6 @@ cc_test(
     name = "candidates_test",
     size = "small",
     srcs = ["candidates_test.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     visibility = ["//visibility:private"],
     deps = [
         ":candidates",
@@ -247,7 +233,6 @@ cc_library(
     name = "generic_signature",
     srcs = ["generic_signature.cc"],
     hdrs = ["generic_signature.h"],
-    copts = VXSIG_DEFAULT_COPTS,
     deps = [
         ":match_chain_table",
         ":sequence_utils",
@@ -265,7 +250,6 @@ cc_test(
     name = "generic_signature_test",
     size = "small",
     srcs = ["generic_signature_test.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     visibility = ["//visibility:private"],
     deps = [
         ":generic_signature",
@@ -283,7 +267,6 @@ cc_library(
     name = "signature_test_util",
     srcs = ["signature_test_util.cc"],
     hdrs = ["signature_test_util.h"],
-    copts = VXSIG_DEFAULT_COPTS,
     deps = [
         ":vxsig_cc_proto",
         "@abseil-cpp//absl/memory",
@@ -305,7 +288,6 @@ cc_library(
         "yara_signature_formatter.h",
     ],
     hdrs = ["signature_formatter.h"],
-    copts = VXSIG_DEFAULT_COPTS,
     deps = [
         ":generic_signature",
         ":types",
@@ -323,7 +305,6 @@ cc_library(
 cc_test(
     name = "signature_formatter_test",
     srcs = ["signature_formatter_test.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     deps = [
         ":signature_formatter",
         ":signature_test_util",
@@ -338,7 +319,6 @@ cc_test(
     name = "clamav_signature_formatter_test",
     size = "small",
     srcs = ["clamav_signature_formatter_test.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     visibility = ["//visibility:private"],
     deps = [
         ":signature_formatter",
@@ -353,7 +333,6 @@ cc_library(
     name = "yara_signature_test_util",
     srcs = ["yara_signature_test_util.cc"],
     hdrs = ["yara_signature_test_util.h"],
-    copts = VXSIG_DEFAULT_COPTS,
     deps = ["@abseil-cpp//absl/strings"],
 )
 
@@ -361,7 +340,6 @@ cc_test(
     name = "yara_signature_formatter_test",
     size = "small",
     srcs = ["yara_signature_formatter_test.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     data = ["testdata/livid1.db"],
     visibility = ["//visibility:private"],
     deps = [
@@ -381,7 +359,6 @@ cc_library(
     name = "siggen",
     srcs = ["siggen.cc"],
     hdrs = ["siggen.h"],
-    copts = VXSIG_DEFAULT_COPTS,
     deps = [
         ":candidates",
         ":generic_signature",
@@ -403,7 +380,6 @@ cc_test(
     name = "siggen_test",
     size = "medium",
     srcs = ["siggen_test.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     data = [
         "testdata/1794a0afbfc38411dec87fa2660d6dd6515cf8d03cb32bb24a1d7a8e1ecf30fa.BinExport",
         "testdata/1794a0afbfc38411dec87fa2660d6dd6515cf8d03cb32bb24a1d7a8e1ecf30fa_vs_1b0a84953909816c1945c2153605c2ddeb3b138fb4c262c7262cd9689ed25f82.BinDiff",
@@ -438,7 +414,6 @@ cc_test(
 cc_binary(
     name = "vxsig",
     srcs = ["siggen_main.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     deps = [
         ":siggen",
         ":signature_formatter",
@@ -457,7 +432,6 @@ cc_library(
     name = "signature_definition_hash",
     srcs = ["signature_definition_hash.cc"],
     hdrs = ["signature_definition_hash.h"],
-    copts = VXSIG_DEFAULT_COPTS,
     deps = [
         ":vxsig_cc_proto",
         "@abseil-cpp//absl/hash",
@@ -469,7 +443,6 @@ cc_library(
 cc_test(
     name = "signature_definition_hash_test",
     srcs = ["signature_definition_hash_test.cc"],
-    copts = VXSIG_DEFAULT_COPTS,
     deps = [
         ":signature_definition_hash",
         "@googletest//:gtest_main",
@@ -479,6 +452,5 @@ cc_test(
 cc_library(
     name = "types",
     hdrs = ["types.h"],
-    copts = VXSIG_DEFAULT_COPTS,
     visibility = ["//visibility:private"],
 )

@@ -137,7 +137,7 @@ void LongestCommonSubsequence(IteratorT first1, IteratorT last1,
     // Divide: Find optimal position where to split the input sequences.
     ptrdiff_t ll_max = -1;
     size_t pivot = 0;
-    for (size_t i = 0; i < size2 + 1; ++i) {
+    for (ptrdiff_t i = 0; i < size2 + 1; ++i) {
       ptrdiff_t ll_cur = ll_left[i] + ll_right[size2 - i];
       if (ll_max < ll_cur) {
         ll_max = ll_cur;

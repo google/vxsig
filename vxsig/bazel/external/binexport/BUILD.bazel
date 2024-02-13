@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("@com_google_vxsig//vxsig/bazel:build_defs.bzl", "VXSIG_DEFAULT_COPTS")
-
 # Defines the protocol message used in the .BinExport v2 file format.
 proto_library(
     name = "binexport2_proto",
@@ -26,14 +24,9 @@ cc_proto_library(
     deps = [":binexport2_proto"],
 )
 
-BINEXPORT_DEFAULT_COPTS = VXSIG_DEFAULT_COPTS + [
-    "-fexceptions",  # This code throws on error
-]
-
 cc_library(
     name = "types",
     hdrs = ["util/types.h"],
-    copts = BINEXPORT_DEFAULT_COPTS,
     include_prefix = "third_party/zynamics/binexport",
     visibility = ["//visibility:public"],
 )
@@ -41,7 +34,6 @@ cc_library(
 cc_library(
     name = "status",
     hdrs = ["util/status_macros.h"],
-    copts = BINEXPORT_DEFAULT_COPTS,
     include_prefix = "third_party/zynamics/binexport",
     visibility = ["//visibility:public"],
     deps = [
@@ -56,7 +48,6 @@ cc_library(
     name = "status_matchers",
     testonly = 1,
     hdrs = ["util/status_matchers.h"],
-    copts = BINEXPORT_DEFAULT_COPTS,
     include_prefix = "third_party/zynamics/binexport",
     visibility = ["//visibility:public"],
     deps = [
@@ -79,7 +70,6 @@ cc_library(
         "util/filesystem.h",
         "util/process.h",  # BinExport has this in "os_helpers"
     ],
-    copts = BINEXPORT_DEFAULT_COPTS,
     include_prefix = "third_party/zynamics/binexport",
     visibility = ["//visibility:public"],
     deps = [
@@ -96,7 +86,6 @@ cc_library(
     name = "binexport_util",
     srcs = ["binexport.cc"],
     hdrs = ["binexport.h"],
-    copts = BINEXPORT_DEFAULT_COPTS,
     include_prefix = "third_party/zynamics/binexport",
     visibility = ["//visibility:public"],
     deps = [
