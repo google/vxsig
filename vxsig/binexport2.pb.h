@@ -16,6 +16,6 @@
 #define VXSIG_BAZEL_EXTERNAL_BINEXPORT2_PB_H_
 
 // Forward to BinExport's version
-#include "external/com_google_binexport/binexport2.pb.h"
+#include "external/+_repo_rules+com_google_binexport/binexport2.pb.h"
 
 #endif  // VXSIG_BAZEL_EXTERNAL_BINEXPORT2_PB_H_

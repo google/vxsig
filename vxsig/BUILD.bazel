@@ -146,6 +146,7 @@ cc_test(
     ],
     visibility = ["//visibility:private"],
     deps = [
+        ":binexport2_cc_proto",
         ":file_readers",
         "@abseil-cpp//absl/status",
         "@abseil-cpp//absl/status:statusor",

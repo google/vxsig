@@ -17,11 +17,33 @@ module(
     version = "2.1",
 )
 
-bazel_dep(name = "rules_cc", version = "0.0.9")
+http_archive = use_repo_rule(
+    "@bazel_tools//tools/build_defs/repo:http.bzl",
+    "http_archive",
+)
 
-# Need to use same version of Abseil LTS as protobuf
-bazel_dep(name = "abseil-cpp", version = "20230802.0.bcr.1")
-bazel_dep(name = "protobuf", version = "23.1")
-bazel_dep(name = "googletest", version = "1.14.0.bcr.1")
-bazel_dep(name = "google_benchmark", version = "1.8.3")
-bazel_dep(name = "sqlite3", version = "3.42.0.bcr.1")
+bazel_dep(name = "rules_cc", version = "0.0.16")
+bazel_dep(name = "abseil-cpp", version = "20240722.0.bcr.2")
+bazel_dep(name = "protobuf", version = "29.0")
+bazel_dep(name = "googletest", version = "1.15.2")
+bazel_dep(name = "google_benchmark", version = "1.8.5")
+bazel_dep(name = "sqlite3", version = "3.47.1")
+
+# BinExport
+http_archive(
+    name = "com_google_binexport",
+    build_file = "//vxsig:bazel/external/binexport/BUILD.bazel",
+    patch_args = ["-p1"],
+    patches = ["//vxsig:bazel/external/binexport/0001-third_party-prefix.patch"],
+    sha256 = "f8a270f990529caf9ad2969337a02b9232b25d6ae69a06346e3f9e2cee8e5502",  # 2024-02-13
+    strip_prefix = "binexport-5795afc727e7ab66072ea12b38f3e9c978bfa046",
+    urls = ["https://github.com/google/binexport/archive/5795afc727e7ab66072ea12b38f3e9c978bfa046.zip"],
+)
+
+# Google OR tools
+http_archive(
+    name = "com_google_ortools",
+    sha256 = "751d2f7399f3290a90e893bc6be5e57181a17545dd18c00b16dfd3933d2cc05d",  # 2023-11-15
+    strip_prefix = "or-tools-9.8",
+    urls = ["https://github.com/google/or-tools/archive/v9.8.zip"],
+)
