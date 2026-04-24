@@ -1,7 +1,7 @@
-diff --git a/basic_block.h b/basic_block.h
-index 7b300e4..561d9a0 100644
---- a/basic_block.h
-+++ b/basic_block.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/basic_block.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/basic_block.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/basic_block.h
 @@ -22,7 +22,7 @@
  #include <vector>
  #undef max
@@ -11,38 +11,42 @@ index 7b300e4..561d9a0 100644
  #include "third_party/zynamics/binexport/instruction.h"
  #include "third_party/zynamics/binexport/util/nested_iterator.h"
  #include "third_party/zynamics/binexport/util/range.h"
-diff --git a/binaryninja/log_sink.cc b/binaryninja/log_sink.cc
-index bd2225f..439af69 100644
---- a/binaryninja/log_sink.cc
-+++ b/binaryninja/log_sink.cc
-@@ -18,8 +18,8 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/binaryninja/log_sink.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/binaryninja/log_sink.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/binaryninja/log_sink.cc
+@@ -18,9 +18,9 @@
  #include "binaryninjaapi.h"  // NOLINT
  // clang-format on
  
 -#include "third_party/absl/base/log_severity.h"
+-#include "third_party/absl/log/log_entry.h"
 -#include "third_party/absl/strings/string_view.h"
 +#include "absl/base/log_severity.h"
++#include "absl/log/log_entry.h"
 +#include "absl/strings/string_view.h"
  #include "third_party/zynamics/binexport/util/logging.h"
  
  namespace security::binexport {
-diff --git a/binaryninja/log_sink.h b/binaryninja/log_sink.h
-index 97adb2c..265c247 100644
---- a/binaryninja/log_sink.h
-+++ b/binaryninja/log_sink.h
-@@ -15,7 +15,7 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/binaryninja/log_sink.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/binaryninja/log_sink.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/binaryninja/log_sink.h
+@@ -15,8 +15,8 @@
  #ifndef BINARYNINJA_LOG_SINK_H_
  #define BINARYNINJA_LOG_SINK_H_
  
+-#include "third_party/absl/log/log_entry.h"
 -#include "third_party/absl/log/log_sink.h"
++#include "absl/log/log_entry.h"
 +#include "absl/log/log_sink.h"
  #include "third_party/zynamics/binexport/util/logging.h"
  
  namespace security::binexport {
-diff --git a/binaryninja/main_plugin.cc b/binaryninja/main_plugin.cc
-index 78d5cea..d61064f 100644
---- a/binaryninja/main_plugin.cc
-+++ b/binaryninja/main_plugin.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/binaryninja/main_plugin.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/binaryninja/main_plugin.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/binaryninja/main_plugin.cc
 @@ -17,13 +17,13 @@
  #include <cstdint>
  #include <string>
@@ -64,10 +68,10 @@ index 78d5cea..d61064f 100644
  #include "third_party/zynamics/binexport/binaryninja/log_sink.h"
  #include "third_party/zynamics/binexport/binexport2_writer.h"
  #include "third_party/zynamics/binexport/call_graph.h"
-diff --git a/binexport.cc b/binexport.cc
-index c42d041..fb26447 100644
---- a/binexport.cc
-+++ b/binexport.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/binexport.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/binexport.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/binexport.cc
 @@ -16,8 +16,8 @@
  
  #include <vector>
@@ -79,36 +83,40 @@ index c42d041..fb26447 100644
  
  namespace security::binexport {
  
-diff --git a/binexport2_writer.cc b/binexport2_writer.cc
-index 48d00a6..c66a71a 100644
---- a/binexport2_writer.cc
-+++ b/binexport2_writer.cc
-@@ -39,12 +39,12 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/binexport2_writer.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/binexport2_writer.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/binexport2_writer.cc
+@@ -39,14 +39,14 @@
  #include <utility>
  #include <vector>
  
 -#include "third_party/absl/container/flat_hash_map.h"
 -#include "third_party/absl/log/check.h"
 -#include "third_party/absl/log/log.h"
+-#include "third_party/absl/status/status.h"
 -#include "third_party/absl/strings/str_cat.h"
+-#include "third_party/absl/strings/string_view.h"  // IWYU pragma: keep
 -#include "third_party/absl/time/clock.h"
 -#include "third_party/absl/time/time.h"
 +#include "absl/container/flat_hash_map.h"
 +#include "absl/log/check.h"
 +#include "absl/log/log.h"
++#include "absl/status/status.h"
 +#include "absl/strings/str_cat.h"
++#include "absl/strings/string_view.h"  // IWYU pragma: keep
 +#include "absl/time/clock.h"
 +#include "absl/time/time.h"
+ #include "third_party/zynamics/binexport/address_references.h"
+ #include "third_party/zynamics/binexport/basic_block.h"
  #include "third_party/zynamics/binexport/binexport2.pb.h"
- #include "third_party/zynamics/binexport/call_graph.h"
- #include "third_party/zynamics/binexport/flow_graph.h"
-diff --git a/call_graph.h b/call_graph.h
-index daa5ac5..ee05f05 100644
---- a/call_graph.h
-+++ b/call_graph.h
-@@ -17,9 +17,9 @@
- 
- #include <iosfwd>
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/call_graph.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/call_graph.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/call_graph.h
+@@ -21,9 +21,9 @@
+ #include <utility>
+ #include <vector>
  
 -#include "third_party/absl/container/btree_set.h"
 -#include "third_party/absl/container/node_hash_map.h"
@@ -119,10 +127,10 @@ index daa5ac5..ee05f05 100644
  #include "third_party/zynamics/binexport/comment.h"
  #include "third_party/zynamics/binexport/library_manager.h"
  #include "third_party/zynamics/binexport/util/types.h"
-diff --git a/comment.cc b/comment.cc
-index 5f48028..ba72141 100644
---- a/comment.cc
-+++ b/comment.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/comment.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/comment.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/comment.cc
 @@ -16,8 +16,8 @@
  
  #include <string>
@@ -134,23 +142,23 @@ index 5f48028..ba72141 100644
  #include "third_party/zynamics/binexport/util/format.h"
  
  bool SortComments(const Comment& lhs, const Comment& rhs) {
-diff --git a/edge.cc b/edge.cc
-index 6def1de..ef669c2 100644
---- a/edge.cc
-+++ b/edge.cc
-@@ -16,7 +16,7 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/edge.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/edge.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/edge.cc
+@@ -14,7 +14,7 @@
  
- #include <functional>
+ #include "third_party/zynamics/binexport/edge.h"
  
 -#include "third_party/absl/log/log.h"
 +#include "absl/log/log.h"
  
  bool operator<(const FlowGraphEdge& one, const FlowGraphEdge& two) {
    if (one.source == two.source) {
-diff --git a/entry_point.cc b/entry_point.cc
-index aaf1512..cfafc5a 100644
---- a/entry_point.cc
-+++ b/entry_point.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/entry_point.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/entry_point.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/entry_point.cc
 @@ -17,7 +17,7 @@
  #include <ios>
  #include <string>
@@ -160,10 +168,10 @@ index aaf1512..cfafc5a 100644
  
  EntryPoint::EntryPoint(Address address, EntryPoint::Source source,
                         const int flags)
-diff --git a/expression.cc b/expression.cc
-index b237799..0e332f1 100644
---- a/expression.cc
-+++ b/expression.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/expression.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/expression.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/expression.cc
 @@ -19,7 +19,7 @@
  #include <string>
  #include <utility>
@@ -173,10 +181,10 @@ index b237799..0e332f1 100644
  #include "third_party/zynamics/binexport/instruction.h"
  #include "third_party/zynamics/binexport/util/hash.h"
  
-diff --git a/expression.h b/expression.h
-index 7af7ee2..e15ee39 100644
---- a/expression.h
-+++ b/expression.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/expression.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/expression.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/expression.h
 @@ -20,10 +20,10 @@
  #include <string>
  #include <vector>
@@ -192,10 +200,10 @@ index 7af7ee2..e15ee39 100644
  #include "third_party/zynamics/binexport/util/types.h"
  
  #pragma pack(push, 1)
-diff --git a/flow_graph.cc b/flow_graph.cc
-index 8d25cd3..b130548 100644
---- a/flow_graph.cc
-+++ b/flow_graph.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/flow_graph.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/flow_graph.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/flow_graph.cc
 @@ -25,10 +25,10 @@
  #include <utility>
  #include <vector>
@@ -211,10 +219,10 @@ index 8d25cd3..b130548 100644
  #include "third_party/zynamics/binexport/call_graph.h"
  #include "third_party/zynamics/binexport/function.h"
  #include "third_party/zynamics/binexport/util/format.h"
-diff --git a/flow_graph.h b/flow_graph.h
-index a59effa..74a1078 100644
---- a/flow_graph.h
-+++ b/flow_graph.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/flow_graph.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/flow_graph.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/flow_graph.h
 @@ -21,8 +21,8 @@
  #include <tuple>
  #include <vector>
@@ -226,10 +234,10 @@ index a59effa..74a1078 100644
  #include "third_party/zynamics/binexport/edge.h"
  #include "third_party/zynamics/binexport/function.h"
  #include "third_party/zynamics/binexport/instruction.h"
-diff --git a/function.cc b/function.cc
-index a64c861..8d2bdae 100644
---- a/function.cc
-+++ b/function.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/function.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/function.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/function.cc
 @@ -24,9 +24,9 @@
  #include <utility>
  #include <vector>
@@ -243,12 +251,12 @@ index a64c861..8d2bdae 100644
  #include "third_party/zynamics/binexport/call_graph.h"
  #include "third_party/zynamics/binexport/util/format.h"
  
-diff --git a/function.h b/function.h
-index 52f7b2f..ec74612 100644
---- a/function.h
-+++ b/function.h
-@@ -19,8 +19,8 @@
- #include <ostream>
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/function.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/function.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/function.h
+@@ -20,8 +20,8 @@
+ #include <string>
  #include <vector>
  
 -#include "third_party/absl/container/btree_map.h"
@@ -257,11 +265,11 @@ index 52f7b2f..ec74612 100644
 +#include "absl/container/node_hash_set.h"
  #include "third_party/zynamics/binexport/basic_block.h"
  #include "third_party/zynamics/binexport/edge.h"
- #include "third_party/zynamics/binexport/util/types.h"
-diff --git a/ida/arm.cc b/ida/arm.cc
-index 31a2b12..84eb642 100644
---- a/ida/arm.cc
-+++ b/ida/arm.cc
+ #include "third_party/zynamics/binexport/instruction.h"
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/arm.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/arm.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/arm.cc
 @@ -26,8 +26,8 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
@@ -273,11 +281,11 @@ index 31a2b12..84eb642 100644
  #include "third_party/zynamics/binexport/ida/names.h"
  #include "third_party/zynamics/binexport/util/format.h"
  
-diff --git a/ida/dalvik.cc b/ida/dalvik.cc
-index d629c42..6e92135 100644
---- a/ida/dalvik.cc
-+++ b/ida/dalvik.cc
-@@ -30,8 +30,8 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/dalvik.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/dalvik.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/dalvik.cc
+@@ -31,8 +31,8 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
  
@@ -288,11 +296,11 @@ index d629c42..6e92135 100644
  #include "third_party/zynamics/binexport/ida/names.h"
  #include "third_party/zynamics/binexport/util/format.h"
  
-diff --git a/ida/digest.cc b/ida/digest.cc
-index fa16dfc..155199c 100644
---- a/ida/digest.cc
-+++ b/ida/digest.cc
-@@ -21,9 +21,9 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/digest.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/digest.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/digest.cc
+@@ -22,9 +22,9 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
  
@@ -305,10 +313,10 @@ index fa16dfc..155199c 100644
  
  namespace security::binexport {
  
-diff --git a/ida/digest.h b/ida/digest.h
-index 1b3d2b2..835515e 100644
---- a/ida/digest.h
-+++ b/ida/digest.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/digest.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/digest.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/digest.h
 @@ -17,7 +17,7 @@
  
  #include <string>
@@ -318,25 +326,29 @@ index 1b3d2b2..835515e 100644
  
  namespace security::binexport {
  //
-diff --git a/ida/flow_analysis.cc b/ida/flow_analysis.cc
-index c96febe..e68c119 100644
---- a/ida/flow_analysis.cc
-+++ b/ida/flow_analysis.cc
-@@ -30,8 +30,8 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/flow_analysis.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/flow_analysis.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/flow_analysis.cc
+@@ -41,10 +41,10 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
  
 -#include "third_party/absl/log/log.h"
+-#include "third_party/absl/status/status.h"
 -#include "third_party/absl/strings/str_cat.h"
+-#include "third_party/absl/time/time.h"
 +#include "absl/log/log.h"
++#include "absl/status/status.h"
 +#include "absl/strings/str_cat.h"
- #include "third_party/zynamics/binexport/flow_analysis.h"
- #include "third_party/zynamics/binexport/ida/arm.h"
- #include "third_party/zynamics/binexport/ida/dalvik.h"
-diff --git a/ida/flow_analysis.h b/ida/flow_analysis.h
-index e237bb3..899ccf4 100644
---- a/ida/flow_analysis.h
-+++ b/ida/flow_analysis.h
++#include "absl/time/time.h"
+ #include "third_party/zynamics/binexport/address_references.h"
+ #include "third_party/zynamics/binexport/call_graph.h"
+ #include "third_party/zynamics/binexport/edge.h"
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/flow_analysis.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/flow_analysis.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/flow_analysis.h
 @@ -15,7 +15,7 @@
  #ifndef IDA_FLOW_ANALYSIS_H_
  #define IDA_FLOW_ANALYSIS_H_
@@ -346,10 +358,10 @@ index e237bb3..899ccf4 100644
  #include "third_party/zynamics/binexport/call_graph.h"
  #include "third_party/zynamics/binexport/entry_point.h"
  #include "third_party/zynamics/binexport/expression.h"
-diff --git a/ida/generic.cc b/ida/generic.cc
-index 9bf2a84..e51fe68 100644
---- a/ida/generic.cc
-+++ b/ida/generic.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/generic.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/generic.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/generic.cc
 @@ -24,8 +24,8 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
@@ -361,37 +373,41 @@ index 9bf2a84..e51fe68 100644
  #include "third_party/zynamics/binexport/ida/names.h"
  
  namespace security::binexport {
-diff --git a/ida/log_sink.cc b/ida/log_sink.cc
-index 9ce6eaa..ce3bffd 100644
---- a/ida/log_sink.cc
-+++ b/ida/log_sink.cc
-@@ -22,7 +22,7 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/log_sink.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/log_sink.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/log_sink.cc
+@@ -22,8 +22,8 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
  
+-#include "third_party/absl/log/log_entry.h"
 -#include "third_party/absl/strings/string_view.h"
++#include "absl/log/log_entry.h"
 +#include "absl/strings/string_view.h"
  #include "third_party/zynamics/binexport/util/logging.h"
  
  namespace security::binexport {
-diff --git a/ida/log_sink.h b/ida/log_sink.h
-index 5488dea..8064340 100644
---- a/ida/log_sink.h
-+++ b/ida/log_sink.h
-@@ -15,7 +15,7 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/log_sink.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/log_sink.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/log_sink.h
+@@ -15,8 +15,8 @@
  #ifndef IDA_LOG_SINK_H_
  #define IDA_LOG_SINK_H_
  
+-#include "third_party/absl/log/log_entry.h"
 -#include "third_party/absl/log/log_sink.h"
++#include "absl/log/log_entry.h"
 +#include "absl/log/log_sink.h"
  #include "third_party/zynamics/binexport/util/logging.h"
  
  namespace security::binexport {
-diff --git a/ida/main_plugin.cc b/ida/main_plugin.cc
-index 131958f..3e96b3c 100644
---- a/ida/main_plugin.cc
-+++ b/ida/main_plugin.cc
-@@ -25,15 +25,15 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/main_plugin.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/main_plugin.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/main_plugin.cc
+@@ -32,15 +32,15 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
  
@@ -416,10 +432,10 @@ index 131958f..3e96b3c 100644
  #include "third_party/zynamics/binexport/binexport2_writer.h"
  #include "third_party/zynamics/binexport/call_graph.h"
  #include "third_party/zynamics/binexport/dump_writer.h"
-diff --git a/ida/metapc.cc b/ida/metapc.cc
-index 28d0b3a..643e9e7 100644
---- a/ida/metapc.cc
-+++ b/ida/metapc.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/metapc.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/metapc.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/metapc.cc
 @@ -27,8 +27,8 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
@@ -431,10 +447,10 @@ index 28d0b3a..643e9e7 100644
  #include "third_party/zynamics/binexport/base_types.h"
  #include "third_party/zynamics/binexport/call_graph.h"
  #include "third_party/zynamics/binexport/flow_graph.h"
-diff --git a/ida/mips.cc b/ida/mips.cc
-index d6f764a..d7471ab 100644
---- a/ida/mips.cc
-+++ b/ida/mips.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/mips.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/mips.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/mips.cc
 @@ -27,8 +27,8 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
@@ -446,11 +462,11 @@ index d6f764a..d7471ab 100644
  #include "third_party/zynamics/binexport/call_graph.h"
  #include "third_party/zynamics/binexport/ida/names.h"
  #include "third_party/zynamics/binexport/util/format.h"
-diff --git a/ida/names.cc b/ida/names.cc
-index a62f6cd..3f3d367 100644
---- a/ida/names.cc
-+++ b/ida/names.cc
-@@ -38,11 +38,11 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/names.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/names.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/names.cc
+@@ -45,11 +45,11 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
  
@@ -467,10 +483,10 @@ index a62f6cd..3f3d367 100644
  #include "third_party/zynamics/binexport/address_references.h"
  #include "third_party/zynamics/binexport/base_types.h"
  #include "third_party/zynamics/binexport/call_graph.h"
-diff --git a/ida/names.h b/ida/names.h
-index 42dc32a..97ff57d 100644
---- a/ida/names.h
-+++ b/ida/names.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/names.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/names.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/names.h
 @@ -25,7 +25,7 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
@@ -480,10 +496,10 @@ index 42dc32a..97ff57d 100644
  #include "third_party/zynamics/binexport/comment.h"
  #include "third_party/zynamics/binexport/expression.h"
  #include "third_party/zynamics/binexport/util/types.h"
-diff --git a/ida/ppc.cc b/ida/ppc.cc
-index b2a6fc4..ce01d68 100644
---- a/ida/ppc.cc
-+++ b/ida/ppc.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/ppc.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/ppc.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/ppc.cc
 @@ -26,8 +26,8 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
@@ -495,11 +511,11 @@ index b2a6fc4..ce01d68 100644
  #include "third_party/zynamics/binexport/call_graph.h"
  #include "third_party/zynamics/binexport/ida/names.h"
  #include "third_party/zynamics/binexport/instruction.h"
-diff --git a/ida/ui.cc b/ida/ui.cc
-index aad61b0..2e0fb9d 100644
---- a/ida/ui.cc
-+++ b/ida/ui.cc
-@@ -30,11 +30,11 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/ui.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/ui.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/ui.cc
+@@ -31,11 +31,11 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
  
@@ -516,10 +532,10 @@ index aad61b0..2e0fb9d 100644
  #include "third_party/zynamics/binexport/util/filesystem.h"
  #include "third_party/zynamics/binexport/util/process.h"
  #include "third_party/zynamics/binexport/util/types.h"
-diff --git a/ida/ui.h b/ida/ui.h
-index f0b9560..1bc6f31 100644
---- a/ida/ui.h
-+++ b/ida/ui.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/ui.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/ui.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/ui.h
 @@ -24,10 +24,10 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
@@ -535,10 +551,10 @@ index f0b9560..1bc6f31 100644
  
  // Small RAII class that displays a wait message for long-running actions.
  class WaitBox {
-diff --git a/ida/util.cc b/ida/util.cc
-index 9d95545..a7de7d3 100644
---- a/ida/util.cc
-+++ b/ida/util.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/util.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/util.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/util.cc
 @@ -14,7 +14,7 @@
  
  #include "third_party/zynamics/binexport/ida/util.h"
@@ -548,10 +564,10 @@ index 9d95545..a7de7d3 100644
  
  namespace security::binexport {
  
-diff --git a/ida/util.h b/ida/util.h
-index 62fe75a..cc5a746 100644
---- a/ida/util.h
-+++ b/ida/util.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/util.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/ida/util.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/ida/util.h
 @@ -22,7 +22,7 @@
  #include "third_party/zynamics/binexport/ida/end_idasdk.inc"    // NOLINT
  // clang-format on
@@ -561,10 +577,10 @@ index 62fe75a..cc5a746 100644
  
  namespace security::binexport {
  
-diff --git a/instruction.cc b/instruction.cc
-index 0ac1baa..24dea4c 100644
---- a/instruction.cc
-+++ b/instruction.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/instruction.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/instruction.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/instruction.cc
 @@ -26,8 +26,8 @@
  #include <string>
  #include <vector>
@@ -576,11 +592,11 @@ index 0ac1baa..24dea4c 100644
  #include "third_party/zynamics/binexport/flow_graph.h"
  #include "third_party/zynamics/binexport/operand.h"
  #include "third_party/zynamics/binexport/virtual_memory.h"
-diff --git a/instruction.h b/instruction.h
-index 03bddd1..5480ec3 100644
---- a/instruction.h
-+++ b/instruction.h
-@@ -19,7 +19,7 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/instruction.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/instruction.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/instruction.h
+@@ -21,7 +21,7 @@
  #include <string>
  #include <vector>
  
@@ -588,11 +604,11 @@ index 03bddd1..5480ec3 100644
 +#include "absl/container/node_hash_set.h"
  #include "third_party/zynamics/binexport/operand.h"
  #include "third_party/zynamics/binexport/util/range.h"
- 
-diff --git a/library_manager.cc b/library_manager.cc
-index 58284b8..3091e53 100644
---- a/library_manager.cc
-+++ b/library_manager.cc
+ #include "third_party/zynamics/binexport/util/types.h"
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/library_manager.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/library_manager.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/library_manager.cc
 @@ -17,7 +17,7 @@
  #include <string>
  #include <vector>
@@ -602,10 +618,10 @@ index 58284b8..3091e53 100644
  
  int LibraryManager::AddKnownLibrary(const std::string& library_name,
                                      Linkage linkage) {
-diff --git a/library_manager.h b/library_manager.h
-index 3664a3a..4f602c1 100644
---- a/library_manager.h
-+++ b/library_manager.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/library_manager.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/library_manager.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/library_manager.h
 @@ -19,7 +19,7 @@
  #include <string>
  #include <vector>
@@ -615,10 +631,10 @@ index 3664a3a..4f602c1 100644
  #include "third_party/zynamics/binexport/util/types.h"
  
  // Theory of operations: this class keeps a list of currently known libraries,
-diff --git a/operand.cc b/operand.cc
-index 600e50e..62e8add 100644
---- a/operand.cc
-+++ b/operand.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/operand.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/operand.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/operand.cc
 @@ -17,7 +17,7 @@
  #include <cstdint>
  #include <string>
@@ -628,10 +644,10 @@ index 600e50e..62e8add 100644
  
  thread_local Expressions Operand::expressions_;
  thread_local Operand::OperandCache Operand::operand_cache_;
-diff --git a/operand.h b/operand.h
-index 9d7a37a..f62290c 100644
---- a/operand.h
-+++ b/operand.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/operand.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/operand.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/operand.h
 @@ -18,8 +18,8 @@
  #include <cstdint>
  #include <string>
@@ -643,10 +659,10 @@ index 9d7a37a..f62290c 100644
  #include "third_party/zynamics/binexport/expression.h"
  
  #pragma pack(push, 1)
-diff --git a/reader/call_graph.cc b/reader/call_graph.cc
-index 75b650c..743751a 100644
---- a/reader/call_graph.cc
-+++ b/reader/call_graph.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/reader/call_graph.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/reader/call_graph.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/reader/call_graph.cc
 @@ -18,9 +18,9 @@
  #include <utility>
  #include <vector>
@@ -660,10 +676,10 @@ index 75b650c..743751a 100644
  #include "third_party/zynamics/binexport/reader/graph_utility.h"
  #include "third_party/zynamics/binexport/util/format.h"
  
-diff --git a/reader/call_graph_test.cc b/reader/call_graph_test.cc
-index 6e1f477..d9e84e2 100644
---- a/reader/call_graph_test.cc
-+++ b/reader/call_graph_test.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/reader/call_graph_test.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/reader/call_graph_test.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/reader/call_graph_test.cc
 @@ -18,7 +18,7 @@
  
  #include "gmock/gmock.h"
@@ -673,42 +689,51 @@ index 6e1f477..d9e84e2 100644
  #include "third_party/zynamics/binexport/reader/graph_utility.h"
  #include "third_party/zynamics/binexport/testing.h"
  
-diff --git a/reader/flow_graph.cc b/reader/flow_graph.cc
-index 95991a0..44420c5 100644
---- a/reader/flow_graph.cc
-+++ b/reader/flow_graph.cc
-@@ -20,9 +20,9 @@
- #include <string>
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/reader/flow_graph.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/reader/flow_graph.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/reader/flow_graph.cc
+@@ -23,14 +23,14 @@
+ #include <utility>
  #include <vector>
  
 -#include "third_party/absl/log/check.h"
 -#include "third_party/absl/log/log.h"
 -#include "third_party/absl/memory/memory.h"
+-#include "third_party/absl/status/status.h"
+-#include "third_party/absl/strings/str_cat.h"
+-#include "third_party/absl/types/optional.h"
 +#include "absl/log/check.h"
 +#include "absl/log/log.h"
 +#include "absl/memory/memory.h"
++#include "absl/status/status.h"
++#include "absl/strings/str_cat.h"
++#include "absl/types/optional.h"
+ #include "third_party/zynamics/binexport/architectures.h"
+-#include "third_party/absl/strings/ascii.h"
++#include "absl/strings/ascii.h"
  #include "third_party/zynamics/binexport/reader/graph_utility.h"
- #include "third_party/zynamics/binexport/util/types.h"
- 
-diff --git a/reader/flow_graph.h b/reader/flow_graph.h
-index 75fed1d..e78e64c 100644
---- a/reader/flow_graph.h
-+++ b/reader/flow_graph.h
-@@ -25,8 +25,8 @@
+ #include "third_party/zynamics/binexport/reader/instruction.h"
+ #include "third_party/zynamics/binexport/util/status_macros.h"
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/reader/flow_graph.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/reader/flow_graph.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/reader/flow_graph.h
+@@ -28,8 +28,8 @@
  #include <utility>
  #include <vector>
  
--#include "third_party/absl/base/macros.h"
+-#include "third_party/absl/base/attributes.h"
 -#include "third_party/absl/types/optional.h"
-+#include "absl/base/macros.h"
++#include "absl/base/attributes.h"
 +#include "absl/types/optional.h"
  #include "third_party/zynamics/binexport/architectures.h"
  #include "third_party/zynamics/binexport/binexport2.pb.h"
  #include "third_party/zynamics/binexport/reader/instruction.h"
-diff --git a/reader/instruction.h b/reader/instruction.h
-index 4848afe..4116934 100644
---- a/reader/instruction.h
-+++ b/reader/instruction.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/reader/instruction.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/reader/instruction.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/reader/instruction.h
 @@ -22,8 +22,8 @@
  #include <string>
  #include <vector>
@@ -720,10 +745,10 @@ index 4848afe..4116934 100644
  #include "third_party/zynamics/binexport/architectures.h"
  #include "third_party/zynamics/binexport/util/types.h"
  
-diff --git a/statistics_writer.cc b/statistics_writer.cc
-index 16fe5d2..7c09d2a 100644
---- a/statistics_writer.cc
-+++ b/statistics_writer.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/statistics_writer.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/statistics_writer.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/statistics_writer.cc
 @@ -19,7 +19,7 @@
  #include <ostream>
  #include <string>
@@ -733,10 +758,10 @@ index 16fe5d2..7c09d2a 100644
  #include "third_party/zynamics/binexport/call_graph.h"
  #include "third_party/zynamics/binexport/flow_graph.h"
  
-diff --git a/statistics_writer.h b/statistics_writer.h
-index 64e1a8b..6ab4221 100644
---- a/statistics_writer.h
-+++ b/statistics_writer.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/statistics_writer.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/statistics_writer.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/statistics_writer.h
 @@ -17,7 +17,7 @@
  
  #include <fstream>
@@ -746,10 +771,10 @@ index 64e1a8b..6ab4221 100644
  #include "third_party/zynamics/binexport/writer.h"
  
  namespace security::binexport {
-diff --git a/testing.cc b/testing.cc
-index 7a0310a..80945f8 100644
---- a/testing.cc
-+++ b/testing.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/testing.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/testing.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/testing.cc
 @@ -4,8 +4,8 @@
  #include <fstream>
  
@@ -761,10 +786,10 @@ index 7a0310a..80945f8 100644
  #include "third_party/zynamics/binexport/util/filesystem.h"
  
  namespace security::binexport {
-diff --git a/testing.h b/testing.h
-index e2a35ed..5ec6685 100644
---- a/testing.h
-+++ b/testing.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/testing.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/testing.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/testing.h
 @@ -17,8 +17,8 @@
  
  #include <string>
@@ -776,10 +801,10 @@ index e2a35ed..5ec6685 100644
  #include "third_party/zynamics/binexport/binexport2.pb.h"
  
  namespace security::binexport {
-diff --git a/tools/binexport2dump.cc b/tools/binexport2dump.cc
-index 96717f4..3ab3e0b 100644
---- a/tools/binexport2dump.cc
-+++ b/tools/binexport2dump.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/tools/binexport2dump.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/tools/binexport2dump.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/tools/binexport2dump.cc
 @@ -19,17 +19,17 @@
  #include <string>
  #include <vector>
@@ -809,10 +834,10 @@ index 96717f4..3ab3e0b 100644
  #include "third_party/zynamics/binexport/binexport.h"
  #include "third_party/zynamics/binexport/binexport2.pb.h"
  #include "third_party/zynamics/binexport/tools/command_util.h"
-diff --git a/tools/bxp_dummy.cc b/tools/bxp_dummy.cc
-index 20d0ef0..076b926 100644
---- a/tools/bxp_dummy.cc
-+++ b/tools/bxp_dummy.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/tools/bxp_dummy.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/tools/bxp_dummy.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/tools/bxp_dummy.cc
 @@ -17,10 +17,10 @@
  
  #include <vector>
@@ -828,10 +853,10 @@ index 20d0ef0..076b926 100644
  #include "third_party/zynamics/binexport/tools/command_util.h"
  #include "third_party/zynamics/binexport/util/filesystem.h"
  
-diff --git a/tools/bxp_main.cc b/tools/bxp_main.cc
-index c5aad3e..472d779 100644
---- a/tools/bxp_main.cc
-+++ b/tools/bxp_main.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/tools/bxp_main.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/tools/bxp_main.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/tools/bxp_main.cc
 @@ -34,12 +34,12 @@
  #include <string>
  #include <vector>
@@ -851,10 +876,10 @@ index c5aad3e..472d779 100644
  #include "third_party/zynamics/binexport/tools/command_util.h"
  #include "third_party/zynamics/binexport/util/filesystem.h"
  #include "third_party/zynamics/binexport/util/process.h"
-diff --git a/tools/command_util.cc b/tools/command_util.cc
-index fa62859..bcf0cc7 100644
---- a/tools/command_util.cc
-+++ b/tools/command_util.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/tools/command_util.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/tools/command_util.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/tools/command_util.cc
 @@ -19,14 +19,14 @@
  #include <string>
  #include <vector>
@@ -878,10 +903,10 @@ index fa62859..bcf0cc7 100644
  #include "third_party/zynamics/binexport/util/filesystem.h"
  #include "third_party/zynamics/binexport/version.h"
  
-diff --git a/tools/command_util.h b/tools/command_util.h
-index b853345..0ebd5aa 100644
---- a/tools/command_util.h
-+++ b/tools/command_util.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/tools/command_util.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/tools/command_util.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/tools/command_util.h
 @@ -18,8 +18,8 @@
  #include <functional>
  #include <vector>
@@ -893,10 +918,10 @@ index b853345..0ebd5aa 100644
  
  namespace security::binexport {
  
-diff --git a/util/filesystem.cc b/util/filesystem.cc
-index 43974d0..0d85abd 100644
---- a/util/filesystem.cc
-+++ b/util/filesystem.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/filesystem.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/util/filesystem.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/filesystem.cc
 @@ -51,13 +51,13 @@
  #include <system_error>  // NOLINT(build/c++11)
  #include <vector>
@@ -918,10 +943,10 @@ index 43974d0..0d85abd 100644
  #include "third_party/zynamics/binexport/util/process.h"
  #include "third_party/zynamics/binexport/util/status_macros.h"
  
-diff --git a/util/filesystem.h b/util/filesystem.h
-index 4fa9459..45fcde1 100644
---- a/util/filesystem.h
-+++ b/util/filesystem.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/filesystem.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/util/filesystem.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/filesystem.h
 @@ -20,9 +20,9 @@
  #include <string>
  #include <vector>
@@ -935,23 +960,25 @@ index 4fa9459..45fcde1 100644
  #include "third_party/zynamics/binexport/util/types.h"
  
  #ifdef _WIN32
-diff --git a/util/filesystem_test.cc b/util/filesystem_test.cc
-index f197fb1..15ae4f7 100644
---- a/util/filesystem_test.cc
-+++ b/util/filesystem_test.cc
-@@ -19,7 +19,7 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/filesystem_test.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/util/filesystem_test.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/filesystem_test.cc
+@@ -19,8 +19,8 @@
  
  #include "gmock/gmock.h"
  #include "gtest/gtest.h"
+-#include "third_party/absl/status/status_matchers.h"
 -#include "third_party/absl/strings/str_cat.h"
++#include "absl/status/status_matchers.h"
 +#include "absl/strings/str_cat.h"
- #include "third_party/zynamics/binexport/util/status_matchers.h"
+ #include "third_party/zynamics/binexport/util/status_macros.h"
  
  namespace security::binexport {
-diff --git a/util/format.cc b/util/format.cc
-index 04e180f..e1ded02 100644
---- a/util/format.cc
-+++ b/util/format.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/format.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/util/format.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/format.cc
 @@ -4,9 +4,9 @@
  #include <cinttypes>
  #include <cstdio>
@@ -965,10 +992,10 @@ index 04e180f..e1ded02 100644
  
  namespace security::binexport {
  
-diff --git a/util/format.h b/util/format.h
-index ca7b35a..f4baa77 100644
---- a/util/format.h
-+++ b/util/format.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/format.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/util/format.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/format.h
 @@ -17,7 +17,7 @@
  
  #include <string>
@@ -978,10 +1005,10 @@ index ca7b35a..f4baa77 100644
  #include "third_party/zynamics/binexport/util/types.h"
  
  namespace security::binexport {
-diff --git a/util/idb_export.cc b/util/idb_export.cc
-index 6aa265f..7939251 100644
---- a/util/idb_export.cc
-+++ b/util/idb_export.cc
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/idb_export.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/util/idb_export.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/idb_export.cc
 @@ -18,20 +18,20 @@
  #include <memory>
  #include <thread>  // NOLINT
@@ -1017,10 +1044,10 @@ index 6aa265f..7939251 100644
  #include "third_party/zynamics/binexport/util/filesystem.h"
  #include "third_party/zynamics/binexport/util/process.h"
  #include "third_party/zynamics/binexport/util/status_macros.h"
-diff --git a/util/idb_export.h b/util/idb_export.h
-index f7aecee..ed51da2 100644
---- a/util/idb_export.h
-+++ b/util/idb_export.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/idb_export.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/util/idb_export.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/idb_export.h
 @@ -18,10 +18,10 @@
  #include <memory>
  #include <vector>
@@ -1036,45 +1063,10 @@ index f7aecee..ed51da2 100644
  #include "third_party/zynamics/binexport/util/types.h"
  
  namespace security::binexport {
-diff --git a/util/logging.cc b/util/logging.cc
-index f237df4..faa16f1 100644
---- a/util/logging.cc
-+++ b/util/logging.cc
-@@ -24,18 +24,18 @@
- #include <sstream>
- #include <thread>  // NOLINT
- 
--#include "third_party/absl/base/internal/sysinfo.h"
--#include "third_party/absl/log/initialize.h"
--#include "third_party/absl/log/log.h"
--#include "third_party/absl/log/log_sink.h"
--#include "third_party/absl/log/log_sink_registry.h"
--#include "third_party/absl/status/status.h"
--#include "third_party/absl/strings/str_cat.h"
--#include "third_party/absl/strings/str_format.h"
--#include "third_party/absl/strings/string_view.h"
--#include "third_party/absl/synchronization/mutex.h"
--#include "third_party/absl/time/clock.h"
--#include "third_party/absl/time/time.h"
-+#include "absl/base/internal/sysinfo.h"
-+#include "absl/log/initialize.h"
-+#include "absl/log/log.h"
-+#include "absl/log/log_sink.h"
-+#include "absl/log/log_sink_registry.h"
-+#include "absl/status/status.h"
-+#include "absl/strings/str_cat.h"
-+#include "absl/strings/str_format.h"
-+#include "absl/strings/string_view.h"
-+#include "absl/synchronization/mutex.h"
-+#include "absl/time/clock.h"
-+#include "absl/time/time.h"
- #include "third_party/zynamics/binexport/util/process.h"
- 
- namespace security::binexport {
-diff --git a/util/logging.h b/util/logging.h
-index fa387d9..de57dae 100644
---- a/util/logging.h
-+++ b/util/logging.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/logging.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/util/logging.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/logging.h
 @@ -20,9 +20,9 @@
  #include <string>
  #include <thread>  // NOLINT
@@ -1088,13 +1080,13 @@ index fa387d9..de57dae 100644
  
  namespace security::binexport {
  
-diff --git a/util/process.cc b/util/process.cc
-index a7467fa..667450e 100644
---- a/util/process.cc
-+++ b/util/process.cc
-@@ -41,11 +41,11 @@
- #include <cstring>
- #include <locale>  // IWYU pragma: keep
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/process.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/util/process.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/process.cc
+@@ -43,11 +43,11 @@
+ #include <string>
+ #include <vector>
  
 -#include "third_party/absl/base/attributes.h"  // IWYU pragma: keep
 -#include "third_party/absl/status/status.h"
@@ -1109,10 +1101,10 @@ index a7467fa..667450e 100644
  #include "third_party/zynamics/binexport/util/filesystem.h"
  #include "third_party/zynamics/binexport/util/status_macros.h"
  
-diff --git a/util/process.h b/util/process.h
-index aba05ac..bbc1ec6 100644
---- a/util/process.h
-+++ b/util/process.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/process.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/util/process.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/process.h
 @@ -18,9 +18,9 @@
  #include <string>
  #include <vector>
@@ -1126,23 +1118,25 @@ index aba05ac..bbc1ec6 100644
  #include "third_party/zynamics/binexport/util/types.h"
  
  namespace security::binexport {
-diff --git a/util/process_test.cc b/util/process_test.cc
-index d0aedc7..6dcd563 100644
---- a/util/process_test.cc
-+++ b/util/process_test.cc
-@@ -19,7 +19,7 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/process_test.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/util/process_test.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/process_test.cc
+@@ -19,8 +19,8 @@
  
  #include "gmock/gmock.h"
  #include "gtest/gtest.h"
+-#include "third_party/absl/status/status_matchers.h"
 -#include "third_party/absl/strings/str_cat.h"
++#include "absl/status/status_matchers.h"
 +#include "absl/strings/str_cat.h"
- #include "third_party/zynamics/binexport/util/status_matchers.h"
+ #include "third_party/zynamics/binexport/util/status_macros.h"
  
  namespace security::binexport {
-diff --git a/util/status_macros.h b/util/status_macros.h
-index 64e8afa..36d51ad 100644
---- a/util/status_macros.h
-+++ b/util/status_macros.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/status_macros.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/util/status_macros.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/status_macros.h
 @@ -18,9 +18,9 @@
  #ifndef UTIL_STATUS_MACROS_H_
  #define UTIL_STATUS_MACROS_H_
@@ -1156,46 +1150,31 @@ index 64e8afa..36d51ad 100644
  
  // Internal helper for concatenating macro values.
  #define NA_MACROS_IMPL_CONCAT_INNER_(x, y) x##y
-diff --git a/util/status_macros_test.cc b/util/status_macros_test.cc
-index 7e66023..885afcc 100644
---- a/util/status_macros_test.cc
-+++ b/util/status_macros_test.cc
-@@ -18,10 +18,10 @@
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/status_macros_test.cc
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/util/status_macros_test.cc
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/util/status_macros_test.cc
+@@ -18,11 +18,11 @@
  
  #include "gmock/gmock.h"
  #include "gtest/gtest.h"
 -#include "third_party/absl/memory/memory.h"
 -#include "third_party/absl/status/status.h"
+-#include "third_party/absl/status/status_matchers.h"
 -#include "third_party/absl/status/statusor.h"
 -#include "third_party/absl/strings/str_cat.h"
 +#include "absl/memory/memory.h"
 +#include "absl/status/status.h"
++#include "absl/status/status_matchers.h"
 +#include "absl/status/statusor.h"
 +#include "absl/strings/str_cat.h"
- #include "third_party/zynamics/binexport/util/status_matchers.h"
  
  namespace not_absl {
-diff --git a/util/status_matchers.h b/util/status_matchers.h
-index 23ed2dc..3ad6534 100644
---- a/util/status_matchers.h
-+++ b/util/status_matchers.h
-@@ -19,9 +19,9 @@
- 
- #include "gmock/gmock.h"
- #include "gtest/gtest.h"
--#include "third_party/absl/status/status.h"
--#include "third_party/absl/status/statusor.h"
--#include "third_party/absl/types/optional.h"
-+#include "absl/status/status.h"
-+#include "absl/status/statusor.h"
-+#include "absl/types/optional.h"
- #include "third_party/zynamics/binexport/util/status_macros.h"
- 
- #define NA_ASSERT_OK_AND_ASSIGN(lhs, rexpr) \
-diff --git a/virtual_memory.h b/virtual_memory.h
-index caebcf7..326f748 100644
---- a/virtual_memory.h
-+++ b/virtual_memory.h
+ namespace {
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/virtual_memory.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/virtual_memory.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/virtual_memory.h
 @@ -19,8 +19,8 @@
  #include <map>
  #include <vector>
@@ -1207,10 +1186,10 @@ index caebcf7..326f748 100644
  #include "third_party/zynamics/binexport/util/types.h"
  
  class AddressSpace {
-diff --git a/writer.h b/writer.h
-index 4416ecf..97476f1 100644
---- a/writer.h
-+++ b/writer.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/writer.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/writer.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/writer.h
 @@ -15,7 +15,7 @@
  #ifndef WRITER_H_
  #define WRITER_H_
@@ -1220,10 +1199,10 @@ index 4416ecf..97476f1 100644
  #include "third_party/zynamics/binexport/address_references.h"
  #include "third_party/zynamics/binexport/comment.h"
  #include "third_party/zynamics/binexport/instruction.h"
-diff --git a/x86_nop.h b/x86_nop.h
-index 43f0dfb..bab13ba 100644
---- a/x86_nop.h
-+++ b/x86_nop.h
+Index: binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/x86_nop.h
+===================================================================
+--- binexport-644786690fcb6bcf6d42a76e7d8b65056176054d.orig/x86_nop.h
++++ binexport-644786690fcb6bcf6d42a76e7d8b65056176054d/x86_nop.h
 @@ -17,7 +17,7 @@
  
  #include <cstddef>

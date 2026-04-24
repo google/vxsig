@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
 # Defines the protocol message used in the .BinExport v2 file format.
 proto_library(
     name = "binexport2_proto",
@@ -47,12 +51,11 @@ cc_library(
 cc_library(
     name = "status_matchers",
     testonly = 1,
-    hdrs = ["util/status_matchers.h"],
-    include_prefix = "third_party/zynamics/binexport",
     visibility = ["//visibility:public"],
     deps = [
         ":status",
         "@abseil-cpp//absl/status",
+        "@abseil-cpp//absl/status:status_matchers",
         "@abseil-cpp//absl/status:statusor",
         "@abseil-cpp//absl/types:optional",
         "@googletest//:gtest",

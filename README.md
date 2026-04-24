@@ -1,6 +1,6 @@
 # VxSig
 
-Copyright 2011-2024 Google LLC
+Copyright 2011-2026 Google LLC
 
 Disclaimer: This is not an official Google product (experimental or otherwise),
 it is just code that happens to be owned by Google.
@@ -28,12 +28,14 @@ The preferred way to use a current version is via
 example, on Debian-based Linux distributions do:
 
 ```bash
-(cd /tmp && \
+(cd /tmp && export ARCH=$(dpkg --print-architecture); \
   wget -qO- \
-  https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-$(dpkg --print-architecture) \
-  > bazelisk && \
-  echo 'd28b588ac0916abd6bf02defb5433f6eddf7cba35ffa808eabb65a44aab226f7  bazelisk' | \
-  sha256sum -c && \
+  "https://github.com/bazelbuild/bazelisk/releases/download/v1.28.1/bazelisk-linux-${ARCH}" \
+  > "bazelisk-${ARCH}" && \
+  (echo "22e7d3a188699982f661cf4687137ee52d1f24fec1ec893d91a6c4d791a75de8  bazelisk-amd64";
+   echo "8ded44b58a0d9425a4178af26cf17693feac3b87bdcfef0a2a0898fcd1afc9f2  bazelisk-arm64") \
+  | sha256sum -c --ignore-missing && \
+  mv "bazelisk-$ARCH" bazelisk &&
   chmod +x bazelisk && \
   sudo mv bazelisk /usr/local/bin/ \
 )

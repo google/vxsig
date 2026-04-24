@@ -24,11 +24,11 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include "third_party/zynamics/binexport/util/filesystem.h"
-#include "third_party/zynamics/binexport/util/status_matchers.h"
+#include "absl/status/status_matchers.h"
 
 using testing::Eq;
 using testing::Ne;
-using not_absl::IsOk;
+using absl_testing::IsOk;
 
 namespace security::vxsig {
 

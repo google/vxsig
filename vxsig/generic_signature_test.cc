@@ -21,10 +21,10 @@
 #include "absl/memory/memory.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
-#include "third_party/zynamics/binexport/util/status_matchers.h"
+#include "absl/status/status_matchers.h"
 #include "vxsig/vxsig.pb.h"
 
-using not_absl::IsOk;
+using absl_testing::IsOk;
 using testing::Eq;
 using testing::SizeIs;
 

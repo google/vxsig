@@ -24,9 +24,9 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include "third_party/zynamics/binexport/util/filesystem.h"
-#include "third_party/zynamics/binexport/util/status_matchers.h"
+#include "absl/status/status_matchers.h"
 
-using not_absl::IsOk;
+using absl_testing::IsOk;
 using testing::Contains;
 using testing::Eq;
 using testing::IsTrue;

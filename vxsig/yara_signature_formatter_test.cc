@@ -24,11 +24,11 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include "third_party/zynamics/binexport/util/filesystem.h"
-#include "third_party/zynamics/binexport/util/status_matchers.h"
+#include "absl/status/status_matchers.h"
 #include "vxsig/signature_formatter.h"
 #include "vxsig/yara_signature_test_util.h"
 
-using not_absl::IsOk;
+using absl_testing::IsOk;
 using testing::Eq;
 using testing::IsTrue;
 
