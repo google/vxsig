@@ -19,6 +19,7 @@ jobs:
 
     - name: Build and Test
       run: |
-        export CC=clang
-        export CXX=clang++
-        bazelisk test //vxsig/...
+        unset ANDROID_HOME
+        unset ANDROID_SDK_ROOT
+        bazelisk test --repo_env=CC=clang --repo_env=CXX=clang++ //vxsig/...
+
